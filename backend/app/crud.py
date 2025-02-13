@@ -22,3 +22,26 @@ def create_user(db:Session, user: schemas.UserCreate):
 
 def get_users(db:Session):
     return db.query(models.User).all()
+
+
+def create_terreiro(db: Session, terreiro: schemas.TerreiroCreate):
+    db_terreiro = models.Terreiro(
+        leader=terreiro.leader,
+        name=terreiro.name,
+        address=terreiro.address,
+        contact=terreiro.contact,
+        opening_hours=terreiro.opening_hours,
+        history=terreiro.history,
+        infrastructure=terreiro.infrastructure,
+        segment=terreiro.segment
+            )
+    try:
+        db.add(db_terreiro)
+        db.commit()
+        db.refresh(db_terreiro)
+
+        return db_terreiro
+
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Erro interno {e}")
