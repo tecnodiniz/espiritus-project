@@ -45,3 +45,33 @@ def create_terreiro(db: Session, terreiro: schemas.TerreiroCreate):
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Erro interno {e}")
+    
+def get_terreiro(terreiro_id: UUID, db: Session):
+    terreiro = db.query(models.Terreiro).filter(models.Terreiro.id == terreiro_id).first()
+
+    if not terreiro:
+        raise HTTPException(status_code=404, detail="Terreiro não encontrado")
+    
+    return terreiro
+
+def get_terreiros(db: Session):
+    return db.query(models.Terreiro).all()
+
+def update_terreiro(terreiro_id: UUID, terreiro: schemas.TerreiroUpdate, db:Session):
+    db_terreiro = db.query(models.Terreiro).filter(models.Terreiro.id == terreiro_id).first()
+
+    if not db_terreiro:
+        raise HTTPException(status_code=404, detail="Terreiro não encontrado")
+    
+    update_data = terreiro.model_dump(exclude_unset=True)
+
+    try:
+        for key, value in update_data.items():
+            setattr(db_terreiro, key, value)
+        
+        db.commit()
+        db.refresh(db_terreiro)
+
+        return {"mensagem":"Terreiro atualizado"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erro interno {e}")

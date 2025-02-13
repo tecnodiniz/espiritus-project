@@ -1,5 +1,7 @@
-from pydantic import BaseModel
 from uuid import UUID
+from typing import Optional
+from pydantic import BaseModel
+
 
 class UserBase(BaseModel):
     name: str
@@ -27,6 +29,15 @@ class TerreiroBase(BaseModel):
 
 class TerreiroCreate(TerreiroBase):
     pass
+
+class TerreiroUpdate(BaseModel):
+    name:           Optional[str] = None
+    address:        Optional[str] = None
+    contact:        Optional[str] = None
+    opening_hours:  Optional[str] = None
+    history:        Optional[str] = None
+    infrastructure: Optional[str] = None
+    segment:        Optional[str] = None
 
 class TerreiroResponse(TerreiroBase):
     id: UUID
