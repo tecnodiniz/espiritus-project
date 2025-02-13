@@ -23,6 +23,25 @@ def create_user(db:Session, user: schemas.UserCreate):
 def get_users(db:Session):
     return db.query(models.User).all()
 
+def update_user(user_id: UUID, user:schemas.UserUpadte, db:Session):
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
+
+    if not db_user: 
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+    
+    update_data = user.model_dump(exclude_unset=True)
+
+    try:
+        for key, value in update_data.items():
+            setattr(db_user, key, value)
+        
+        db.commit()
+        db.refresh(db_user)
+
+        return {"mensagem":"usário atualizado"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"erro interno {e}")
+
 
 def create_terreiro(db: Session, terreiro: schemas.TerreiroCreate):
     db_terreiro = models.Terreiro(

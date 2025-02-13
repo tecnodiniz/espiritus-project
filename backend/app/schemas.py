@@ -11,6 +11,10 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     pass
 
+class UserUpadte(BaseModel):
+    name: Optional[str]
+    plan: Optional[str]
+    
 class UserResponse(UserBase):
     id: UUID
     
