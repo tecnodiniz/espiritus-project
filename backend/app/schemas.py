@@ -12,8 +12,9 @@ class UserCreate(UserBase):
     pass
 
 class UserUpadte(BaseModel):
-    name: Optional[str]
-    plan: Optional[str]
+    name: Optional[str] = None
+    cpf: Optional[str] = None
+    plan: Optional[str] = None
     
 class UserResponse(UserBase):
     id: UUID
@@ -42,10 +43,29 @@ class TerreiroUpdate(BaseModel):
     history:        Optional[str] = None
     infrastructure: Optional[str] = None
     segment:        Optional[str] = None
-
+    
 class TerreiroResponse(TerreiroBase):
     id: UUID
     leader: UUID
 
+    user: UserResponse
+
+    class Config:
+        from_attributes = True
+
+class MediumBase(BaseModel):
+    user_id: UUID
+    type: str
+    role: str
+
+class MediumCreate(MediumBase):
+    pass
+
+class MediumResponse(MediumBase):
+    id: UUID
+    user_id: UUID
+
+    user: UserResponse
+    
     class Config:
         from_attributes = True

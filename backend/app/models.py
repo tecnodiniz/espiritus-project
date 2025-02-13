@@ -13,6 +13,7 @@ class User(Base):
     plan = Column(String(50), nullable=False)
 
     terreiros = relationship("Terreiro", back_populates="user", uselist=True, cascade="all, delete-orphan")
+    mediums = relationship("Medium", back_populates="user", uselist=True, cascade="all, delete-orphan")
 
 class Terreiro(Base):
     __tablename__ = "terreiros"
@@ -28,3 +29,14 @@ class Terreiro(Base):
     segment = Column(String(100))
 
     user = relationship("User", back_populates="terreiros")
+
+
+class Medium(Base):
+    __tablename__ ="mediums"
+    
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), unique=True, nullable=False)
+    type = Column(String(50))
+    role = Column(String(100))
+
+    user = relationship("User", back_populates="mediums")
