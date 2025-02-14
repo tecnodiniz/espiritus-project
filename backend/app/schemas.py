@@ -52,3 +52,16 @@ class TerreiroResponse(TerreiroBase):
 
     class Config:
         from_attributes = True
+
+class TerreiroRoleBase(BaseModel):
+    position: str
+    description: str
+
+class TerreiroRoleCreate(TerreiroRoleBase):
+    pass
+
+class TerreiroRoleResponse(TerreiroRoleBase):
+    id: UUID
+
+    class Config:
+        from_attributes = True

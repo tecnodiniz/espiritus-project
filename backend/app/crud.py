@@ -95,3 +95,18 @@ def update_terreiro(terreiro_id: UUID, terreiro: schemas.TerreiroUpdate, db:Sess
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro interno {e}")
     
+def create_terreiroRole(terreiro_role:schemas.TerreiroRoleCreate, db:Session):
+    db_role = models.TerreiroRole(position=terreiro_role.position, description=terreiro_role.description)
+
+    try:
+        db.add(db_role)
+        db.commit()
+        db.refresh(db_role)
+
+        return db_role
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erro interno {e}")
+
+def get_terreiroRole(db:Session):
+    return db.query(models.TerreiroRole).all()
