@@ -1,7 +1,7 @@
 import uuid
 from database import Base
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy import Column,Text, String, ForeignKey
+from sqlalchemy import Column,Text, String, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 class User(Base):
@@ -13,7 +13,7 @@ class User(Base):
     plan = Column(String(50), nullable=False)
 
     terreiros = relationship("Terreiro", back_populates="user", uselist=True, cascade="all, delete-orphan")
-    mediums = relationship("Medium", back_populates="user", uselist=True, cascade="all, delete-orphan")
+    agents = relationship("AgentTerreiro", back_populates="user", uselist=True, cascade="all, delete-orphan")
 
 class Terreiro(Base):
     __tablename__ = "terreiros"
@@ -29,14 +29,30 @@ class Terreiro(Base):
     segment = Column(String(100))
 
     user = relationship("User", back_populates="terreiros")
+    agents = relationship("AgentTerreiro", back_populates="terreiro", uselist=True, cascade="all, delete-orphan")
 
+class TerreiroRole(Base):
+    __tablename__ = "terreiro_roles"
 
-class Medium(Base):
-    __tablename__ ="mediums"
-    
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), unique=True, nullable=False)
-    type = Column(String(50))
-    role = Column(String(100))
+    position = Column(String(50))
+    description = Column(Text)
 
-    user = relationship("User", back_populates="mediums")
+    agents = relationship("AgentTerreiro", back_populates="role", uselist=True, cascade="all, delete-orphan")
+
+class AgentTerreiro(Base):
+    __tablename__ = "agente_terreiros"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id_terreiro_role = Column(UUID(as_uuid=True), ForeignKey("terreiro_roles.id", ondelete="CASCADE"), nullable=False)
+    id_user = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    id_terreiro = Column(UUID(as_uuid=True), ForeignKey("terreiros.id", ondelete="CASCADE"), nullable=False)
+
+    __table_args__ = (UniqueConstraint("id_user","id_terreiro", name="uq_user_terreiro"),)
+
+    role = relationship("TerreiroRole", back_populates="agents")
+    user = relationship("User", back_populates="agents")
+    terreiro = relationship("Terreiro", back_populates="agents")
+
+
+

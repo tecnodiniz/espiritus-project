@@ -95,19 +95,3 @@ def update_terreiro(terreiro_id: UUID, terreiro: schemas.TerreiroUpdate, db:Sess
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro interno {e}")
     
-
-def create_medium(medium: schemas.MediumCreate,db: Session):
-    db_medium = models.Medium(user_id=medium.user_id, type=medium.type, role=medium.role)
-
-    try:
-        db.add(db_medium)
-        db.commit()
-        db.refresh(db_medium)
-
-        return db_medium
-    
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erro interno {e}")
-    
-def get_mediums(db: Session):
-    return db.query(models.Medium).all()

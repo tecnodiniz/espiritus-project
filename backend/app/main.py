@@ -46,10 +46,3 @@ def get_terreiros(db: Session = Depends(database.get_db)):
 def update_terreiro(terreiro_id: UUID, terreiro: schemas.TerreiroUpdate, db: Session = Depends(database.get_db)):
     return crud.update_terreiro(terreiro_id, terreiro, db)
 
-@app.post("/mediums/", response_model=schemas.MediumResponse)
-def create_medium(medium:schemas.MediumCreate, db:Session = Depends(database.get_db)):
-    return crud.create_medium(medium,db)
-
-@app.get("/mediums", response_model=list[schemas.MediumResponse])
-def get_mediums(db:Session = Depends(database.get_db)):
-  return crud.get_mediums(db)

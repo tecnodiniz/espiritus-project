@@ -52,20 +52,3 @@ class TerreiroResponse(TerreiroBase):
 
     class Config:
         from_attributes = True
-
-class MediumBase(BaseModel):
-    user_id: UUID
-    type: str
-    role: str
-
-class MediumCreate(MediumBase):
-    pass
-
-class MediumResponse(MediumBase):
-    id: UUID
-    user_id: UUID
-
-    user: UserResponse
-    
-    class Config:
-        from_attributes = True
