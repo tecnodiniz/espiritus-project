@@ -55,3 +55,14 @@ def create_terreiroRole(terreiro_role:schemas.TerreiroRoleCreate, db:Session = D
 @app.get("/terreiro_roles/", response_model=list[schemas.TerreiroRoleResponse])
 def get_terreiroRoles(db:Session=Depends(database.get_db)):
     return crud.get_terreiroRole(db)
+
+# POST AGENT TERREIRO
+@app.post("/agent_terreiro/", response_model=schemas.AgentTerreiroResponse)
+def create_agentTerreiro(agent: schemas.AgentTerreiroCreate, db:Session=Depends(database.get_db)):
+    return crud.create_agentTerreiro(agent, db)
+
+
+# GET AGENT TERREIRO
+@app.get("/agent_terreiro/",response_model=list[schemas.AgentTerreiroResponse])
+def get_agentsTerreiro(db:Session=Depends(database.get_db)):
+    return crud.get_agentTerreiro(db)

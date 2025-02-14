@@ -110,3 +110,22 @@ def create_terreiroRole(terreiro_role:schemas.TerreiroRoleCreate, db:Session):
 
 def get_terreiroRole(db:Session):
     return db.query(models.TerreiroRole).all()
+
+
+# Agent
+def create_agentTerreiro(agent: schemas.AgentTerreiroCreate, db:Session):
+    db_agent = models.AgentTerreiro(
+        id_user=agent.id_user, 
+        id_terreiro_role=agent.id_terreiro_role, 
+        id_terreiro=agent.id_terreiro
+        )
+    try:
+        db.add(db_agent)
+        db.commit()
+        db.refresh(db_agent)
+        return db_agent
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erro interno {e}")
+    
+def get_agentTerreiro(db:Session):
+    return db.query(models.AgentTerreiro).all()
