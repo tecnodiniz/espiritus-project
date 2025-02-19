@@ -4,6 +4,9 @@ from sqlalchemy.exc import IntegrityError
 from fastapi import HTTPException
 import models, schemas
 
+
+# USER
+
 def create_user(db:Session, user: schemas.UserCreate):
     db_user = models.User(name=user.name, cpf = user.cpf, plan = user.plan)
 
@@ -43,6 +46,7 @@ def update_user(user_id: UUID, user:schemas.UserUpadte, db:Session):
         raise HTTPException(status_code=500, detail=f"erro interno {e}")
 
 
+# Terreiro
 def create_terreiro(db: Session, terreiro: schemas.TerreiroCreate):
     db_terreiro = models.Terreiro(
         leader=terreiro.leader,
@@ -95,6 +99,8 @@ def update_terreiro(terreiro_id: UUID, terreiro: schemas.TerreiroUpdate, db:Sess
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro interno {e}")
     
+
+# Terreiro Roles
 def create_terreiroRole(terreiro_role:schemas.TerreiroRoleCreate, db:Session):
     db_role = models.TerreiroRole(position=terreiro_role.position, description=terreiro_role.description)
 
