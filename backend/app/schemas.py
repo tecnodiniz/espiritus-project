@@ -6,8 +6,8 @@ from pydantic import BaseModel
 # User
 class UserBase(BaseModel):
     name: str
-    cpf: str
-    plan: str
+    cpf: Optional[str] = None
+    plan: Optional[str] = None
     
 class UserCreate(UserBase):
     pass

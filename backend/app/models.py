@@ -9,8 +9,8 @@ class User(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
     name = Column(String(255), index=True)
-    cpf = Column(String(14), unique=True, nullable=False)
-    plan = Column(String(50), nullable=False)
+    cpf = Column(String(14))
+    plan = Column(String(50), default="basic")
 
     terreiros = relationship("Terreiro", back_populates="user", uselist=True, cascade="all, delete-orphan")
     agents = relationship("AgentTerreiro", back_populates="user", uselist=True, cascade="all, delete-orphan")
