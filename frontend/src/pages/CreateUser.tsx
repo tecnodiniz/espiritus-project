@@ -2,8 +2,14 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Check } from "lucide-react";
+import { Loader2 } from "lucide-react";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/hooks/use-toast";
+
 import {
   Form,
   FormControl,
@@ -13,6 +19,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+
 import {
   Card,
   CardContent,
@@ -21,10 +28,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 import { user_create } from "@/services/api";
-import { useToast } from "@/hooks/use-toast";
-import { ToastAction } from "@/components/ui/toast";
-import { Check } from "lucide-react";
+import { useState } from "react";
+
 const formSchema = z.object({
   name: z
     .string()
@@ -40,6 +47,8 @@ const formSchema = z.object({
 
 export default function ProfileForm() {
   const { toast } = useToast();
+  const [load, setLoad] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,7 +57,8 @@ export default function ProfileForm() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setLoad(true);
     try {
       const response = await user_create(values);
 
@@ -56,11 +66,16 @@ export default function ProfileForm() {
         console.log(response.data);
         toast({
           description: "user has been created",
-          action: <Check />,
+          action: (
+            <div className="flex items-center gap-2">
+              <Check className="w-4 h-4 text-green-500" />
+            </div>
+          ),
         });
         form.reset();
       }
     } catch (error) {
+      setLoad(false);
       console.log(error);
       toast({
         variant: "destructive",
@@ -73,7 +88,7 @@ export default function ProfileForm() {
         ),
       });
     }
-  }
+  };
 
   return (
     <div className="flex flex-col ">
@@ -121,7 +136,8 @@ export default function ProfileForm() {
                   )}
                 />
                 <CardFooter>
-                  <Button variant="default" type="submit">
+                  <Button variant="default" type="submit" disabled={load}>
+                    {load && <Loader2 className="animate-spin" />}
                     Submit
                   </Button>
                 </CardFooter>
