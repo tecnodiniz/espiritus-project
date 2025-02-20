@@ -3,8 +3,9 @@ import { Outlet } from "react-router-dom";
 const Layout = () => {
   return (
     <>
-      <h1>Hello Wolrd!</h1>
-      <Outlet />
+      <div className="container mx-auto p-10">
+        <Outlet />
+      </div>
     </>
   );
 };
