@@ -25,13 +25,23 @@ import {
 const formSchema = z.object({
   username: z
     .string()
-    .regex(new RegExp("^(?!.*[._-]{2})[a-zA-Z0-9._-]+$"), {
-      message: "Invalid username",
-    })
     .min(2, {
       message: "Username must be at leat 2 characters",
     })
+    .regex(new RegExp("^(?!\\s)[a-zA-Z]+(\\s[a-z-A-Z]+)*$"), {
+      message: "Invalid username",
+    })
     .max(50),
+  email: z
+    .string()
+    .regex(
+      new RegExp(
+        "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\\.([a-zA-Z0-9]{2,})(\\.[a-zA-Z0-9]{2,})?$"
+      ),
+      {
+        message: "Invalid email",
+      }
+    ),
 });
 
 const ProfileForm = () => {
@@ -49,8 +59,8 @@ const ProfileForm = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Create new user</CardTitle>
-        <CardDescription>a new user to use the system</CardDescription>
+        <CardTitle>User Form</CardTitle>
+        <CardDescription>Create a new user</CardDescription>
       </CardHeader>
 
       <CardContent>
@@ -63,10 +73,31 @@ const ProfileForm = () => {
                 <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
-                    <Input placeholder="duhdiniz" {...field} />
+                    <Input placeholder="John Doe" {...field} />
                   </FormControl>
                   <FormDescription>
                     This is you public display name
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>E-Mail</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="email@example.com"
+                      type="email"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    This is you public display email
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
