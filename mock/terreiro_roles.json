@@ -1,0 +1,32 @@
+[
+  {
+    "id": "0fd27905-4ebd-4060-a231-fc7ba6aee427",
+    "position": "Tabaqueiro",
+    "description": "Conduz o atabaque no terreiro"
+  },
+  {
+    "id": "d077c6bc-ec87-4739-b78b-28921962f920",
+    "position": "Pai de Santo",
+    "description": "Líder espiritual do terreiro, responsável por orientar e conduzir os rituais"
+  },
+  {
+    "id": "6cbe9f36-b68c-4bd7-9f85-8a4211da8367",
+    "position": "Mãe de Santo",
+    "description": "Líder espiritual feminina, auxilia o Pai de Santo nos rituais e na orientação da comunidade"
+  },
+  {
+    "id": "b46ec827-bc3c-4fbe-bd7d-a96c99324b63",
+    "position": "Ogã",
+    "description": "Responsável por cuidar das ferramentas sagradas e pela parte logística dos rituais"
+  },
+  {
+    "id": "2472175b-10ae-437e-9fd4-2e75697ed0ed",
+    "position": "Filho de Santo",
+    "description": "Devoto que participa dos rituais e segue as orientações espirituais do terreiro"
+  },
+  {
+    "id": "fe49aaa3-3f3e-455d-a57b-01911869babc",
+    "position": "Baiana",
+    "description": "Responsável por preparar alimentos e cuidar do acolhimento durante os rituais e festas no terreiro"
+  }
+]

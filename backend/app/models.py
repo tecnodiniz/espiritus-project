@@ -24,7 +24,7 @@ class Terreiro(Base):
     contact = Column(String(50))
     opening_hours = Column(Text)
     history = Column(Text)
-    leader = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), unique=True, nullable=False)
+    leader = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     infrastructure = Column(Text)
     segment = Column(String(100))
 

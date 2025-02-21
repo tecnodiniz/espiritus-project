@@ -1,0 +1,402 @@
+[
+  {
+    "leader": "ea3e3fe0-a567-4382-b2e7-4e0449a715ff",
+    "name": "Terreiro Pai Benedito",
+    "address": "Rua das Palmeiras, 123 - Salvador, BA",
+    "contact": "+55 91077-7872",
+    "opening_hours": "10h às 20h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Jurema"
+  },
+  {
+    "leader": "ea3e3fe0-a567-4382-b2e7-4e0449a715ff",
+    "name": "Ilê Ifá Oxalá",
+    "address": "Travessa das Águas, 505 - Belém, PA",
+    "contact": "+55 91872-7053",
+    "opening_hours": "15h às 22h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Quimbanda"
+  },
+  {
+    "leader": "ea3e3fe0-a567-4382-b2e7-4e0449a715ff",
+    "name": "Ilê Omolokô Oxóssi",
+    "address": "Avenida Brasil, 456 - Rio de Janeiro, RJ",
+    "contact": "+55 99878-8521",
+    "opening_hours": "15h às 21h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Quimbanda"
+  },
+  {
+    "leader": "ea3e3fe0-a567-4382-b2e7-4e0449a715ff",
+    "name": "Ilê Asé Iemanjá",
+    "address": "Alameda dos Orixás, 101 - Porto Alegre, RS",
+    "contact": "+55 97473-1493",
+    "opening_hours": "11h às 23h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Omolokô"
+  },
+  {
+    "leader": "ea3e3fe0-a567-4382-b2e7-4e0449a715ff",
+    "name": "Terreiro de Xangô Kaô",
+    "address": "Estrada do Axé, 202 - São Paulo, SP",
+    "contact": "+55 94133-4293",
+    "opening_hours": "17h às 23h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Candomblé"
+  },
+  {
+    "leader": "ea3e3fe0-a567-4382-b2e7-4e0449a715ff",
+    "name": "Ilê Asé Iemanjá",
+    "address": "Estrada do Axé, 202 - São Paulo, SP",
+    "contact": "+55 91064-4015",
+    "opening_hours": "13h às 19h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Jurema"
+  },
+  {
+    "leader": "ea3e3fe0-a567-4382-b2e7-4e0449a715ff",
+    "name": "Ilê Axé Obá",
+    "address": "Rua da Paz, 303 - Belo Horizonte, MG",
+    "contact": "+55 96677-3361",
+    "opening_hours": "11h às 21h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Candomblé"
+  },
+  {
+    "leader": "ea3e3fe0-a567-4382-b2e7-4e0449a715ff",
+    "name": "Ilê Asé Iemanjá",
+    "address": "Avenida Iemanjá, 404 - Fortaleza, CE",
+    "contact": "+55 98328-8466",
+    "opening_hours": "11h às 19h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Jurema"
+  },
+  {
+    "leader": "ea3e3fe0-a567-4382-b2e7-4e0449a715ff",
+    "name": "Ilê Ifá Oxalá",
+    "address": "Alameda dos Orixás, 101 - Porto Alegre, RS",
+    "contact": "+55 94695-6566",
+    "opening_hours": "16h às 21h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Jurema"
+  },
+  {
+    "leader": "ea3e3fe0-a567-4382-b2e7-4e0449a715ff",
+    "name": "Ilê Ifá Oxalá",
+    "address": "Avenida Iemanjá, 404 - Fortaleza, CE",
+    "contact": "+55 94888-7542",
+    "opening_hours": "16h às 23h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Jurema"
+  },
+  {
+    "leader": "f5822058-6fca-4d79-a133-284e1b427859",
+    "name": "Ilê Ifá Oxalá",
+    "address": "Travessa das Águas, 505 - Belém, PA",
+    "contact": "+55 93780-4127",
+    "opening_hours": "18h às 22h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Candomblé"
+  },
+  {
+    "leader": "f5822058-6fca-4d79-a133-284e1b427859",
+    "name": "Terreiro de Xangô Kaô",
+    "address": "Travessa das Águas, 505 - Belém, PA",
+    "contact": "+55 98091-1861",
+    "opening_hours": "18h às 19h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Jurema"
+  },
+  {
+    "leader": "f5822058-6fca-4d79-a133-284e1b427859",
+    "name": "Terreiro de Xangô Kaô",
+    "address": "Rua das Palmeiras, 123 - Salvador, BA",
+    "contact": "+55 99236-5378",
+    "opening_hours": "17h às 19h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Xangô"
+  },
+  {
+    "leader": "f5822058-6fca-4d79-a133-284e1b427859",
+    "name": "Terreiro Pai Benedito",
+    "address": "Avenida Iemanjá, 404 - Fortaleza, CE",
+    "contact": "+55 97308-4474",
+    "opening_hours": "8h às 19h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Jurema"
+  },
+  {
+    "leader": "f5822058-6fca-4d79-a133-284e1b427859",
+    "name": "Tenda Espírita Vovó Catarina",
+    "address": "Travessa das Águas, 505 - Belém, PA",
+    "contact": "+55 93574-9292",
+    "opening_hours": "8h às 21h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Candomblé"
+  },
+  {
+    "leader": "f5822058-6fca-4d79-a133-284e1b427859",
+    "name": "Casa Espírita Caboclo Jurema",
+    "address": "Estrada do Axé, 202 - São Paulo, SP",
+    "contact": "+55 94385-3974",
+    "opening_hours": "17h às 23h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Umbanda"
+  },
+  {
+    "leader": "f5822058-6fca-4d79-a133-284e1b427859",
+    "name": "Terreiro de Xangô Kaô",
+    "address": "Avenida Brasil, 456 - Rio de Janeiro, RJ",
+    "contact": "+55 92571-4932",
+    "opening_hours": "12h às 21h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Omolokô"
+  },
+  {
+    "leader": "f5822058-6fca-4d79-a133-284e1b427859",
+    "name": "Ilê Ifá Oxalá",
+    "address": "Travessa São Jorge, 789 - Recife, PE",
+    "contact": "+55 99836-2625",
+    "opening_hours": "17h às 22h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Ifá"
+  },
+  {
+    "leader": "f5822058-6fca-4d79-a133-284e1b427859",
+    "name": "Casa de Santo Ogum Beira-Mar",
+    "address": "Estrada do Axé, 202 - São Paulo, SP",
+    "contact": "+55 98243-1833",
+    "opening_hours": "12h às 21h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Omolokô"
+  },
+  {
+    "leader": "f5822058-6fca-4d79-a133-284e1b427859",
+    "name": "Tenda Espírita Vovó Catarina",
+    "address": "Rua da Paz, 303 - Belo Horizonte, MG",
+    "contact": "+55 97544-1290",
+    "opening_hours": "12h às 21h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Batuque"
+  },
+  {
+    "leader": "e31ea875-a772-4931-93ef-a19f6f523d07",
+    "name": "Casa Espírita Caboclo Jurema",
+    "address": "Travessa das Águas, 505 - Belém, PA",
+    "contact": "+55 91732-5402",
+    "opening_hours": "13h às 19h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Jurema"
+  },
+  {
+    "leader": "e31ea875-a772-4931-93ef-a19f6f523d07",
+    "name": "Ilê Ifá Oxalá",
+    "address": "Travessa das Águas, 505 - Belém, PA",
+    "contact": "+55 96924-6533",
+    "opening_hours": "17h às 21h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Quimbanda"
+  },
+  {
+    "leader": "e31ea875-a772-4931-93ef-a19f6f523d07",
+    "name": "Ilê Omolokô Oxóssi",
+    "address": "Rua das Palmeiras, 123 - Salvador, BA",
+    "contact": "+55 97854-3856",
+    "opening_hours": "15h às 20h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Candomblé"
+  },
+  {
+    "leader": "e31ea875-a772-4931-93ef-a19f6f523d07",
+    "name": "Terreiro de Xangô Kaô",
+    "address": "Ladeira do Santo, 707 - Brasília, DF",
+    "contact": "+55 93092-4173",
+    "opening_hours": "10h às 19h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Xangô"
+  },
+  {
+    "leader": "e31ea875-a772-4931-93ef-a19f6f523d07",
+    "name": "Ilê Omolokô Oxóssi",
+    "address": "Estrada do Axé, 202 - São Paulo, SP",
+    "contact": "+55 94629-4605",
+    "opening_hours": "17h às 19h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Jurema"
+  },
+  {
+    "leader": "e31ea875-a772-4931-93ef-a19f6f523d07",
+    "name": "Ilê Asé Iemanjá",
+    "address": "Ladeira do Santo, 707 - Brasília, DF",
+    "contact": "+55 91172-3418",
+    "opening_hours": "18h às 22h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Quimbanda"
+  },
+  {
+    "leader": "e31ea875-a772-4931-93ef-a19f6f523d07",
+    "name": "Terreiro de Xangô Kaô",
+    "address": "Estrada do Axé, 202 - São Paulo, SP",
+    "contact": "+55 98124-4295",
+    "opening_hours": "13h às 22h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Quimbanda"
+  },
+  {
+    "leader": "e31ea875-a772-4931-93ef-a19f6f523d07",
+    "name": "Ilê Asé Iemanjá",
+    "address": "Avenida Iemanjá, 404 - Fortaleza, CE",
+    "contact": "+55 98458-9499",
+    "opening_hours": "17h às 22h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Batuque"
+  },
+  {
+    "leader": "e31ea875-a772-4931-93ef-a19f6f523d07",
+    "name": "Casa de Santo Ogum Beira-Mar",
+    "address": "Ladeira do Santo, 707 - Brasília, DF",
+    "contact": "+55 96493-6070",
+    "opening_hours": "15h às 20h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Quimbanda"
+  },
+  {
+    "leader": "e31ea875-a772-4931-93ef-a19f6f523d07",
+    "name": "Templo de Oxóssi",
+    "address": "Rua Ogunjá, 606 - Curitiba, PR",
+    "contact": "+55 94937-4653",
+    "opening_hours": "15h às 22h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Candomblé"
+  },
+  {
+    "leader": "43a702d1-557a-4fc9-83dc-4621a3109697",
+    "name": "Ilê Axé Obá",
+    "address": "Estrada do Axé, 202 - São Paulo, SP",
+    "contact": "+55 96080-5140",
+    "opening_hours": "8h às 20h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Ifá"
+  },
+  {
+    "leader": "43a702d1-557a-4fc9-83dc-4621a3109697",
+    "name": "Ilê Ifá Oxalá",
+    "address": "Travessa das Águas, 505 - Belém, PA",
+    "contact": "+55 95980-7596",
+    "opening_hours": "16h às 20h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Ifá"
+  },
+  {
+    "leader": "43a702d1-557a-4fc9-83dc-4621a3109697",
+    "name": "Ilê Omolokô Oxóssi",
+    "address": "Avenida Iemanjá, 404 - Fortaleza, CE",
+    "contact": "+55 97940-5378",
+    "opening_hours": "9h às 22h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Ifá"
+  },
+  {
+    "leader": "43a702d1-557a-4fc9-83dc-4621a3109697",
+    "name": "Casa Espírita Caboclo Jurema",
+    "address": "Ladeira do Santo, 707 - Brasília, DF",
+    "contact": "+55 91336-4449",
+    "opening_hours": "17h às 20h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Xangô"
+  },
+  {
+    "leader": "43a702d1-557a-4fc9-83dc-4621a3109697",
+    "name": "Ilê Ifá Oxalá",
+    "address": "Travessa São Jorge, 789 - Recife, PE",
+    "contact": "+55 96271-8030",
+    "opening_hours": "18h às 20h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Ifá"
+  },
+  {
+    "leader": "43a702d1-557a-4fc9-83dc-4621a3109697",
+    "name": "Ilê Asé Iemanjá",
+    "address": "Alameda dos Orixás, 101 - Porto Alegre, RS",
+    "contact": "+55 98580-3894",
+    "opening_hours": "15h às 22h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Quimbanda"
+  },
+  {
+    "leader": "43a702d1-557a-4fc9-83dc-4621a3109697",
+    "name": "Tenda Espírita Vovó Catarina",
+    "address": "Rua Ogunjá, 606 - Curitiba, PR",
+    "contact": "+55 91958-4585",
+    "opening_hours": "8h às 20h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Batuque"
+  },
+  {
+    "leader": "43a702d1-557a-4fc9-83dc-4621a3109697",
+    "name": "Tenda Espírita Vovó Catarina",
+    "address": "Travessa São Jorge, 789 - Recife, PE",
+    "contact": "+55 92089-3354",
+    "opening_hours": "11h às 20h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Quimbanda"
+  },
+  {
+    "leader": "43a702d1-557a-4fc9-83dc-4621a3109697",
+    "name": "Casa Espírita Caboclo Jurema",
+    "address": "Rua da Paz, 303 - Belo Horizonte, MG",
+    "contact": "+55 94814-7629",
+    "opening_hours": "12h às 23h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Batuque"
+  },
+  {
+    "leader": "43a702d1-557a-4fc9-83dc-4621a3109697",
+    "name": "Casa de Santo Ogum Beira-Mar",
+    "address": "Travessa das Águas, 505 - Belém, PA",
+    "contact": "+55 96757-1458",
+    "opening_hours": "8h às 23h",
+    "history": "Um terreiro tradicional, conhecido por suas celebrações e rituais de grande importância espiritual.",
+    "infrastructure": "O terreiro conta com salão principal, espaço para oferendas e um jardim sagrado.",
+    "segment": "Xangô"
+  }
+]

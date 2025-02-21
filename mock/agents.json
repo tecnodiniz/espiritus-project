@@ -1,0 +1,127 @@
+[
+  {
+    "id_terreiro_role": "0fd27905-4ebd-4060-a231-fc7ba6aee427",
+    "id_terreiro": "6250dde8-d34e-4756-8456-d4b35f67fa9c",
+    "id_user": "8f3baa99-4937-48c7-b31c-032718b12800"
+  },
+  {
+    "id_terreiro_role": "0fd27905-4ebd-4060-a231-fc7ba6aee427",
+    "id_terreiro": "763e19d4-b1da-40ab-99c9-fc9c708f90a2",
+    "id_user": "35ee8ab4-5356-4eb4-8d3a-2fecb640961f"
+  },
+  {
+    "id_terreiro_role": "d077c6bc-ec87-4739-b78b-28921962f920",
+    "id_terreiro": "3493dd6f-8755-4de3-a93d-39185bb033c4",
+    "id_user": "1b9d0c17-1993-4225-92bc-5c6b6d49e3a7"
+  },
+  {
+    "id_terreiro_role": "d077c6bc-ec87-4739-b78b-28921962f920",
+    "id_terreiro": "e5862bad-5697-419b-99bf-8622fc9de319",
+    "id_user": "13a589a5-f1de-497d-9db1-5124c11c6c12"
+  },
+  {
+    "id_terreiro_role": "6cbe9f36-b68c-4bd7-9f85-8a4211da8367",
+    "id_terreiro": "8666f278-b8ae-4469-8bca-71de1b7fb11e",
+    "id_user": "30386b31-2533-4855-9f2e-32a3987ec644"
+  },
+  {
+    "id_terreiro_role": "6cbe9f36-b68c-4bd7-9f85-8a4211da8367",
+    "id_terreiro": "66675e98-7d5c-461c-a892-c6832a3df277",
+    "id_user": "46e3591c-45d1-4db3-93f7-363e6f0de0fc"
+  },
+  {
+    "id_terreiro_role": "b46ec827-bc3c-4fbe-bd7d-a96c99324b63",
+    "id_terreiro": "22338bb0-63f8-4b89-aebd-d6cfc816243d",
+    "id_user": "ea3e3fe0-a567-4382-b2e7-4e0449a715ff"
+  },
+  {
+    "id_terreiro_role": "b46ec827-bc3c-4fbe-bd7d-a96c99324b63",
+    "id_terreiro": "d7f74c0f-56d3-480b-ba7d-fb0d159284c7",
+    "id_user": "f5822058-6fca-4d79-a133-284e1b427859"
+  },
+  {
+    "id_terreiro_role": "2472175b-10ae-437e-9fd4-2e75697ed0ed",
+    "id_terreiro": "2d77b598-c5e3-4922-b375-fe4847921748",
+    "id_user": "e31ea875-a772-4931-93ef-a19f6f523d07"
+  },
+  {
+    "id_terreiro_role": "2472175b-10ae-437e-9fd4-2e75697ed0ed",
+    "id_terreiro": "15fdc6f7-50db-4314-8d36-60e244981e30",
+    "id_user": "43a702d1-557a-4fc9-83dc-4621a3109697"
+  },
+  {
+    "id_terreiro_role": "fe49aaa3-3f3e-455d-a57b-01911869babc",
+    "id_terreiro": "b6116060-f780-4f46-93cc-ebd84be38ce6",
+    "id_user": "58b5a89d-404e-444f-b805-cd011f135467"
+  },
+  {
+    "id_terreiro_role": "fe49aaa3-3f3e-455d-a57b-01911869babc",
+    "id_terreiro": "a6c4e501-c417-4d59-bfc5-a590b9c58fc7",
+    "id_user": "76c94df8-179b-458d-88d2-089d672cde4c"
+  },
+  {
+    "id_terreiro_role": "0fd27905-4ebd-4060-a231-fc7ba6aee427",
+    "id_terreiro": "d235a91f-a3e1-4468-bb4d-9bfe56ba0f50",
+    "id_user": "abdf863b-dc0a-47b3-b98c-76c17f5e33d1"
+  },
+  {
+    "id_terreiro_role": "0fd27905-4ebd-4060-a231-fc7ba6aee427",
+    "id_terreiro": "c270f1e3-342b-44eb-9dff-ccc7cc88844e",
+    "id_user": "a894f6b1-18fd-429e-8035-a8c287c09465"
+  },
+  {
+    "id_terreiro_role": "d077c6bc-ec87-4739-b78b-28921962f920",
+    "id_terreiro": "36bad5c0-c372-4557-9939-91d061fb5a92",
+    "id_user": "9a645f72-ba21-4287-ac0e-1518eb99eaea"
+  },
+  {
+    "id_terreiro_role": "d077c6bc-ec87-4739-b78b-28921962f920",
+    "id_terreiro": "b9463bf9-91c2-4233-b548-9267d6de11c5",
+    "id_user": "a6081702-7f26-4e95-a50a-8c87129dedec"
+  },
+  {
+    "id_terreiro_role": "6cbe9f36-b68c-4bd7-9f85-8a4211da8367",
+    "id_terreiro": "157a42f6-232e-4e0e-8b13-8ec8a77e3505",
+    "id_user": "ca3ab346-ad3a-445e-a743-a708f4939ad6"
+  },
+  {
+    "id_terreiro_role": "6cbe9f36-b68c-4bd7-9f85-8a4211da8367",
+    "id_terreiro": "5bee799e-18ff-4c14-8f19-239b42d049a7",
+    "id_user": "c8d50780-d80f-4796-95f8-55aab75ed84a"
+  },
+  {
+    "id_terreiro_role": "b46ec827-bc3c-4fbe-bd7d-a96c99324b63",
+    "id_terreiro": "4f674db4-4bfb-443b-9a93-bf9ef8fcbe77",
+    "id_user": "c5da2585-88ef-4ea9-b09c-817410fbb197"
+  },
+  {
+    "id_terreiro_role": "b46ec827-bc3c-4fbe-bd7d-a96c99324b63",
+    "id_terreiro": "638060fe-f9af-4fe1-aef6-c259ad52474c",
+    "id_user": "bfad2b1a-e5dc-4193-b59b-8fb676ddf491"
+  },
+  {
+    "id_terreiro_role": "2472175b-10ae-437e-9fd4-2e75697ed0ed",
+    "id_terreiro": "c3653920-deda-49f9-ba8d-24813bb2e684",
+    "id_user": "43165010-6352-43fb-96dc-dfa495ab666c"
+  },
+  {
+    "id_terreiro_role": "2472175b-10ae-437e-9fd4-2e75697ed0ed",
+    "id_terreiro": "e970501e-562f-4018-a0cc-b119d1025f60",
+    "id_user": "c09c011c-f9d2-441d-a446-700f64aee3b9"
+  },
+  {
+    "id_terreiro_role": "fe49aaa3-3f3e-455d-a57b-01911869babc",
+    "id_terreiro": "38b6920c-2690-4a00-a1c5-bc166165ef7c",
+    "id_user": "ec37b64e-e04a-4cda-ada9-92f6908b0604"
+  },
+  {
+    "id_terreiro_role": "fe49aaa3-3f3e-455d-a57b-01911869babc",
+    "id_terreiro": "a8c2a61e-dba4-48ca-ab87-5dda51f606fd",
+    "id_user": "044467d0-0408-4db4-ab99-bb1d4d38519c"
+  },
+  {
+    "id_terreiro_role": "0fd27905-4ebd-4060-a231-fc7ba6aee427",
+    "id_terreiro": "d96d2464-c7c4-4a69-a870-797d15388333",
+    "id_user": "5558f931-6107-4c1e-9738-657a828f1530"
+  }
+]

@@ -1,8 +1,9 @@
-import crud,  schemas, database
+import crud,  schemas, database, models
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 from uuid import UUID
 from fastapi.middleware.cors import CORSMiddleware
+from typing import List
 
 app = FastAPI()
 
@@ -76,3 +77,41 @@ def create_agentTerreiro(agent: schemas.AgentTerreiroCreate, db:Session=Depends(
 @app.get("/agent_terreiro/",response_model=list[schemas.AgentTerreiroResponse])
 def get_agentsTerreiro(db:Session=Depends(database.get_db)):
     return crud.get_agentTerreiro(db)
+
+
+
+
+
+# END POINTS FOR TEST, ONLY FOR DEVELOPE MODE
+
+# INSERT MASSIVE DATA
+
+@app.post("/users/batch")
+def create_multiples_users(users: List[schemas.UserCreate], db:Session=Depends(database.get_db)):
+    db_users = [models.User(**user.model_dump()) for user in users]
+    db.add_all(db_users)
+    db.commit()
+    return {"message":"Users has been created","count":len(db_users)}
+
+@app.post("/terreiros/batch")
+def create_multiples_terreiros(terreiros: List[schemas.TerreiroCreate], db:Session=Depends(database.get_db)):
+    db_terreiros = [models.Terreiro(**terreiro.model_dump()) for terreiro in terreiros]
+    db.add_all(db_terreiros)
+    db.commit() 
+    return {"message":"Terreiros has been created","count":len(db_terreiros)}
+
+@app.post("/tereiro_roles/batch")
+def create_multiples_roles(roles: List[schemas.TerreiroRoleCreate], db:Session=Depends(database.get_db)):
+    db_roles = [models.TerreiroRole(**role.model_dump()) for role in roles]
+    db.add_all(db_roles)
+    db.commit()
+    return {"message":"Roles has been created","count":len(db_roles)}
+
+@app.post("/agent_terreiro/batch")
+def create_multiple_agents(agents: List[schemas.AgentTerreiroCreate], db:Session=Depends(database.get_db)):
+    db_agents=[models.AgentTerreiro(**agent.model_dump())for agent in agents]
+    db.add_all(db_agents)
+    db.commit()
+    return {"message":"Agents has been created","count":len(db_agents)}
+
+

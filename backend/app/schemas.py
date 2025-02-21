@@ -5,6 +5,7 @@ from pydantic import BaseModel
 
 # User
 class UserBase(BaseModel):
+    id: Optional[UUID] = None # Remove this on prod
     name: str
     cpf: Optional[str] = None
     plan: Optional[str] = None
@@ -25,6 +26,7 @@ class UserResponse(UserBase):
 
 # Terreiro Roles
 class TerreiroRoleBase(BaseModel):
+    id: Optional[UUID] = None # Remove
     position: str
     description: str
 
@@ -57,6 +59,7 @@ class AgentTerreiroResponse(BaseModel):
 
 # Terreiro
 class TerreiroBase(BaseModel):
+    id: Optional[UUID] = None # Remove this on prod
     leader: UUID
     name: str
     address: str
