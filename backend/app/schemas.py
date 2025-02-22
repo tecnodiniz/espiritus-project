@@ -1,6 +1,7 @@
 from uuid import UUID
-from typing import Optional
-from pydantic import BaseModel
+from typing import Optional, Any,List
+from pydantic import BaseModel, computed_field,  ConfigDict
+import models
 
 
 # User
@@ -20,10 +21,12 @@ class UserUpadte(BaseModel):
     
 class UserResponse(UserBase):
     id: UUID
+    terreiros: Optional[List["PureTerreiroResponse"]] = None
 
     class Config:
-        from_attributes: True
+        from_attributes = True
 
+    
 # Terreiro Roles
 class TerreiroRoleBase(BaseModel):
     id: Optional[UUID] = None # Remove
@@ -50,10 +53,6 @@ class AgentTerreiroCreate(AgentTerreiroBase):
 
 class AgentTerreiroResponse(BaseModel):
     id: UUID
-
-    user: "UserResponse"
-    role: "TerreiroRoleResponse"
-  
     
     class Config:
         from_attributes: True
@@ -82,15 +81,22 @@ class TerreiroUpdate(BaseModel):
     infrastructure: Optional[str] = None
     segment:        Optional[str] = None
     
+
+class PureTerreiroResponse(TerreiroBase):
+    id: UUID
+    class Config:
+        from_attributes = True
+
 class TerreiroResponse(TerreiroBase):
     id: UUID
     leader: UUID
 
     user: UserResponse
-    agents: Optional[list[AgentTerreiroResponse]] = None
+    agents: Optional[List[AgentTerreiroResponse]] = None
 
     class Config:
         from_attributes = True
+
 
 
 

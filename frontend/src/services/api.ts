@@ -10,5 +10,6 @@ const api = axios.create({
 
 export const conn_api = () => api.get("");
 export const user_create = (data: any) => api.post("/users/", data);
+export const fetch_users = () => api.get("/users/");
 
 export default api;
