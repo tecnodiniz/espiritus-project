@@ -20,7 +20,7 @@ class UserUpadte(BaseModel):
     
 class UserResponse(UserBase):
     id: UUID
-    
+
     class Config:
         from_attributes: True
 
@@ -51,9 +51,10 @@ class AgentTerreiroCreate(AgentTerreiroBase):
 class AgentTerreiroResponse(BaseModel):
     id: UUID
 
-    user: UserResponse
-    role: TerreiroRoleResponse
-
+    user: "UserResponse"
+    role: "TerreiroRoleResponse"
+  
+    
     class Config:
         from_attributes: True
 
@@ -93,5 +94,8 @@ class TerreiroResponse(TerreiroBase):
 
 
 
-
+UserResponse.model_rebuild()
+TerreiroRoleResponse.model_rebuild()
+AgentTerreiroResponse.model_rebuild()
+TerreiroResponse.model_rebuild()
 
