@@ -21,7 +21,6 @@ class UserUpadte(BaseModel):
     
 class UserResponse(UserBase):
     id: UUID
-    terreiros: Optional[List["PureTerreiroResponse"]] = None
 
     class Config:
         from_attributes = True
@@ -53,6 +52,8 @@ class AgentTerreiroCreate(AgentTerreiroBase):
 
 class AgentTerreiroResponse(BaseModel):
     id: UUID
+    user: "UserResponse"
+    role: "TerreiroRoleResponse"
     
     class Config:
         from_attributes: True
@@ -90,8 +91,8 @@ class PureTerreiroResponse(TerreiroBase):
 class TerreiroResponse(TerreiroBase):
     id: UUID
     leader: UUID
-
     user: UserResponse
+    
     agents: Optional[List[AgentTerreiroResponse]] = None
 
     class Config:
