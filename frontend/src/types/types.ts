@@ -9,7 +9,7 @@ export type Role = {
   position: string;
   description: string;
 };
-export type Agent = {
+export type TerreiroAgent = {
   id: string;
   role: Role;
   user: User;
@@ -24,5 +24,5 @@ export type Terreiro = {
   contact: string;
   opening_hours: string;
   address: string;
-  agents: Agent[];
+  agents: TerreiroAgent[];
 };
