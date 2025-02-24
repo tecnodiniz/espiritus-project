@@ -27,24 +27,17 @@ export default function TerreiroPage() {
 
   useEffect(() => {
     if (terreiro?.agents) {
-      if (!query.trim()) {
-        setFilteredUser(terreiro?.agents);
-      } else
-        setFilteredUser(
-          terreiro?.agents.filter((terreiroAgent) =>
-            terreiroAgent.user.name
-              .toLowerCase()
-              .includes(query.toLocaleLowerCase())
-          )
-        );
+      setFilteredUser(
+        query.trim()
+          ? terreiro.agents.filter((terreiroAgent) =>
+              terreiroAgent.user.name
+                .toLowerCase()
+                .includes(query.toLowerCase())
+            )
+          : terreiro.agents
+      );
     }
-  }, [query]);
-
-  useEffect(() => {
-    if (terreiro?.agents) {
-      setFilteredUser(terreiro.agents);
-    }
-  }, [terreiro]);
+  }, [query, terreiro]);
 
   return (
     <>
