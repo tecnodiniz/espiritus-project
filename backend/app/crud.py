@@ -26,6 +26,14 @@ def create_user(db:Session, user: schemas.UserCreate):
 def get_users(db:Session):
     return db.query(models.User).all()
 
+def get_user(user_id: UUID, db: Session):
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
+
+    if not db_user:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+    
+    return db_user
+
 def update_user(user_id: UUID, user:schemas.UserUpadte, db:Session):
     db_user = db.query(models.User).filter(models.User.id == user_id).first()
 

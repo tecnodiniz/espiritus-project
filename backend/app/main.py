@@ -22,15 +22,26 @@ app.add_middleware(
 def read_root():
     return {"message":"API v0", "status":"ok"}
 
+
+
 # POST USER
 @app.post("/users/", response_model=schemas.UserResponse)
 def create_user(user: schemas.UserCreate, db: Session = Depends(database.get_db)):
     return crud.create_user(db, user)
 
+@app.get("/users/detail/{user_id}", response_model=schemas.UserDetailResponse)
+def get_user(user_id:UUID, db: Session = Depends(database.get_db)):
+    return crud.get_user(user_id, db)
+
 # GET USERS
 @app.get("/users/", response_model=list[schemas.UserResponse])
 def get_users(db: Session = Depends(database.get_db)):
     return crud.get_users(db)
+
+# GET USER
+@app.get("/users/{user_id}", response_model=schemas.UserResponse)
+def get_user(user_id:UUID, db: Session = Depends(database.get_db)):
+    return crud.get_user(user_id, db)
 
 # PATH USER
 @app.patch("/users/{user_id}", response_model=dict)

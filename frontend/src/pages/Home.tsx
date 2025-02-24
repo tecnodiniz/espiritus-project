@@ -74,7 +74,7 @@ export default function Home() {
 
               <CardFooter className="flex justify-end p-1">
                 <Button className="cursor-pointer" variant="link">
-                  <Link to={"terreiro/" + terreiro.id}>Mais</Link>
+                  <Link to={"terreiros/" + terreiro.id}>Mais</Link>
                 </Button>
               </CardFooter>
             </Card>

@@ -25,7 +25,12 @@ class UserResponse(UserBase):
     class Config:
         from_attributes = True
 
-    
+class UserDetailResponse(UserBase):
+    id: UUID
+    agents:Optional[List["AgentTerreiroBasicResponse"]] = None
+
+    class Config:
+        from_attributes = True
 # Terreiro Roles
 class TerreiroRoleBase(BaseModel):
     id: Optional[UUID] = None # Remove
@@ -56,7 +61,14 @@ class AgentTerreiroResponse(BaseModel):
     role: "TerreiroRoleResponse"
     
     class Config:
-        from_attributes: True
+        from_attributes = True
+
+class AgentTerreiroBasicResponse(BaseModel):
+    role: Optional["TerreiroRoleResponse"] = None
+    terreiro: Optional["TerreiroBasicResponse"] = None
+
+    class Config:
+        from_attributes = True
 
 # Terreiro
 class TerreiroBase(BaseModel):
@@ -94,6 +106,14 @@ class TerreiroResponse(TerreiroBase):
     user: UserResponse
     
     agents: Optional[List[AgentTerreiroResponse]] = None
+
+    class Config:
+        from_attributes = True
+
+class TerreiroBasicResponse(TerreiroBase):
+    id: UUID
+    leader: UUID 
+    user: UserResponse
 
     class Config:
         from_attributes = True

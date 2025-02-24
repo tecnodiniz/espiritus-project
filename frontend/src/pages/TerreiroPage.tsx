@@ -17,7 +17,7 @@ import { TerreiroAgent } from "@/types/types";
 
 import { useEffect, useState } from "react";
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function TerreiroPage() {
   const { id } = useParams();
@@ -99,7 +99,7 @@ export default function TerreiroPage() {
 
                 <CardFooter className="flex justify-end p-1">
                   <Button className="cursor-pointer" variant="link">
-                    Visitar Perfil
+                    <Link to={"/users/" + agent.user.id}>Visitar Perfil</Link>
                   </Button>
                 </CardFooter>
               </Card>
