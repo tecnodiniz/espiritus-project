@@ -3,7 +3,8 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
-import CreateUser from "./pages/CreateUser";
+
+import Terreiro from "./pages/TerreiroPage";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +12,8 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-      { path: "create-user", element: <CreateUser /> },
+      // { path: "create-user", element: <CreateUser /> },
+      { path: "terreiro/:id", element: <Terreiro /> },
     ],
   },
   {
