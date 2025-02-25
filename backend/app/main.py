@@ -29,7 +29,7 @@ def read_root():
 def create_user(user: schemas.UserCreate, db: Session = Depends(database.get_db)):
     return crud.create_user(db, user)
 
-@app.get("/users/detail/{user_id}", response_model=schemas.UserDetailResponse)
+@app.get("/users-detail/{user_id}", response_model=schemas.UserDetailResponse)
 def get_user(user_id:UUID, db: Session = Depends(database.get_db)):
     return crud.get_user(user_id, db)
 

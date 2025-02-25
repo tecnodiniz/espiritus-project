@@ -2,6 +2,7 @@ export type User = {
   id: string;
   name: string;
   plan: string;
+  agents: TerreiroAgent[];
 };
 
 export type Role = {
@@ -13,6 +14,7 @@ export type TerreiroAgent = {
   id: string;
   role: Role;
   user: User;
+  terreiro: Terreiro;
 };
 export type Terreiro = {
   id: string;

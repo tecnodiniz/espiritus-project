@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ChevronLeft } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -42,7 +43,12 @@ export default function TerreiroPage() {
   return (
     <>
       <Card className="min-h-[100vh]">
-        <CardHeader>
+        <Link to="/">
+          <Button className="m-2 cursor-pointer" variant="link">
+            <ChevronLeft /> Voltar
+          </Button>
+        </Link>
+        <CardHeader className="pt-0">
           <CardTitle className="text-2xl">{terreiro?.name}</CardTitle>
           <CardDescription>{terreiro?.history}</CardDescription>
           <CardDescription>

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { useUser } from "@/hooks/use-user";
 import { getInitials } from "@/lib/utils";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function UserPage() {
   const { id } = useParams();
@@ -34,7 +34,17 @@ export default function UserPage() {
             </CardDescription>
           </CardHeader>
         </div>
-        <CardContent></CardContent>
+        <CardContent>
+          <p className="text-2xl mb-5">Terreiros</p>
+          <div className="flex flex-col gap-3">
+            {user &&
+              user?.agents.map((agent) => (
+                <Link to={"/terreiros/" + agent.terreiro.id} key={agent.id}>
+                  {agent.terreiro.name} - {agent.role.position}
+                </Link>
+              ))}
+          </div>
+        </CardContent>
 
         <CardFooter className="flex justify-end p-1"></CardFooter>
       </Card>
