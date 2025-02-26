@@ -1,0 +1,8 @@
+.wrapper svg {
+  position: relative;
+  left: 10px;
+  top: 29px;
+  z-index: 1;
+  color: var(--vp-c-text-2);
+  pointer-events: none;
+}

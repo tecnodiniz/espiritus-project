@@ -47,10 +47,6 @@ export default function Home() {
           {filteredTerreiros.map((terreiro, index) => (
             <Card className=" " key={index}>
               <div className="flex items-center">
-                {/* <Avatar className="size-15 ml-3">
-                <AvatarImage src="" />
-                <AvatarFallback>{getInitials(terreiro.name)}</AvatarFallback>
-              </Avatar> */}
                 <CardHeader>
                   <CardTitle>{terreiro.name}</CardTitle>
                   <CardDescription>
