@@ -8,7 +8,14 @@ const NavBar = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("", className)} {...props} />
+  <div
+    ref={ref}
+    className={cn(
+      "shadow  text-black dark:border-b dark:text-white",
+      className
+    )}
+    {...props}
+  />
 ));
 NavBar.displayName = "NavBar";
 
@@ -19,7 +26,8 @@ const NavBarContent = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex flex-wrap text-white items-baseline justify-between min-h-20 max-w-7xl mx-auto px-4 pb-5 sm:px-6 lg:px-8",
+      "flex flex-wrap items-baseline justify-between min-h-20 max-w-7xl mx-auto px-4 pb-5 sm:px-6 lg:px-8",
+
       className
     )}
     {...props}

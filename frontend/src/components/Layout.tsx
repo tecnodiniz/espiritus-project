@@ -8,18 +8,37 @@ import {
 } from "./NavBar";
 import { Button } from "./ui/button";
 import { SearchBox } from "./SearchBox";
-
+import { useEffect, useState } from "react";
+import { Moon } from "lucide-react";
+import { Sun } from "lucide-react";
 const Layout = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Para aplicar o tema dark no body quando o estado mudar
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [isDarkMode]);
   return (
     <>
-      <NavBar className="bg-blue-400">
+      <NavBar>
         <NavBarContent>
           <NavBarLogo>
             <a href="/" className="text-2xl font-semibold ">
               Logo
             </a>
-            <Button variant="link" className="ml-2 text-white cursor-pointer">
+            <Button variant="link" className="ml-2 cursor-pointer">
               v0.0.1
+            </Button>
+            <Button
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              variant="ghost"
+              className="size-4 p-3"
+            >
+              {isDarkMode ? <Sun /> : <Moon />}
             </Button>
           </NavBarLogo>
 
@@ -27,7 +46,7 @@ const Layout = () => {
             <SearchBox className="bg-white" />
             <NavBarLink to="/">Features</NavBarLink>
             <NavBarLink to="/">About</NavBarLink>
-            <Button variant="outline" className="bg-transparent cursor-pointer">
+            <Button variant="default" className="cursor-pointer">
               Sign In
             </Button>
           </NavbarMenu>

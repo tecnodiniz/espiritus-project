@@ -8,7 +8,7 @@ const SearchBox = React.forwardRef<
   React.ComponentProps<"input">
 >(({ className, type, ...props }, ref) => {
   return (
-    <div className="wrapper text-gray-600">
+    <div className="wrapper text-gray-900">
       <Search />
       <input
         type={type}
