@@ -2,15 +2,13 @@ import { cn } from "@/lib/utils";
 import * as React from "react";
 import { Link } from "react-router-dom";
 
+import { Menu, X } from "lucide-react";
+
 const NavBar = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("p-3 pb-5 bg-blue-500 text-white shadow ", className)}
-    {...props}
-  />
+  <div ref={ref} className={cn("", className)} {...props} />
 ));
 NavBar.displayName = "NavBar";
 
@@ -21,7 +19,7 @@ const NavBarContent = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex flex-col justify-center h-auto items-baseline justify-between gap-8 px-4 sm:px-6 md:flex-row",
+      "flex flex-wrap text-white items-baseline justify-between min-h-20 max-w-7xl mx-auto px-4 pb-5 sm:px-6 lg:px-8",
       className
     )}
     {...props}
@@ -29,7 +27,7 @@ const NavBarContent = React.forwardRef<
 ));
 NavBarContent.displayName = "NavBarContent";
 
-const NavBarItem = React.forwardRef<
+const NavBarLogo = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -39,6 +37,52 @@ const NavBarItem = React.forwardRef<
     {...props}
   />
 ));
+
+NavBarLogo.displayName = "NavBarLogo";
+
+const NavbarMenu = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  return (
+    <>
+      <div className="flex md:hidden">
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="text-gray-700 hover:text-gray-900 focus:outline-none"
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
+        </button>
+      </div>
+
+      <div
+        ref={ref}
+        className={cn("hidden md:flex items-baseline space-x-6", className)}
+        {...props}
+      />
+
+      <div
+        className={cn(
+          "z-50 md:hidden w-full overflow-hidden transition-all duration-700 ease-in-out",
+          isMenuOpen ? "max-h-[500px]" : "max-h-0 opacity-0"
+        )}
+      >
+        <div className="px-4 py-2">
+          <div ref={ref} className="flex flex-col space-y-4" {...props} />
+        </div>
+      </div>
+    </>
+  );
+});
+
+NavbarMenu.displayName = "NavbarMenu";
 
 function NavBarLink({
   className,
@@ -55,4 +99,4 @@ function NavBarLink({
 
 NavBarLink.displayName = "NavbarLink";
 
-export { NavBar, NavBarContent, NavBarItem, NavBarLink };
+export { NavBar, NavBarContent, NavBarLogo, NavbarMenu, NavBarLink };

@@ -1,41 +1,46 @@
 import { Outlet } from "react-router-dom";
-import { NavBar, NavBarContent, NavBarItem, NavBarLink } from "./NavBar";
+import {
+  NavBar,
+  NavBarContent,
+  NavBarLink,
+  NavBarLogo,
+  NavbarMenu,
+} from "./NavBar";
 import { Button } from "./ui/button";
-
 import { SearchBox } from "./SearchBox";
 
 const Layout = () => {
   return (
     <>
-      <NavBar>
+      <NavBar className="bg-blue-400">
         <NavBarContent>
-          <NavBarItem>
-            <a href="" className="text-2xl font-semibold">
-              Espiritus
+          <NavBarLogo>
+            <a href="/" className="text-2xl font-semibold ">
+              Logo
             </a>
-            <Button variant="link" className="cursor-pointer text-white">
+            <Button variant="link" className="ml-2 text-white cursor-pointer">
               v0.0.1
             </Button>
-          </NavBarItem>
-          <NavBarItem>
-            <SearchBox />
-          </NavBarItem>
-          <NavBarItem>
-            {/* <NavBarLink to="/">Home</NavBarLink>
-            <NavBarLink to="/">Sobre</NavBarLink>
-            <NavBarLink to="/">Instituição</NavBarLink>
-            <NavBarLink to="/">Parceiros</NavBarLink>
-            <NavBarLink to="/">Contato</NavBarLink> */}
-          </NavBarItem>
+          </NavBarLogo>
+
+          <NavbarMenu>
+            <SearchBox className="bg-white" />
+            <NavBarLink to="/">Features</NavBarLink>
+            <NavBarLink to="/">About</NavBarLink>
+            <Button variant="outline" className="bg-transparent cursor-pointer">
+              Sign In
+            </Button>
+          </NavbarMenu>
         </NavBarContent>
       </NavBar>
 
       <main className="main">
-        <div className="container mx-auto p-10">
+        <div className="container mx-auto p-4 sm:p-6 lg:p-10">
           <Outlet />
         </div>
       </main>
     </>
   );
 };
+
 export default Layout;
