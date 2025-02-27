@@ -36,16 +36,16 @@ export default function Home() {
 
   return (
     <>
-      <div className="grid grid-cols-1 space-y-6">
+      <div className="grid grid-cols-1 col-span-4 col-start-2 space-y-6">
         <Input
           type="text"
           placeholder="Search Terreiros"
           onChange={(e) => setQuery(e.target.value)}
         />
 
-        <div className="grid grid-cols-4 gap-4 justify-center">
+        <div className="grid grid-cols-3 gap-4 justify-center">
           {filteredTerreiros.map((terreiro, index) => (
-            <Card className=" " key={index}>
+            <Card className="rounded-none" key={index}>
               <div className="flex items-center">
                 <CardHeader>
                   <CardTitle>{terreiro.name}</CardTitle>

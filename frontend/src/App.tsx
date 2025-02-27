@@ -6,8 +6,10 @@ import "./App.css";
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
-      <Toaster />
+      <div className="min-h-screen h-auto">
+        <RouterProvider router={router} />
+        <Toaster />
+      </div>
     </>
   );
 }

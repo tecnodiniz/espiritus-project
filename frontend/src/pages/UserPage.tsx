@@ -19,35 +19,41 @@ export default function UserPage() {
 
   return (
     <>
-      <Card>
-        <div className="flex items-center">
-          <Avatar className="size-15 ml-3">
-            <AvatarImage src="" />
-            <AvatarFallback>
-              {getInitials(user ? user?.name : "")}
-            </AvatarFallback>
-          </Avatar>
-          <CardHeader>
-            <CardTitle>{user?.name}</CardTitle>
-            <CardDescription>
-              <Badge>{user?.plan}</Badge>
-            </CardDescription>
-          </CardHeader>
-        </div>
-        <CardContent>
-          <p className="text-2xl mb-5">Terreiros</p>
-          <div className="flex flex-col gap-3">
-            {user &&
-              user?.agents.map((agent) => (
-                <Link to={"/terreiros/" + agent.terreiro.id} key={agent.id}>
-                  {agent.terreiro.name} - {agent.role.position}
-                </Link>
-              ))}
+      <div className="col-span-4 col-start-2">
+        <Card>
+          <div className="flex items-center">
+            <Avatar className="size-15 ml-3">
+              <AvatarImage src="" />
+              <AvatarFallback>
+                {getInitials(user ? user?.name : "")}
+              </AvatarFallback>
+            </Avatar>
+            <CardHeader>
+              <CardTitle>{user?.name}</CardTitle>
+              <CardDescription>
+                <Badge>{user?.plan}</Badge>
+              </CardDescription>
+            </CardHeader>
           </div>
-        </CardContent>
+          <CardContent>
+            <p className="text-2xl mb-5">Terreiros</p>
+            <div className="flex flex-col gap-3">
+              {user &&
+                user?.agents.map((agent) => (
+                  <Link
+                    to={"/terreiros/" + agent.terreiro.id}
+                    key={agent.id}
+                    className="hover:underline"
+                  >
+                    {agent.terreiro.name} - {agent.role.position}
+                  </Link>
+                ))}
+            </div>
+          </CardContent>
 
-        <CardFooter className="flex justify-end p-1"></CardFooter>
-      </Card>
+          <CardFooter className="flex justify-end p-1"></CardFooter>
+        </Card>
+      </div>
     </>
   );
 }

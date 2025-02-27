@@ -41,8 +41,8 @@ export default function TerreiroPage() {
   }, [query, terreiro]);
 
   return (
-    <>
-      <Card className="min-h-[100vh]">
+    <div className="col-span-4 col-start-2">
+      <Card className="min-h-[100vh] rounded-none">
         <Link to="/">
           <Button className="m-2 cursor-pointer" variant="link">
             <ChevronLeft /> Voltar
@@ -86,7 +86,7 @@ export default function TerreiroPage() {
             )}
           </div>
 
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid gap-3">
             {filteredUser.map((agent, index) => (
               <Card key={index}>
                 <div className="flex items-center">
@@ -113,6 +113,6 @@ export default function TerreiroPage() {
           </div>
         </CardContent>
       </Card>
-    </>
+    </div>
   );
 }
