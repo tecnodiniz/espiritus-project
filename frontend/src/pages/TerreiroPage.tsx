@@ -1,7 +1,15 @@
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+
+import { ChevronLeft } from "lucide-react";
+
+import { useTerreiro } from "@/hooks/use-terreiro";
+import { getInitials } from "@/lib/utils";
+import { TerreiroAgent } from "@/types/types";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -12,13 +20,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { useTerreiro } from "@/hooks/use-terreiro";
-import { getInitials } from "@/lib/utils";
-import { TerreiroAgent } from "@/types/types";
-
-import { useEffect, useState } from "react";
-
-import { Link, useParams } from "react-router-dom";
 
 export default function TerreiroPage() {
   const { id } = useParams();

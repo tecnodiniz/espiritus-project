@@ -1,5 +1,7 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+import { Link, useParams } from "react-router-dom";
+
+import { useUser } from "@/hooks/use-user";
+import { getInitials } from "@/lib/utils";
 
 import {
   Card,
@@ -9,9 +11,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useUser } from "@/hooks/use-user";
-import { getInitials } from "@/lib/utils";
-import { Link, useParams } from "react-router-dom";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 
 export default function UserPage() {
   const { id } = useParams();

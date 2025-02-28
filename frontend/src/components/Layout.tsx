@@ -1,4 +1,9 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { Moon, Sun } from "lucide-react";
+
+import { useTheme } from "@/context/ThemeContext";
+
 import {
   NavBar,
   NavBarContent,
@@ -6,20 +11,8 @@ import {
   NavBarLogo,
   NavbarMenu,
 } from "./NavBar";
-import { Button } from "./ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { SearchBox } from "./SearchBox";
-import { useTheme } from "@/context/ThemeContext";
-
-import { Moon } from "lucide-react";
-import { Sun } from "lucide-react";
-import { useState } from "react";
+import { Button } from "./ui/button";
 
 const Layout = () => {
   const { theme, toggleTheme } = useTheme();

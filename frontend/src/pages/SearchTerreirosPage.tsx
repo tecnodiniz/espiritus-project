@@ -1,3 +1,9 @@
+import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+
+import { useTerreiros } from "@/hooks/use-terreiro";
+import { Terreiro } from "@/types/types";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,11 +14,6 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
-import { useTerreiros } from "@/hooks/use-terreiro";
-import { Terreiro } from "@/types/types";
-
-import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
 
 export function SearchTerreiros() {
   const { terreiros } = useTerreiros(); //Provisório. O correto é fazer a buscar pela api
