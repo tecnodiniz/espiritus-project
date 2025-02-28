@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import {
   NavBar,
   NavBarContent,
@@ -11,7 +11,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -20,10 +19,17 @@ import { useTheme } from "@/context/ThemeContext";
 
 import { Moon } from "lucide-react";
 import { Sun } from "lucide-react";
+import { useState } from "react";
 
 const Layout = () => {
   const { theme, toggleTheme } = useTheme();
+  const [searchTerm, setsearchTerm] = useState<string>("");
+  const navigate = useNavigate();
 
+  const handleSearch = () => {
+    searchTerm.trim() &&
+      navigate(`/terreiros?query=${encodeURIComponent(searchTerm)}`);
+  };
   return (
     <>
       <div className="fixed w-full z-50">
@@ -46,9 +52,15 @@ const Layout = () => {
             </NavBarLogo>
 
             <NavbarMenu>
-              <SearchBox className="bg-white" />
-              <NavBarLink to="/">Features</NavBarLink>
-              <NavBarLink to="/">About</NavBarLink>
+              <SearchBox
+                className="bg-white"
+                onChange={(e) => setsearchTerm(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              />
+
+              <NavBarLink to="/terreiros">Terreiros</NavBarLink>
+              <NavBarLink to="/">Lojas</NavBarLink>
+              <NavBarLink to="/">História</NavBarLink>
               <Button variant="default" className="cursor-pointer">
                 Sign In
               </Button>
@@ -57,16 +69,19 @@ const Layout = () => {
         </NavBar>
       </div>
 
-      <main className="grid grid-cols-6 gap-6 justify-center p-4 container mx-auto sm:p-6 lg:p-10 lg:pt-[8rem]">
-        <div className="fixed left-10 z-50">
-          <Card className="rounded-none">
-            <CardHeader>
-              <CardTitle>Bem vindo ao meu Card</CardTitle>
-              <CardDescription>Card de exemplo</CardDescription>
-            </CardHeader>
-            <CardContent>OLAA</CardContent>
-          </Card>
-        </div>
+      <main className="grid gap-6 container mx-auto px-4 sm:px-6 lg:px-10 lg:pt-[8rem]">
+        {/* <div className="col-span-1">
+          <div className="sticky top-[8rem]">
+            <Card className="rounded-none">
+              <CardHeader>
+                <CardTitle>Bem vindo ao meu Card</CardTitle>
+                <CardDescription>Card de exemplo</CardDescription>
+              </CardHeader>
+              <CardContent>OLAA</CardContent>
+            </Card>
+          </div>
+        </div> */}
+
         <Outlet />
       </main>
     </>

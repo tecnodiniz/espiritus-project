@@ -1,5 +1,5 @@
 // src/context/ThemeContext.tsx
-import React, {
+import {
   createContext,
   useState,
   useContext,
@@ -28,7 +28,7 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<Theme>(() => {
     const savedTheme = localStorage.getItem("theme") as Theme;
     return savedTheme || "light";

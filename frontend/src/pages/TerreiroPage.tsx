@@ -27,6 +27,7 @@ export default function TerreiroPage() {
   const [filteredUser, setFilteredUser] = useState<TerreiroAgent[]>([]);
 
   useEffect(() => {
+    console.log(id);
     if (terreiro?.agents) {
       setFilteredUser(
         query.trim()
@@ -41,78 +42,76 @@ export default function TerreiroPage() {
   }, [query, terreiro]);
 
   return (
-    <div className="col-span-4 col-start-2">
-      <Card className="min-h-[100vh] rounded-none">
-        <Link to="/">
-          <Button className="m-2 cursor-pointer" variant="link">
-            <ChevronLeft /> Voltar
-          </Button>
-        </Link>
-        <CardHeader className="pt-0">
-          <CardTitle className="text-2xl">{terreiro?.name}</CardTitle>
-          <CardDescription>{terreiro?.history}</CardDescription>
-          <CardDescription>
-            <Badge>{terreiro?.segment}</Badge>
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col gap-2 mb-5 ">
-            <div>{terreiro?.infrastructure}</div>
-            <div>
-              <strong>Responsável:</strong> {terreiro?.user.name}
-            </div>
-            <div>
-              <strong>Endereço:</strong> {terreiro?.address}
-            </div>
-            <div>
-              <strong>Contato:</strong> {terreiro?.contact}
-            </div>
-            <div>
-              <strong>Horário de funcionamento: </strong>
-              {terreiro?.opening_hours}
-            </div>
+    <Card className="min-h-[100vh] rounded-none">
+      <Link to="/">
+        <Button className="m-2 cursor-pointer" variant="link">
+          <ChevronLeft /> Voltar
+        </Button>
+      </Link>
+      <CardHeader className="pt-0">
+        <CardTitle className="text-2xl">{terreiro?.name}</CardTitle>
+        <CardDescription>{terreiro?.history}</CardDescription>
+        <CardDescription>
+          <Badge>{terreiro?.segment}</Badge>
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="flex flex-col gap-2 mb-5 ">
+          <div>{terreiro?.infrastructure}</div>
+          <div>
+            <strong>Responsável:</strong> {terreiro?.user.name}
           </div>
-          <Separator className="mb-5" />
-          <div className="font-semibold text-xl mb-4">Membros</div>
-          <div className="my-5">
-            {terreiro && terreiro.agents.length > 0 ? (
-              <Input
-                type="text"
-                placeholder="Pesquisar participantes"
-                onChange={(e) => setQuery(e.target.value)}
-              />
-            ) : (
-              <p>Não há participantes</p>
-            )}
+          <div>
+            <strong>Endereço:</strong> {terreiro?.address}
           </div>
+          <div>
+            <strong>Contato:</strong> {terreiro?.contact}
+          </div>
+          <div>
+            <strong>Horário de funcionamento: </strong>
+            {terreiro?.opening_hours}
+          </div>
+        </div>
+        <Separator className="mb-5" />
+        <div className="font-semibold text-xl mb-4">Membros</div>
+        <div className="my-5">
+          {terreiro && terreiro.agents.length > 0 ? (
+            <Input
+              type="text"
+              placeholder="Pesquisar participantes"
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          ) : (
+            <p>Não há participantes</p>
+          )}
+        </div>
 
-          <div className="grid gap-3">
-            {filteredUser.map((agent, index) => (
-              <Card key={index}>
-                <div className="flex items-center">
-                  <Avatar className="size-15 ml-3">
-                    <AvatarImage src="" />
-                    <AvatarFallback>
-                      {getInitials(agent.user.name)}
-                    </AvatarFallback>
-                  </Avatar>
-                  <CardHeader>
-                    <CardTitle>{agent.user.name}</CardTitle>
-                    <CardDescription>{agent.role.position}</CardDescription>
-                  </CardHeader>
-                </div>
-                <CardContent>{agent.role.description}</CardContent>
+        <div className="grid gap-3">
+          {filteredUser.map((agent, index) => (
+            <Card key={index}>
+              <div className="flex items-center">
+                <Avatar className="size-15 ml-3">
+                  <AvatarImage src="" />
+                  <AvatarFallback>
+                    {getInitials(agent.user.name)}
+                  </AvatarFallback>
+                </Avatar>
+                <CardHeader>
+                  <CardTitle>{agent.user.name}</CardTitle>
+                  <CardDescription>{agent.role.position}</CardDescription>
+                </CardHeader>
+              </div>
+              <CardContent>{agent.role.description}</CardContent>
 
-                <CardFooter className="flex justify-end p-1">
-                  <Button className="cursor-pointer" variant="link">
-                    <Link to={"/users/" + agent.user.id}>Visitar Perfil</Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+              <CardFooter className="flex justify-end p-1">
+                <Button className="cursor-pointer" variant="link">
+                  <Link to={"/users/" + agent.user.id}>Visitar Perfil</Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   );
 }

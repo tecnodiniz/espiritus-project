@@ -1,7 +1,5 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+
 import {
   Card,
   CardContent,
@@ -10,71 +8,99 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useTerreiros } from "@/hooks/use-terreiro";
-import { Terreiro } from "@/types/types";
 
 export default function Home() {
-  const { terreiros } = useTerreiros();
-  const [filteredTerreiros, setFilteredTerreiros] = useState<Terreiro[]>([]);
-
-  const [query, setQuery] = useState("");
-
-  useEffect(() => {
-    if (!query.trim()) {
-      setFilteredTerreiros(terreiros);
-    } else
-      setFilteredTerreiros(
-        terreiros.filter((terreiro) =>
-          terreiro.name.toLowerCase().includes(query.toLocaleLowerCase())
-        )
-      );
-  }, [query]);
-
-  useEffect(() => {
-    setFilteredTerreiros(terreiros);
-  }, [terreiros]);
-
   return (
     <>
-      <div className="grid grid-cols-1 col-span-4 col-start-2 space-y-6">
-        <Input
-          type="text"
-          placeholder="Search Terreiros"
-          onChange={(e) => setQuery(e.target.value)}
-        />
+      <div className="grid grid-cols-6 space-y-6">
+        <div className="col-span-3 col-start-2 grid grid-cols-1 gap-4 justify-center">
+          <Card>
+            <CardHeader>
+              <CardTitle>Tudo sobre a Umbanda</CardTitle>
+              <CardDescription>
+                Venha entender e desmistificar sobre a religião
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>
+                A Umbanda é uma religião brasileira que combina elementos de
+                diversas tradições espirituais, como o catolicismo, o
+                espiritismo, as religiões africanas e o xamanismo indígena. Ela
+                é baseada na crença na comunicação com espíritos, como guias
+                espirituais, orixás e entidades de diferentes origens, que
+                ajudam na cura, orientação e proteção...
+              </p>
+            </CardContent>
+            <CardFooter className="justify-self-end">
+              <Button>Saiba mais</Button>
+            </CardFooter>
+          </Card>
 
-        <div className="grid grid-cols-3 gap-4 justify-center">
-          {filteredTerreiros.map((terreiro, index) => (
-            <Card className="rounded-none" key={index}>
-              <div className="flex items-center">
-                <CardHeader>
-                  <CardTitle>{terreiro.name}</CardTitle>
-                  <CardDescription>
-                    <ul>
-                      <li>Responsável: {terreiro.user.name}</li>
-                      <li>Membros: {terreiro.agents.length}</li>
-                    </ul>
-                  </CardDescription>
-                </CardHeader>
-              </div>
-              <CardContent>
-                <ul>
-                  <li>
-                    <strong>Contact:</strong> {terreiro.contact}
-                  </li>
-                  <li>
-                    <strong>Opening Hours:</strong> {terreiro.opening_hours}
-                  </li>
-                </ul>
-              </CardContent>
+          <Card>
+            <CardHeader>
+              <CardTitle>Tudo sobre a Umbanda</CardTitle>
+              <CardDescription>
+                Venha entender e desmistificar sobre a religião
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>
+                A Umbanda é uma religião brasileira que combina elementos de
+                diversas tradições espirituais, como o catolicismo, o
+                espiritismo, as religiões africanas e o xamanismo indígena. Ela
+                é baseada na crença na comunicação com espíritos, como guias
+                espirituais, orixás e entidades de diferentes origens, que
+                ajudam na cura, orientação e proteção...
+              </p>
+            </CardContent>
+            <CardFooter className="justify-self-end">
+              <Button>Saiba mais</Button>
+            </CardFooter>
+          </Card>
 
-              <CardFooter className="flex justify-end p-1">
-                <Button className="cursor-pointer" variant="link">
-                  <Link to={"terreiros/" + terreiro.id}>Mais</Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+          <Card>
+            <CardHeader>
+              <CardTitle>Tudo sobre a Umbanda</CardTitle>
+              <CardDescription>
+                Venha entender e desmistificar sobre a religião
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>
+                A Umbanda é uma religião brasileira que combina elementos de
+                diversas tradições espirituais, como o catolicismo, o
+                espiritismo, as religiões africanas e o xamanismo indígena. Ela
+                é baseada na crença na comunicação com espíritos, como guias
+                espirituais, orixás e entidades de diferentes origens, que
+                ajudam na cura, orientação e proteção...
+              </p>
+            </CardContent>
+            <CardFooter className="justify-self-end">
+              <Button>Saiba mais</Button>
+            </CardFooter>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Tudo sobre a Umbanda</CardTitle>
+              <CardDescription>
+                Venha entender e desmistificar sobre a religião
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>
+                A Umbanda é uma religião brasileira que combina elementos de
+                diversas tradições espirituais, como o catolicismo, o
+                espiritismo, as religiões africanas e o xamanismo indígena. Ela
+                é baseada na crença na comunicação com espíritos, como guias
+                espirituais, orixás e entidades de diferentes origens, que
+                ajudam na cura, orientação e proteção...
+              </p>
+            </CardContent>
+            <CardFooter className="justify-self-end">
+              <Button>Saiba mais</Button>
+            </CardFooter>
+          </Card>
         </div>
       </div>
     </>
