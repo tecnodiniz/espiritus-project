@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Moon, Sun } from "lucide-react";
 
 import { useTheme } from "@/context/ThemeContext";
@@ -55,7 +55,7 @@ const Layout = () => {
               <NavBarLink to="/">Lojas</NavBarLink>
               <NavBarLink to="/">História</NavBarLink>
               <Button variant="default" className="cursor-pointer">
-                Sign In
+                <Link to="/login">Sign In</Link>
               </Button>
             </NavbarMenu>
           </NavBarContent>
