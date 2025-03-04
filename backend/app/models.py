@@ -1,7 +1,7 @@
 import uuid
 from database import Base
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy import Column,Text, String, ForeignKey, UniqueConstraint
+from sqlalchemy import Column,Text, String, Boolean, DateTime, func, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 class User(Base):
@@ -14,6 +14,24 @@ class User(Base):
 
     terreiros = relationship("Terreiro", back_populates="user", uselist=True, cascade="all, delete-orphan")
     agents = relationship("AgentTerreiro", back_populates="user", uselist=True, cascade="all, delete-orphan")
+    auth = relationship("auth", back_populates="user", uselist=False, cascade="all, delete-orphan")
+
+
+class Auth(Base):
+    __tablename__ = "auth"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    email = Column(String(255))
+    password_has = Column(Text)
+    google_id = Column(String(255))
+    avatar_url = Column(Text)
+    is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=func.now)
+
+    user = relationship("User", back_populates="auth")
+
+
 
 class Terreiro(Base):
     __tablename__ = "terreiros"
