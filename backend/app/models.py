@@ -14,7 +14,7 @@ class User(Base):
 
     terreiros = relationship("Terreiro", back_populates="user", uselist=True, cascade="all, delete-orphan")
     agents = relationship("AgentTerreiro", back_populates="user", uselist=True, cascade="all, delete-orphan")
-    auth = relationship("auth", back_populates="user", uselist=False, cascade="all, delete-orphan")
+    auth = relationship("Auth", back_populates="user", uselist=False, cascade="all, delete-orphan")
 
 
 class Auth(Base):
@@ -23,11 +23,11 @@ class Auth(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     email = Column(String(255))
-    password_has = Column(Text)
+    password_hash = Column(Text)
     google_id = Column(String(255))
     avatar_url = Column(Text)
     is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=func.now)
+    created_at = Column(DateTime, default=func.now())
 
     user = relationship("User", back_populates="auth")
 

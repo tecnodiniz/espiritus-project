@@ -24,7 +24,7 @@ def upgrade() -> None:
     sa.Column('id', sa.UUID(), nullable=False),
     sa.Column('user_id', sa.UUID(), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=True),
-    sa.Column('password_has', sa.Text(), nullable=True),
+    sa.Column('password_hash', sa.Text(), nullable=True),
     sa.Column('google_id', sa.String(length=255), nullable=True),
     sa.Column('avatar_url', sa.Text(), nullable=True),
     sa.Column('is_active', sa.Boolean(), nullable=True),

@@ -31,6 +31,26 @@ class UserDetailResponse(UserBase):
 
     class Config:
         from_attributes = True
+
+# Auth
+class AuthBase(BaseModel):
+    user_id: UUID
+    email: str
+    google_id: Optional[str] = None
+    avatar_url: Optional[str] = None
+
+class AuthCreate(AuthBase):
+    password: str
+
+class AuthResponse(AuthBase):
+    id: UUID
+
+    class Config:
+        from_attributes = True
+    
+
+
+
 # Terreiro Roles
 class TerreiroRoleBase(BaseModel):
     id: Optional[UUID] = None # Remove

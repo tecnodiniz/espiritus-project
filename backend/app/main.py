@@ -48,6 +48,11 @@ def get_user(user_id:UUID, db: Session = Depends(database.get_db)):
 def update_user(user_id: UUID, user: schemas.UserUpadte, db: Session=Depends(database.get_db)):
     return crud.update_user(user_id, user, db)
 
+# AUTH
+@app.post("/auth/", response_model=schemas.AuthResponse)
+def create_auth(auth: schemas.AuthCreate, db: Session = Depends(database.get_db)):
+    return crud.create_auth(db,auth)
+
 # POST TERREIRO
 @app.post("/terreiros/", response_model=schemas.TerreiroResponse)
 def create_terreiro(terreiro: schemas.TerreiroCreate, db: Session = Depends(database.get_db)):

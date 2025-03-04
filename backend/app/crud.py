@@ -3,10 +3,17 @@ from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from fastapi import HTTPException
 import models, schemas
+from passlib.context import CryptContext
+
+pwd_context =  CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+def hash_password(password: str) -> str:
+    return pwd_context.hash(password)
+
+
 
 
 # USER
-
 def create_user(db:Session, user: schemas.UserCreate):
     db_user = models.User(name=user.name, cpf = user.cpf, plan = user.plan)
 
@@ -52,6 +59,30 @@ def update_user(user_id: UUID, user:schemas.UserUpadte, db:Session):
         return {"mensagem":"usário atualizado"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"erro interno {e}")
+
+
+# Auth
+def create_auth(db: Session, auth: schemas.AuthCreate):
+
+    password = hash_password(auth.password)
+    db_auth = models.Auth(
+        user_id = auth.user_id,
+        email=auth.email,
+        password_hash=password,
+        google_id=auth.google_id,
+        avatar_url=auth.avatar_url
+    )
+
+    try:
+        db.add(db_auth)
+        db.commit()
+        db.refresh(db_auth)
+
+        return db_auth
+
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Erro interno {e}")
 
 
 # Terreiro
