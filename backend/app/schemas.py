@@ -1,7 +1,7 @@
 from uuid import UUID
 from typing import Optional, Any,List
-from pydantic import BaseModel, computed_field,  ConfigDict
-import models
+from pydantic import BaseModel
+
 
 
 # User
@@ -21,12 +21,12 @@ class UserUpadte(BaseModel):
     
 class UserResponse(UserBase):
     id: UUID
-
     class Config:
         from_attributes = True
 
 class UserDetailResponse(UserBase):
     id: UUID
+    auth: "AuthResponse"
     agents:Optional[List["AgentTerreiroBasicResponse"]] = None
 
     class Config:
@@ -40,6 +40,10 @@ class AuthBase(BaseModel):
     avatar_url: Optional[str] = None
 
 class AuthCreate(AuthBase):
+    password: str
+
+class Authentication(BaseModel):
+    email: str
     password: str
 
 class AuthResponse(AuthBase):

@@ -53,6 +53,10 @@ def update_user(user_id: UUID, user: schemas.UserUpadte, db: Session=Depends(dat
 def create_auth(auth: schemas.AuthCreate, db: Session = Depends(database.get_db)):
     return crud.create_auth(db,auth)
 
+@app.post("/users/auth",  response_model=schemas.UserDetailResponse)
+def authentication(auth: schemas.Authentication, db:Session = Depends(database.get_db)):
+    return crud.authentication(db, auth)
+
 # POST TERREIRO
 @app.post("/terreiros/", response_model=schemas.TerreiroResponse)
 def create_terreiro(terreiro: schemas.TerreiroCreate, db: Session = Depends(database.get_db)):

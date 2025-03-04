@@ -5,13 +5,13 @@ from fastapi import HTTPException
 import models, schemas
 from passlib.context import CryptContext
 
-pwd_context =  CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
 
-
-
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return pwd_context.verify(plain_password, hashed_password)
 
 # USER
 def create_user(db:Session, user: schemas.UserCreate):
@@ -84,7 +84,14 @@ def create_auth(db: Session, auth: schemas.AuthCreate):
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Erro interno {e}")
 
+def authentication(db: Session, auth: schemas.Authentication):
+    db_auth = db.query(models.Auth).filter(models.Auth.email == auth.email).first()
 
+    if db_auth and verify_password(auth.password, db_auth.password_hash):
+            return db_auth.user
+    raise HTTPException(status_code=401, detail="Email ou Senha incorretos")
+    
+    
 # Terreiro
 def create_terreiro(db: Session, terreiro: schemas.TerreiroCreate):
     db_terreiro = models.Terreiro(
