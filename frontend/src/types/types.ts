@@ -5,6 +5,10 @@ export type User = {
   agents: TerreiroAgent[];
 };
 
+export type Auth = {
+  email: string;
+  password: string;
+};
 export type Role = {
   id: string;
   position: string;

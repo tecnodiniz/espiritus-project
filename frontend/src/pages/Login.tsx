@@ -1,7 +1,6 @@
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,6 +15,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+import { useAuth } from "@/hooks/use-user";
+
 const formSchema = z.object({
   email: z
     .string()
@@ -25,6 +26,7 @@ const formSchema = z.object({
 });
 
 export default function Login() {
+  const { authenticate } = useAuth();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -34,8 +36,8 @@ export default function Login() {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
     form.reset();
+    authenticate(values);
   };
 
   return (
