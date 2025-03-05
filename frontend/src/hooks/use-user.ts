@@ -1,7 +1,9 @@
+import { useProfile } from "@/context/ProfileContext";
 import { authService } from "@/services/authService";
 import { userService } from "@/services/userService";
 import { Auth, User } from "@/types/types";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function useUser(id: any) {
   const [user, setUser] = useState<User>();
@@ -18,17 +20,20 @@ export function useUser(id: any) {
 
 export function useAuth() {
   const [error, setError] = useState<string | null>(null);
+  const { userLogin } = useProfile();
+  const navigate = useNavigate();
 
   async function authenticate(credentials: Auth) {
     setError(null);
     try {
       const response = await authService.userLogin(credentials);
-      console.log(response);
+      userLogin(response.data);
+      navigate("/");
     } catch (err: any) {
       if (err.response.status === 401) {
-        console.log(err.response.data);
+        setError(err.response.data?.detail);
       }
-      console.log(err.response?.data?.message || "Erro ao fazer login");
+      console.log(err.response?.data || "Erro ao fazer login");
     }
   }
   return { authenticate, error };

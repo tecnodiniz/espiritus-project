@@ -13,9 +13,11 @@ import {
 } from "./NavBar";
 import { SearchBox } from "./SearchBox";
 import { Button } from "./ui/button";
+import { useProfile } from "@/context/ProfileContext";
 
 const Layout = () => {
   const { theme, toggleTheme } = useTheme();
+  const { profile, userLogout } = useProfile();
   const [searchTerm, setsearchTerm] = useState<string>("");
   const navigate = useNavigate();
 
@@ -54,9 +56,20 @@ const Layout = () => {
               <NavBarLink to="/terreiros">Terreiros</NavBarLink>
               <NavBarLink to="/">Lojas</NavBarLink>
               <NavBarLink to="/">História</NavBarLink>
-              <Button variant="default" className="cursor-pointer">
-                <Link to="/login">Sign In</Link>
-              </Button>
+
+              {profile ? (
+                <Button
+                  variant="default"
+                  className="cursor-pointer"
+                  onClick={userLogout}
+                >
+                  Logout {profile.name}
+                </Button>
+              ) : (
+                <Button variant="default" className="cursor-pointer">
+                  <Link to="/login">Sign In</Link>
+                </Button>
+              )}
             </NavbarMenu>
           </NavBarContent>
         </NavBar>

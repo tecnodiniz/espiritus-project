@@ -13,9 +13,18 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 import { useAuth } from "@/hooks/use-user";
+import { useProfile } from "@/context/ProfileContext";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
   email: z
@@ -26,7 +35,14 @@ const formSchema = z.object({
 });
 
 export default function Login() {
-  const { authenticate } = useAuth();
+  const { profile } = useProfile();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storageUser = localStorage.getItem("user");
+    if (storageUser) navigate("/");
+  }, []);
+  const { authenticate, error } = useAuth();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,6 +63,9 @@ export default function Login() {
           <Card className="p-3">
             <CardHeader>
               <CardTitle>Login</CardTitle>
+              <CardDescription className="text-red-500">
+                {error}
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <Form {...form}>
