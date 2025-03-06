@@ -17,6 +17,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -62,7 +63,9 @@ export default function Login() {
         <div className="w-[450px] mx-auto">
           <Card className="p-3">
             <CardHeader>
-              <CardTitle>Login</CardTitle>
+              <CardTitle className="text-center  text-2xl">
+                Acesse sua conta
+              </CardTitle>
               <CardDescription className="text-red-500">
                 {error}
               </CardDescription>
@@ -106,12 +109,22 @@ export default function Login() {
                       </FormItem>
                     )}
                   />
-                  <div className="w-full flex justify-end">
-                    <Button type="submit">Login</Button>
+                  <div className="w-full flex ">
+                    <Button type="submit" className="w-full p-5">
+                      Entrar
+                    </Button>
                   </div>
                 </form>
               </Form>
             </CardContent>
+            <CardFooter className="justify-between">
+              <Button variant="secondary" className="cursor-pointer">
+                Entre com Google
+              </Button>
+              <Button variant="secondary" className="cursor-pointer">
+                Entre com facebook
+              </Button>
+            </CardFooter>
           </Card>
         </div>
       </div>
