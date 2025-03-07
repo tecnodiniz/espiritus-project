@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/card";
 
 import { useAuth } from "@/hooks/use-user";
-import { useProfile } from "@/context/ProfileContext";
+
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -36,7 +36,6 @@ const formSchema = z.object({
 });
 
 export default function Login() {
-  const { profile } = useProfile();
   const navigate = useNavigate();
 
   useEffect(() => {

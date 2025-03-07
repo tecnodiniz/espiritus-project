@@ -103,19 +103,7 @@ const Layout = () => {
         </NavBar>
       </div>
 
-      <main className="grid gap-6 container mx-auto px-4 sm:px-6 lg:px-10 lg:pt-[8rem]">
-        {/* <div className="col-span-1">
-          <div className="sticky top-[8rem]">
-            <Card className="rounded-none">
-              <CardHeader>
-                <CardTitle>Bem vindo ao meu Card</CardTitle>
-                <CardDescription>Card de exemplo</CardDescription>
-              </CardHeader>
-              <CardContent>OLAA</CardContent>
-            </Card>
-          </div>
-        </div> */}
-
+      <main className="grid gap-5 h-full h-auto container mx-auto px-4 sm:px-6 lg:px-10 lg:pt-[1rem]">
         <Outlet />
       </main>
     </>
