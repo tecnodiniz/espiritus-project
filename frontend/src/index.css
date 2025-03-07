@@ -18,10 +18,10 @@ body {
   margin: 0;
   overflow-y: scroll;
 }
-main {
+/* main {
   max-width: 1280px;
   margin: 0 auto;
-}
+} */
 
 @media (prefers-color-scheme: light) {
   :root {

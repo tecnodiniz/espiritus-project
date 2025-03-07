@@ -100,6 +100,11 @@ const Layout = () => {
       <main className="flex-grow py-4">
         <Outlet />
       </main>
+      <footer>
+        <div className="flex items-center justify-center">
+          <p>&copy; 2025 Espiritus. Todos os direitos reservados.</p>
+        </div>
+      </footer>
     </>
   );
 };
