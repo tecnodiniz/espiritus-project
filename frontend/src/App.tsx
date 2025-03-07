@@ -6,7 +6,7 @@ import "./App.css";
 function App() {
   return (
     <>
-      <div className="min-h-screen h-auto">
+      <div className="min-h-screen">
         <RouterProvider router={router} />
         <Toaster />
       </div>

@@ -40,32 +40,26 @@ const Layout = () => {
   };
   return (
     <>
-      <div className="w-full z-50">
-        <NavBar className="mx-auto">
-          <NavBarContent>
-            <NavBarLogo>
-              <a href="/" className="text-2xl font-semibold ">
-                Espiritus
-              </a>
-              <Button variant="link" className="ml-2 cursor-pointer">
-                v0.0.1
-              </Button>
-              <Button
-                onClick={toggleTheme}
-                variant="ghost"
-                className="size-4 p-4 cursor-pointer"
-              >
-                {theme === "light" ? <Moon /> : <Sun />}
-              </Button>
-            </NavBarLogo>
+      <NavBar>
+        <NavBarContent>
+          <NavBarLogo>
+            Espiritus
+            <Button
+              onClick={toggleTheme}
+              variant="ghost"
+              className="size-4 p-4 cursor-pointer"
+            >
+              {theme === "light" ? <Moon /> : <Sun />}
+            </Button>
+          </NavBarLogo>
+          <SearchBox
+            className="bg-white w-full mb-3 lg:w-50 lg:m-0"
+            onChange={(e) => setsearchTerm(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          />
 
-            <NavbarMenu>
-              <SearchBox
-                className="bg-white"
-                onChange={(e) => setsearchTerm(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-              />
-
+          <NavbarMenu>
+            <div className="flex flex-col items-center md:flex-row gap-4 ">
               <NavBarLink to="/">Inicio</NavBarLink>
               <NavBarLink to="/terreiros">Terreiros</NavBarLink>
               <NavBarLink to="/terreiros">Mediums</NavBarLink>
@@ -73,7 +67,7 @@ const Layout = () => {
               <NavBarLink to="/">Lojas</NavBarLink>
               <NavBarLink to="/">Federações</NavBarLink>
               <NavBarLink to="/terreiros">Espaços</NavBarLink>
-            </NavbarMenu>
+            </div>
 
             {profile ? (
               <DropdownMenu>
@@ -99,11 +93,11 @@ const Layout = () => {
                 <Link to="/login">Sign In</Link>
               </Button>
             )}
-          </NavBarContent>
-        </NavBar>
-      </div>
+          </NavbarMenu>
+        </NavBarContent>
+      </NavBar>
 
-      <main className="grid gap-5 h-full h-auto container mx-auto px-4 sm:px-6 lg:px-10 lg:pt-[1rem]">
+      <main className="flex-grow py-4">
         <Outlet />
       </main>
     </>

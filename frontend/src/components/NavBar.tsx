@@ -11,7 +11,7 @@ const NavBar = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "shadow text-black bg-neutral-50 dark:bg-neutral-950 dark:border-b dark:text-white",
+      "shadow text-black bg-neutral-50 dark:bg-neutral-950 dark:border-b dark:text-white p-4",
       className
     )}
     {...props}
@@ -26,8 +26,7 @@ const NavBarContent = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex flex-wrap items-baseline justify-between min-h-20 max-w-7xl mx-auto px-4 pb-5 sm:px-6 lg:px-8",
-
+      "container mx-auto flex-col flex-wrap justify-between items-baseline sm:px-6 lg:px-8 md:flex sm:flex-col lg:flex-row ",
       className
     )}
     {...props}
@@ -39,11 +38,7 @@ const NavBarLogo = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex items-center gap-6", className)}
-    {...props}
-  />
+  <div ref={ref} className={cn("text-xl font-bold", className)} {...props} />
 ));
 
 NavBarLogo.displayName = "NavBarLogo";
@@ -56,7 +51,7 @@ const NavbarMenu = React.forwardRef<
 
   return (
     <>
-      <div className="flex md:hidden">
+      <div className="flex md:hidden justify-end">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="text-gray-700 hover:text-gray-900 focus:outline-none"
@@ -72,7 +67,10 @@ const NavbarMenu = React.forwardRef<
 
       <div
         ref={ref}
-        className={cn("hidden md:flex items-baseline space-x-6", className)}
+        className={cn(
+          "hidden md:flex items-baseline gap-4 justify-between w-full lg:w-auto",
+          className
+        )}
         {...props}
       />
 

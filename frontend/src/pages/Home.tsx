@@ -8,68 +8,70 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getInitials } from "@/lib/utils";
-import { profile } from "console";
+
 import { Star, StarHalf } from "lucide-react";
 
 export default function Home() {
   return (
     <>
-      <div className="flex h-[500px] w-full">
-        <Card className="flex items-center w-full bg-purple-900 dark:bg-card">
-          <CardContent className="pl-30 ">
-            <div className="mb-7">
-              <p className="text-4xl font-bold max-w-[600px] text-white">
-                Descubra e conecte-se com tradições espirituais
-              </p>
-            </div>
-            <Button
-              variant="default"
-              className="px-20 py-5 font-light cursor-pointer rounded-3xl bg-yellow-400 text-purple-900 font-medium hover:bg-yellow-300 dark:bg-primary dark:text-primary-foreground"
-            >
-              EXPLORAR
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="pt-15 ">
-        <div className="flex items-center justify-between my-5">
-          <p className="text-2xl font-bold">Terreiros em destaque</p>
-          <a className="hover:underline cursor-pointer text-purple-900">
-            Ver todos
-          </a>
+      <div className="container mx-auto">
+        <div className="flex h-[500px]">
+          <Card className="flex items-center w-full bg-purple-900 dark:bg-card">
+            <CardContent className="pl-30 ">
+              <div className="mb-7">
+                <p className="text-4xl font-bold max-w-[600px] text-white">
+                  Descubra e conecte-se com tradições espirituais
+                </p>
+              </div>
+              <Button
+                variant="default"
+                className="px-20 py-5 font-light cursor-pointer rounded-3xl bg-yellow-400 text-purple-900 font-medium hover:bg-yellow-300 dark:bg-primary dark:text-primary-foreground"
+              >
+                EXPLORAR
+              </Button>
+            </CardContent>
+          </Card>
         </div>
 
-        <div className="grid grid-cols-4 gap-4">
-          {[...Array(4)].map((_, i) => (
-            <Card key={i} className="rounded-none">
-              <div className="w-full bg-purple-900 h-40"></div>
-              <CardHeader>
-                <CardTitle>Terreiro do Mauro</CardTitle>
-                <CardDescription>Umbanda - Salvador,BA</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex">
-                  <Star />
-                  <Star />
-                  <Star /> <StarHalf />
-                  <p>4.2</p>
-                </div>
-              </CardContent>
-              <CardFooter className="flex gap-2 justify-between flex-nowrap">
-                <Button className="w-full cursor-pointer font-light cursor-pointer rounded-3xl bg-yellow-400 text-purple-900 font-medium hover:bg-yellow-300 dark:bg-primary dark:text-primary-foreground">
-                  Seguir
-                </Button>
-                <Button className="w-full cursor-pointer font-light cursor-pointer rounded-3xl bg-emerald-500 font-medium hover:bg-emerald-700 dark:bg-primary dark:text-primary-foreground">
-                  Como chegar
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+        <div className="px-5">
+          <div className="flex items-center justify-between my-5">
+            <p className="text-2xl font-bold">Terreiros em destaque</p>
+            <a className="hover:underline cursor-pointer text-purple-900">
+              Ver todos
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  gap-4">
+            {[...Array(4)].map((_, i) => (
+              <Card key={i} className="rounded-none">
+                <div className="w-full bg-purple-900 h-40"></div>
+                <CardHeader>
+                  <CardTitle>Terreiro do Mauro</CardTitle>
+                  <CardDescription>Umbanda - Salvador,BA</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex">
+                    <Star />
+                    <Star />
+                    <Star /> <StarHalf />
+                    <p>4.2</p>
+                  </div>
+                </CardContent>
+                <CardFooter className="flex flex-col xl:flex-row md:flex-col gap-2 justify-between">
+                  <Button className="w-full cursor-pointer font-light cursor-pointer rounded-3xl bg-yellow-400 text-purple-900 font-medium hover:bg-yellow-300 dark:bg-primary dark:text-primary-foreground">
+                    Seguir
+                  </Button>
+                  <Button className="w-full cursor-pointer font-light cursor-pointer rounded-3xl bg-emerald-500 font-medium hover:bg-emerald-700 dark:bg-primary dark:text-primary-foreground">
+                    Como chegar
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
 
+      {/*
       <div className="pt-15 ">
         <div className="flex items-center justify-between my-5">
           <p className="text-2xl font-bold">Explore Categorias</p>
@@ -139,7 +141,8 @@ export default function Home() {
             </div>
           </Card>
         </div>
-      </div>
+      </div> 
+      */}
     </>
   );
 }
