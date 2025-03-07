@@ -34,45 +34,34 @@ export function SearchTerreiros() {
 
   return (
     <>
-      <div className="grid grid-cols-1 space-y-6">
-        <Badge>Terreiros</Badge>
-        {filteredTerreiros.length == 0 && (
-          <p>Ops! Não encontramos resultados para a busca por "{query}"</p>
-        )}
+      <div className="container mx-auto p-8">
+        <div className="grid grid-cols-1 space-y-6">
+          <Badge>Terreiros</Badge>
+          {filteredTerreiros.length == 0 && (
+            <p>Ops! Não encontramos resultados para a busca por "{query}"</p>
+          )}
 
-        <h2 className="text-2xl"></h2>
-        <div className="grid grid-cols-1 gap-4 justify-center">
-          {filteredTerreiros.map((terreiro, index) => (
-            <Card className="rounded-none" key={index}>
-              <div className="flex items-center">
+          <h2 className="text-2xl"></h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {filteredTerreiros.map((terreiro, index) => (
+              <Card key={index} className="rounded-none">
+                <div className="w-full bg-purple-900 h-40"></div>
                 <CardHeader>
                   <CardTitle>{terreiro.name}</CardTitle>
-                  <CardDescription>
-                    <ul>
-                      <li>Responsável: {terreiro.user.name}</li>
-                      <li>Membros: {terreiro.agents.length}</li>
-                    </ul>
-                  </CardDescription>
+                  <CardDescription>{terreiro.address}</CardDescription>
                 </CardHeader>
-              </div>
-              <CardContent>
-                <ul>
-                  <li>
-                    <strong>Contact:</strong> {terreiro.contact}
-                  </li>
-                  <li>
-                    <strong>Opening Hours:</strong> {terreiro.opening_hours}
-                  </li>
-                </ul>
-              </CardContent>
-
-              <CardFooter className="flex justify-end p-1">
-                <Button className="cursor-pointer" variant="link">
-                  <Link to={"/terreiros/" + terreiro.id}>Mais</Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+                <CardContent></CardContent>
+                <CardFooter className="flex flex-col xl:flex-row md:flex-col gap-2 justify-between">
+                  <Button className="w-full cursor-pointer font-light cursor-pointer rounded-3xl bg-yellow-400 text-purple-900 font-medium hover:bg-yellow-300 dark:bg-primary dark:text-primary-foreground">
+                    <Link to={"/terreiros/" + terreiro.id}>Seguir</Link>
+                  </Button>
+                  <Button className="w-full cursor-pointer font-light cursor-pointer rounded-3xl bg-emerald-500 font-medium hover:bg-emerald-700 dark:bg-primary dark:text-primary-foreground">
+                    Como chegar
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </>
