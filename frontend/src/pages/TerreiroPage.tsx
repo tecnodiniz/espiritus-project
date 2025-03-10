@@ -19,7 +19,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function TerreiroPage() {
@@ -139,9 +139,9 @@ export default function TerreiroPage() {
                   )}
                 </div>
 
-                <div className="grid gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-3">
                   {filteredUser.map((agent, index) => (
-                    <Card key={index}>
+                    <Card key={index} className="">
                       <div className="flex items-center">
                         <Avatar className="size-15 ml-3">
                           <AvatarImage src="" />
@@ -156,10 +156,15 @@ export default function TerreiroPage() {
                           </CardDescription>
                         </CardHeader>
                       </div>
-                      <CardContent>{agent.role.description}</CardContent>
+                      <CardContent>
+                        <p className=" w-full truncate">
+                          {agent.role.description}
+                        </p>
+                      </CardContent>
 
-                      <CardFooter className="flex justify-end p-1">
-                        <Button className="cursor-pointer" variant="link">
+                      <CardFooter className="flex justify-between">
+                        <CardDescription>Membro desde 2020</CardDescription>
+                        <Button className="cursor-pointer rounded-2xl">
                           <Link to={"/users/" + agent.user.id}>
                             Visitar Perfil
                           </Link>

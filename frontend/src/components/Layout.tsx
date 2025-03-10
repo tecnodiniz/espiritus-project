@@ -38,6 +38,11 @@ const Layout = () => {
     searchTerm.trim() &&
       navigate(`/terreiros?query=${encodeURIComponent(searchTerm)}`);
   };
+
+  const login = () => {
+    localStorage.setItem("redirectAfterLogin", window.location.pathname);
+    navigate("/login");
+  };
   return (
     <>
       <NavBar>
@@ -89,8 +94,12 @@ const Layout = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Button variant="default" className="cursor-pointer">
-                <Link to="/login">Sign In</Link>
+              <Button
+                variant="default"
+                className="cursor-pointer"
+                onClick={login}
+              >
+                Sign In
               </Button>
             )}
           </NavbarMenu>

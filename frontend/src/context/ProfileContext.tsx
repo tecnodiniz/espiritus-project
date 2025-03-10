@@ -39,12 +39,13 @@ export const ProfileProvider = ({ children }: ProfileProviderProps) => {
   const userLogin = (user: User) => {
     setProfile(user);
     localStorage.setItem("user", JSON.stringify(user));
+    window.location.href = localStorage.getItem("redirectAfterLogin") || "/";
   };
 
   const userLogout = () => {
     setProfile(null);
     localStorage.removeItem("user");
-    window.location.href = "/";
+    localStorage.removeItem("redirectAfterLogin");
   };
 
   return (
