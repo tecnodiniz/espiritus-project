@@ -48,17 +48,20 @@ const Layout = () => {
       <NavBar>
         <NavBarContent>
           <NavBarLogo>
-            Espiritus
-            <Button
-              onClick={toggleTheme}
-              variant="ghost"
-              className="size-4 p-4 cursor-pointer"
-            >
-              {theme === "light" ? <Moon /> : <Sun />}
-            </Button>
+            <div className="flex items-baseline gap-6">
+              <p className="text-3xl">Espiritus</p>
+              <Button
+                onClick={toggleTheme}
+                variant="ghost"
+                className="size-4 p-4 cursor-pointer"
+              >
+                {theme === "light" ? <Moon /> : <Sun />}
+              </Button>
+            </div>
           </NavBarLogo>
           <SearchBox
-            className="bg-white w-full mb-3 lg:w-50 lg:m-0"
+            className="bg-white w-full mb-3 lg:w-50 lg:m-0 rounded-xl"
+            placeholder="Pesquisar..."
             onChange={(e) => setsearchTerm(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
           />

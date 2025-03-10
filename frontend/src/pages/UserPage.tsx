@@ -13,12 +13,9 @@ import {
 } from "@/components/ui/card";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
-import { use } from "react";
 import { useProfile } from "@/context/ProfileContext";
 
 export default function UserPage() {
@@ -97,12 +94,15 @@ export default function UserPage() {
                         </p>
                       </CardContent>
                       <CardFooter className="flex flex-col xl:flex-row md:flex-col gap-2 justify-between">
-                        <Button className="w-full cursor-pointer font-light cursor-pointer rounded-3xl bg-yellow-400 text-purple-900 font-medium hover:bg-yellow-300 dark:bg-primary dark:text-primary-foreground">
+                        <Button className="w-full rounded-3xl cursor-pointer">
                           <Link to={"/terreiros/" + agent.terreiro.id}>
                             Seguir
                           </Link>
                         </Button>
-                        <Button className="w-full cursor-pointer font-light cursor-pointer rounded-3xl bg-emerald-500 font-medium hover:bg-emerald-700 dark:bg-primary dark:text-primary-foreground">
+                        <Button
+                          className="w-full rounded-3xl cursor-pointer"
+                          variant="secondary"
+                        >
                           Como chegar
                         </Button>
                       </CardFooter>

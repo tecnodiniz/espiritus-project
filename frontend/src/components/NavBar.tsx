@@ -11,7 +11,7 @@ const NavBar = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "shadow text-black bg-neutral-50 dark:bg-neutral-950 dark:border-b dark:text-white p-4",
+      "shadow text-white bg-purple-950 dark:bg-neutral-950 dark:border-b p-4",
       className
     )}
     {...props}

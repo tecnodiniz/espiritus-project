@@ -45,17 +45,17 @@ export function SearchTerreiros() {
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {filteredTerreiros.map((terreiro, index) => (
               <Card key={index} className="rounded-none">
-                <div className="w-full bg-purple-900 h-40"></div>
+                <div className="w-full bg-purple-900 h-40 dark:bg-card"></div>
                 <CardHeader>
                   <CardTitle>{terreiro.name}</CardTitle>
                   <CardDescription>{terreiro.address}</CardDescription>
                 </CardHeader>
                 <CardContent></CardContent>
                 <CardFooter className="flex flex-col xl:flex-row md:flex-col gap-2 justify-between">
-                  <Button className="w-full cursor-pointer font-light cursor-pointer rounded-3xl bg-yellow-400 text-purple-900 font-medium hover:bg-yellow-300 dark:bg-primary dark:text-primary-foreground">
+                  <Button className="w-full cursor-pointer">
                     <Link to={"/terreiros/" + terreiro.id}>Seguir</Link>
                   </Button>
-                  <Button className="w-full cursor-pointer font-light cursor-pointer rounded-3xl bg-emerald-500 font-medium hover:bg-emerald-700 dark:bg-primary dark:text-primary-foreground">
+                  <Button className="w-full cursor-pointer" variant="secondary">
                     Como chegar
                   </Button>
                 </CardFooter>

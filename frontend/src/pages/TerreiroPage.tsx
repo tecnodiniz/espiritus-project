@@ -46,7 +46,7 @@ export default function TerreiroPage() {
   return (
     <div className="container max-w-[1280px] mx-auto">
       <Card className="min-h-[100vh] rounded-none">
-        <div className="w-full bg-purple-900 h-100"></div>
+        <div className="w-full bg-purple-900 h-100 dark:bg-card"></div>
         <Link to="/">
           <Button className="m-2 cursor-pointer" variant="link">
             <ChevronLeft /> Voltar
@@ -61,10 +61,13 @@ export default function TerreiroPage() {
             </CardDescription>
           </div>
           <div className="flex  gap-2 justify-between">
-            <Button className="w-full cursor-pointer font-light cursor-pointer rounded-3xl bg-yellow-400 text-purple-900 font-medium hover:bg-yellow-300 dark:bg-primary dark:text-primary-foreground">
+            <Button className="w-full rounded-3xl cursor-pointer">
               Seguir
             </Button>
-            <Button className="w-full cursor-pointer font-light cursor-pointer rounded-3xl bg-emerald-500 font-medium hover:bg-emerald-700 dark:bg-primary dark:text-primary-foreground">
+            <Button
+              className="w-full rounded-3xl cursor-pointer"
+              variant="secondary"
+            >
               Como chegar
             </Button>
           </div>
