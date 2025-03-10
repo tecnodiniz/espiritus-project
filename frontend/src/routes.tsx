@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import UserPage from "./pages/UserPage";
 import TerreiroPage from "./pages/TerreiroPage";
 import { SearchTerreiros } from "./pages/SearchTerreirosPage";
+import { CreateTerreiro } from "./pages/CreateTerreiro";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
         path: "terreiros", // Caminho base para a página de busca
         element: <SearchTerreiros />,
       },
+      { path: "terreiros/create", element: <CreateTerreiro /> },
       { path: "terreiros/:id", element: <TerreiroPage /> },
       { path: "users/:id", element: <UserPage /> },
     ],
