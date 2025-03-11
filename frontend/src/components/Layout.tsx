@@ -81,8 +81,10 @@ const Layout = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger className="focus-visible:outline-none cursor-pointer">
                   <Avatar className="size-12">
-                    <AvatarImage src="" />
-                    <AvatarFallback>{getInitials(profile.name)}</AvatarFallback>
+                    <AvatarImage src="/" />
+                    <AvatarFallback className=" text-purple-900 font-bold">
+                      {getInitials(profile.name)}
+                    </AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>

@@ -21,6 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useProfile } from "@/context/ProfileContext";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   name: z
@@ -31,6 +32,11 @@ const formSchema = z.object({
     .regex(new RegExp("^(?!\\s)(?=.*[a-zA-Z])[a-zA-Z0-9 \\s]+$"), {
       message: "Nome inválido",
     }),
+  address: z.string(),
+  contact: z.string().nonempty(),
+  opening_hours: z.string(),
+  history: z.string(),
+  federation: z.string(),
   segment: z.string().nonempty({
     message: "Selecione um segmento",
   }),
@@ -42,6 +48,11 @@ export function CreateTerreiro() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
+      address: "",
+      contact: "",
+      opening_hours: "",
+      history: "",
+      federation: "",
     },
   });
 
@@ -63,7 +74,7 @@ export function CreateTerreiro() {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="grid grid-cols-2 gap-6 space-y-4 items-center"
+              className="grid grid-cols-2 gap-3 items-baseline"
             >
               <div className="col-span-2">
                 <FormField
@@ -77,6 +88,121 @@ export function CreateTerreiro() {
                       <FormControl>
                         <Input
                           placeholder="Nome do Terreiro"
+                          className="mt-2"
+                          {...field}
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="col-span-2">
+                <FormField
+                  control={form.control}
+                  name="address"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-xl font-normal">
+                        Endereço
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Endereço"
+                          className="mt-2"
+                          {...field}
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="">
+                <FormField
+                  control={form.control}
+                  name="contact"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-xl font-normal">
+                        Contato
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Contato"
+                          className="mt-2"
+                          {...field}
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="">
+                <FormField
+                  control={form.control}
+                  name="opening_hours"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-xl font-normal">
+                        Horário de Funcionamento
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Funcionamento"
+                          className="mt-2"
+                          {...field}
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="col-span-2">
+                <FormField
+                  control={form.control}
+                  name="history"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-xl font-normal">
+                        Histórico da casa
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Fale sobre o histórico do terreiro"
+                          className="resize-none"
+                          {...field}
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="w-full">
+                <FormField
+                  control={form.control}
+                  name="federation"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-xl font-normal">
+                        Federação
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Federação"
                           className="mt-2"
                           {...field}
                         />

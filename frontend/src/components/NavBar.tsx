@@ -68,7 +68,7 @@ const NavbarMenu = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "hidden md:flex items-baseline gap-4 justify-between w-full lg:w-auto",
+          "hidden md:flex items-center gap-4 justify-between w-full lg:w-auto",
           className
         )}
         {...props}
