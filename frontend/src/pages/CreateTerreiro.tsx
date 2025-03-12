@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -32,8 +38,13 @@ const formSchema = z.object({
     .regex(new RegExp("^(?!\\s)(?=.*[a-zA-Z])[a-zA-Z0-9 \\s]+$"), {
       message: "Nome inválido",
     }),
-  address: z.string(),
-  contact: z.string().nonempty(),
+  address: z.string().nonempty({ message: "Preencha o endereço" }),
+  contact: z
+    .string()
+    .nonempty({ message: "Preencha o contato" })
+    .regex(new RegExp("^[\\d]{2}\\s[\\d]{4,5}[-\\s][\\d]{4}$"), {
+      message: "Formato inválido",
+    }),
   opening_hours: z.string(),
   history: z.string(),
   federation: z.string(),
@@ -59,16 +70,18 @@ export function CreateTerreiro() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     const payload = { ...values, leader: profile?.id || 0 };
     console.log(payload);
+    form.reset();
   }
   return (
     <div className="container max-w-[1280px] md:w-[800px] mx-auto">
       <Card className="px-4">
         <CardHeader>
           <CardTitle>
-            <p className="text-3xl text-purple-900 font-semibold">
+            <p className="text-3xl text-purple-900 font-semibold dark:text-white">
               Cadastro de Terreiro
             </p>
           </CardTitle>
+          <CardDescription>Campos Obrigatórios *</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -83,7 +96,7 @@ export function CreateTerreiro() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-xl font-normal">
-                        Nome do Terreiro
+                        Nome do Terreiro *
                       </FormLabel>
                       <FormControl>
                         <Input
@@ -106,7 +119,7 @@ export function CreateTerreiro() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-xl font-normal">
-                        Endereço
+                        Endereço *
                       </FormLabel>
                       <FormControl>
                         <Input
@@ -129,11 +142,11 @@ export function CreateTerreiro() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-xl font-normal">
-                        Contato
+                        Contato *
                       </FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Contato"
+                          placeholder="99 9999-9999"
                           className="mt-2"
                           {...field}
                         />
@@ -221,7 +234,7 @@ export function CreateTerreiro() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-xl font-normal">
-                        Segmento
+                        Segmento *
                       </FormLabel>
                       <Select
                         onValueChange={field.onChange}
