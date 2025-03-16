@@ -58,7 +58,7 @@ const formSchema = z.object({
     }),
 
   history: z.string(),
-  federation: z.string(),
+  infrastructure: z.string(),
   segment: z.string().nonempty({
     message: "Selecione um segmento",
   }),
@@ -76,7 +76,7 @@ export function CreateTerreiro() {
       contact: "",
       hours: { start: "", end: "" },
       history: "",
-      federation: "",
+      infrastructure: "",
     },
   });
 
@@ -239,15 +239,15 @@ export function CreateTerreiro() {
               <div className="w-full">
                 <FormField
                   control={form.control}
-                  name="federation"
+                  name="infrastructure"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-xl font-normal">
-                        Federação
+                        Infraestrutura
                       </FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Federação"
+                          placeholder="Infraestrutura"
                           className="mt-2"
                           {...field}
                         />
