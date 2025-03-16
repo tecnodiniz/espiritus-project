@@ -1,9 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-// import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
-
 import UserPage from "./pages/UserPage";
 import TerreiroPage from "./pages/TerreiroPage";
 import { SearchTerreiros } from "./pages/SearchTerreirosPage";
@@ -16,17 +14,25 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       {
-        path: "terreiros", // Caminho base para a página de busca
-        element: <SearchTerreiros />,
+        path: "terreiros",
+        children: [
+          { index: true, element: <SearchTerreiros /> },
+          { path: "create", element: <CreateTerreiro /> },
+          { path: ":id", element: <TerreiroPage /> },
+          { path: "*", element: <p>Ops, 404 página não encontrada</p> }, // Catch-all route for /terreiros/*
+        ],
       },
-      { path: "terreiros/create", element: <CreateTerreiro /> },
-      { path: "terreiros/:id", element: <TerreiroPage /> },
       { path: "users/:id", element: <UserPage /> },
+      { path: "*", element: <p>Ops, 404 página não encontrada</p> }, // Catch-all route for other paths
     ],
   },
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "*",
+    element: <h1>Ops, 404 página não encontrada</h1>,
   },
 ]);
 

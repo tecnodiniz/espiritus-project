@@ -93,6 +93,10 @@ const Layout = () => {
                   <DropdownMenuGroup>
                     <DropdownMenuItem>
                       <LogOut />
+                      <Link to="/terreiros/create">Cadastrar Terreiro</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <LogOut />
                       <span onClick={userLogout}>Logout</span>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
