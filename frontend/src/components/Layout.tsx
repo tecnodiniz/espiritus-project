@@ -6,12 +6,11 @@ import { useTheme } from "@/context/ThemeContext";
 
 import {
   NavBar,
-  NavBarContent,
+
   NavBarLink,
-  NavBarLogo,
-  NavbarMenu,
+
 } from "./NavBar";
-import { SearchBox } from "./SearchBox";
+
 import { Button } from "./ui/button";
 import { useProfile } from "@/context/ProfileContext";
 import { getInitials } from "@/lib/utils";
@@ -74,7 +73,7 @@ const Layout = () => {
                 <NavBarLink to="/terreiros">Terreiros</NavBarLink>
                 <NavBarLink to="/terreiros">Mediums</NavBarLink>
                 <NavBarLink to="/terreiros">Eventos</NavBarLink>
-                <NavBarLink to="/" className="group relative">
+                <div className="group relative">
                   Mais
                   <div className="absolute left-0 top-full mt-1 w-48 bg-white dark:bg-gray-900 rounded-md overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-lg z-50">
                     <div className="py-1">
@@ -83,7 +82,7 @@ const Layout = () => {
                       <Link to="/terreiros" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-purple-50 dark:hover:bg-gray-800">Espaços</Link>
                     </div>
                   </div>
-                </NavBarLink>
+                </div>
               </nav>
             </div>
 
