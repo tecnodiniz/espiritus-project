@@ -22,7 +22,7 @@ import {
   MapPin, 
   Calendar, 
   User as UserIcon, 
-  Home, 
+
   Mail, 
   Phone, 
   Info, 
