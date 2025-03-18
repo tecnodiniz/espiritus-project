@@ -126,12 +126,13 @@ export function CreateTerreiro() {
           title: "Terreiro cadastrado com sucesso!",
           description: `O terreiro ${values.name} foi cadastrado com sucesso.`,
         });
+
+        form.reset();
+        setCurrentStep(1);
       }
       // Simulate API call
       // await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      form.reset();
-      setCurrentStep(1);
+    
     } catch (error) {
       toast({
         title: "Erro ao cadastrar terreiro",

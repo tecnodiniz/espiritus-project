@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 
 import { useUser } from "@/hooks/use-user";
-import { getInitials } from "@/lib/utils";
+import { getInitials } from "@/utility/utils";
 
 import {
   Card,

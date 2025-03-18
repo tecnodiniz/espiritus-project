@@ -13,7 +13,7 @@ import {
 
 import { Button } from "./ui/button";
 import { useProfile } from "@/context/ProfileContext";
-import { getInitials } from "@/lib/utils";
+import { getInitials } from "@/utility/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,

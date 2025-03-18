@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { ChevronLeft, MapPin, CalendarDays, Users, Image, Star, Phone, Clock, Building, Info, Heart, Navigation2, Search } from "lucide-react";
 
 import { useTerreiro } from "@/hooks/use-terreiro";
-import { getInitials } from "@/lib/utils";
+import { getInitials } from "@/utility/utils";
 import { TerreiroAgent } from "@/types/types";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
