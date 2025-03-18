@@ -29,11 +29,11 @@ import { useProfile } from "@/context/ProfileContext";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Textarea } from "@/components/ui/textarea";
-import { TimeRangePicker } from "@/components/ui/time-range-picker";
+
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import {
-  CheckCircle,
+ 
   ChevronRight,
   Clock,
   HelpCircle,
@@ -75,8 +75,8 @@ const formSchema = z.object({
       path: ["end"],
     }),
 
-  history: z.string(),
-  infrastructure: z.string(),
+  history: z.string().nonempty({ message: "Preencha o histórico" }),
+  infrastructure: z.string().nonempty({ message: "Preencha a infraestrutura" }),
   segment: z.string().nonempty({
     message: "Selecione um segmento",
   }),
@@ -459,7 +459,7 @@ export function CreateTerreiro() {
                             </FormLabel>
                           </div>
                           <FormDescription className="text-xs text-gray-500 ml-6 mb-2">
-                            Conte a história e a trajetória do terreiro (opcional)
+                            Conte a história e a trajetória do terreiro <span className="text-red-500">*</span>
                           </FormDescription>
                           <FormControl>
                             <Textarea
@@ -485,7 +485,7 @@ export function CreateTerreiro() {
                             </FormLabel>
                           </div>
                           <FormDescription className="text-xs text-gray-500 ml-6 mb-2">
-                            Descreva a infraestrutura e acomodações do terreiro (opcional)
+                            Descreva a infraestrutura e acomodações do terreiro <span className="text-red-500">*</span>
                           </FormDescription>
                           <FormControl>
                             <Textarea
