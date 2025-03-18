@@ -1,3 +1,4 @@
+
 import api from "./api";
 
 export const terreiroService = {
@@ -10,4 +11,10 @@ export const terreiroService = {
     const response = await api.get("/terreiros/" + id);
     return response.data;
   },
+
+
+  async postTerreiro(data: any) {
+    const response = await api.post("/terreiros/", data);
+    return response;
+  }
 };

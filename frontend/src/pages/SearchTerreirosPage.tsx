@@ -108,7 +108,7 @@ export function SearchTerreiros() {
                     <span className="text-gray-600 dark:text-gray-400 text-sm ml-1 font-medium">4.2</span>
                   </div>
                   <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                    {"Terreiro tradicional com anos de história dedicada à espiritualidade."}
+                    {terreiro.history}
                   </p>
                 </CardContent>
                 <CardFooter className="flex flex-col xl:flex-row md:flex-col gap-2 justify-between pt-2">

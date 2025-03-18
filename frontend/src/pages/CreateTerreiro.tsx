@@ -47,6 +47,7 @@ import {
   X,
 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { terreiroService } from "@/services/terreiroService";
 
 const formSchema = z.object({
   name: z
@@ -116,14 +117,19 @@ export function CreateTerreiro() {
         opening_hours: opening_hours,
       };
       console.log(payload);
+      
+      const response = await terreiroService.postTerreiro(payload);
+
+      console.log(response);
+      if (response.status === 200) {
+        toast({
+          title: "Terreiro cadastrado com sucesso!",
+          description: `O terreiro ${values.name} foi cadastrado com sucesso.`,
+        });
+      }
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      
-      toast({
-        title: "Terreiro cadastrado com sucesso!",
-        description: `O terreiro ${values.name} foi cadastrado com sucesso.`,
-      });
-      
+      // await new Promise((resolve) => setTimeout(resolve, 1000));
+
       form.reset();
       setCurrentStep(1);
     } catch (error) {
