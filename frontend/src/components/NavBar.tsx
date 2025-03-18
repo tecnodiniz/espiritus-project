@@ -11,7 +11,7 @@ const NavBar = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "shadow text-white bg-purple-950 dark:bg-neutral-950 dark:border-b p-4",
+      "sticky top-0 z-50 shadow-md text-white bg-gradient-to-r from-purple-950 to-purple-800 dark:from-neutral-950 dark:to-gray-900 p-4 backdrop-blur-sm transition-all duration-300",
       className
     )}
     {...props}
@@ -26,7 +26,7 @@ const NavBarContent = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "container mx-auto flex-col flex-wrap justify-between items-baseline sm:px-6 lg:px-8 md:flex sm:flex-col lg:flex-row ",
+      "container mx-auto flex-col flex-wrap justify-between items-baseline sm:px-6 lg:px-8 md:flex sm:flex-col lg:flex-row",
       className
     )}
     {...props}
@@ -51,10 +51,10 @@ const NavbarMenu = React.forwardRef<
 
   return (
     <>
-      <div className="flex md:hidden justify-end">
+      <div className="flex md:hidden justify-end w-full">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="text-gray-700 hover:text-gray-900 focus:outline-none"
+          className="text-white hover:text-yellow-300 focus:outline-none transition-colors duration-200"
           aria-label="Toggle menu"
         >
           {isMenuOpen ? (
@@ -68,7 +68,7 @@ const NavbarMenu = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "hidden md:flex items-center gap-4 justify-between w-full lg:w-auto",
+          "hidden md:flex items-center gap-6 justify-between w-full lg:w-auto",
           className
         )}
         {...props}
@@ -76,12 +76,15 @@ const NavbarMenu = React.forwardRef<
 
       <div
         className={cn(
-          "z-50 md:hidden w-full overflow-hidden transition-all duration-700 ease-in-out",
-          isMenuOpen ? "max-h-[500px]" : "max-h-0 opacity-0"
+          "absolute left-0 right-0 bg-gradient-to-r from-purple-950 to-purple-800 dark:from-neutral-950 dark:to-gray-900 md:hidden w-full overflow-hidden transition-all duration-500 ease-in-out border-t border-purple-700 dark:border-gray-800 shadow-lg",
+          isMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         )}
+        style={{
+          top: isMenuOpen ? "100%" : "calc(100% - 5px)",
+        }}
       >
-        <div className="px-4 py-2">
-          <div ref={ref} className="flex flex-col space-y-4" {...props} />
+        <div className="px-6 py-4">
+          <div ref={ref} className="flex flex-col space-y-5" {...props} />
         </div>
       </div>
     </>
@@ -97,7 +100,10 @@ function NavBarLink({
   return (
     <Link
       data-slot="navbar-link"
-      className={cn("hover:underline", className)}
+      className={cn(
+        "text-white relative font-medium px-2 py-1 hover:text-yellow-300 transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-yellow-300 after:transition-all hover:after:w-full",
+        className
+      )}
       {...props}
     />
   );
