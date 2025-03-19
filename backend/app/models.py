@@ -22,7 +22,7 @@ class Auth(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    email = Column(String(255))
+    email = Column(String(255), unique=True)
     password_hash = Column(Text)
     google_id = Column(String(255))
     avatar_url = Column(Text)

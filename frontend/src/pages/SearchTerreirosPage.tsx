@@ -45,7 +45,7 @@ export function SearchTerreiros() {
               {query ? `Resultados para "${query}"` : "Todos os Terreiros"}
             </h1>
           </div>
-          
+
           {filteredTerreiros.length === 0 && (
             <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800">
               <p className="text-purple-800 dark:text-purple-300 text-lg">
@@ -63,16 +63,16 @@ export function SearchTerreiros() {
                 {filteredTerreiros.length} terreiros encontrados
               </p>
               <div className="flex items-center gap-2">
-                <Button 
-                  variant="outline" 
-                  size="sm" 
+                <Button
+                  variant="outline"
+                  size="sm"
                   className="border-purple-200 text-purple-700 hover:bg-purple-50 dark:border-gray-700 dark:text-purple-400 dark:hover:bg-gray-800/50"
                 >
                   Filtrar
                 </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
+                <Button
+                  variant="outline"
+                  size="sm"
                   className="border-purple-200 text-purple-700 hover:bg-purple-50 dark:border-gray-700 dark:text-purple-400 dark:hover:bg-gray-800/50"
                 >
                   Ordenar
@@ -83,8 +83,8 @@ export function SearchTerreiros() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {filteredTerreiros.map((terreiro, index) => (
-              <Card 
-                key={index} 
+              <Card
+                key={index}
                 className="rounded-xl overflow-hidden border border-purple-100 dark:border-gray-800 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-white dark:bg-gray-950"
               >
                 <div className="relative w-full h-48 bg-gradient-to-br from-purple-800 to-purple-600 dark:from-purple-900 dark:to-gray-800 overflow-hidden">
@@ -92,10 +92,15 @@ export function SearchTerreiros() {
                   <div className="absolute inset-0 opacity-20 bg-[url('https://source.unsplash.com/random/300x200/?temple')] bg-center bg-cover"></div>
                 </div>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-xl text-purple-900 dark:text-white">{terreiro.name}</CardTitle>
+                  <CardTitle className="text-xl text-purple-900 dark:text-white">
+                    {terreiro.name}
+                  </CardTitle>
                   <CardDescription className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
-                    <span className="text-purple-700 dark:text-purple-400 font-medium">Umbanda</span> · 
-                    <MapPin className="h-3.5 w-3.5 text-gray-500 dark:text-gray-400" /> 
+                    <span className="text-purple-700 dark:text-purple-400 font-medium">
+                      {terreiro.segment}
+                    </span>{" "}
+                    ·
+                    <MapPin className="h-3.5 w-3.5 text-gray-500 dark:text-gray-400" />
                     {terreiro.address}
                   </CardDescription>
                 </CardHeader>
@@ -103,19 +108,22 @@ export function SearchTerreiros() {
                   <div className="flex items-center gap-1 mb-4">
                     <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" /> 
+                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     <StarHalf className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                    <span className="text-gray-600 dark:text-gray-400 text-sm ml-1 font-medium">4.2</span>
+                    <span className="text-gray-600 dark:text-gray-400 text-sm ml-1 font-medium">
+                      4.2
+                    </span>
                   </div>
                   <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
                     {terreiro.history}
                   </p>
                 </CardContent>
                 <CardFooter className="flex flex-col xl:flex-row md:flex-col gap-2 justify-between pt-2">
-                  <Button 
-                    className="w-full rounded-full cursor-pointer bg-purple-700 hover:bg-purple-800 text-white"
-                  >
-                    <Link to={"/terreiros/" + terreiro.id} className="flex items-center justify-center w-full">
+                  <Button className="w-full rounded-full cursor-pointer bg-purple-700 hover:bg-purple-800 text-white">
+                    <Link
+                      to={"/terreiros/" + terreiro.id}
+                      className="flex items-center justify-center w-full"
+                    >
                       Seguir
                     </Link>
                   </Button>
@@ -129,11 +137,11 @@ export function SearchTerreiros() {
               </Card>
             ))}
           </div>
-          
+
           {filteredTerreiros.length > 8 && (
             <div className="flex justify-center mt-8">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="rounded-full border-purple-300 text-purple-700 hover:bg-purple-50 dark:border-purple-800 dark:text-purple-400 dark:hover:bg-gray-800/30 px-6"
               >
                 Carregar mais

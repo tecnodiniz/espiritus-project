@@ -14,7 +14,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
 # USER
-def create_user(db:Session, user: schemas.UserCreate):
+def create_user(db:Session, user: schemas.UserCreate, auth: schemas.AuthCreate):
     db_user = models.User(name=user.name, cpf = user.cpf, plan = user.plan)
 
     try:
@@ -22,10 +22,22 @@ def create_user(db:Session, user: schemas.UserCreate):
         db.commit()
         db.refresh(db_user)
 
+        password = hash_password(auth.password)
+        db_auth = models.Auth(
+        user_id = db_user.id,
+        email=auth.email,
+        password_hash=password,
+        google_id=auth.google_id,
+        avatar_url=auth.avatar_url
+        )
+        db.add(db_auth)
+        db.commit()
+        db.refresh(db_auth)
+
         return db_user
     except IntegrityError:
         db.rollback()
-        raise HTTPException(status_code=400, detail="cpf já cadastrado!")
+        raise HTTPException(status_code=400, detail=f"Email já cadastrado {e}")
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Erro interno {e}")
@@ -58,6 +70,7 @@ def update_user(user_id: UUID, user:schemas.UserUpadte, db:Session):
 
         return {"mensagem":"usário atualizado"}
     except Exception as e:
+        db.rollback()
         raise HTTPException(status_code=500, detail=f"erro interno {e}")
 
 
@@ -88,7 +101,7 @@ def authentication(db: Session, auth: schemas.Authentication):
     db_auth = db.query(models.Auth).filter(models.Auth.email == auth.email).first()
 
     if db_auth and verify_password(auth.password, db_auth.password_hash):
-            return db_auth.user
+        return db_auth.user
     raise HTTPException(status_code=401, detail="Email ou Senha incorretos")
     
     
@@ -143,6 +156,7 @@ def update_terreiro(terreiro_id: UUID, terreiro: schemas.TerreiroUpdate, db:Sess
 
         return {"mensagem":"Terreiro atualizado"}
     except Exception as e:
+        db.rollback()
         raise HTTPException(status_code=500, detail=f"Erro interno {e}")
     
 
@@ -158,6 +172,7 @@ def create_terreiroRole(terreiro_role:schemas.TerreiroRoleCreate, db:Session):
         return db_role
 
     except Exception as e:
+        db.rollback()
         raise HTTPException(status_code=500, detail=f"Erro interno {e}")
 
 def get_terreiroRole(db:Session):
@@ -177,6 +192,7 @@ def create_agentTerreiro(agent: schemas.AgentTerreiroCreate, db:Session):
         db.refresh(db_agent)
         return db_agent
     except Exception as e:
+        db.rollback()
         raise HTTPException(status_code=500, detail=f"Erro interno {e}")
     
 def get_agentTerreiro(db:Session):

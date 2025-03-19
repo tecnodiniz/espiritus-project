@@ -28,10 +28,10 @@ def read_root():
 
 
 
-# POST USER
+# CREATE USER
 @app.post("/users/", response_model=schemas.UserResponse)
-def create_user(user: schemas.UserCreate, db: Session = Depends(database.get_db)):
-    return crud.create_user(db, user)
+def create_user(user: schemas.UserCreate, auth:schemas.AuthCreate, db: Session = Depends(database.get_db)):
+    return crud.create_user(db, user, auth)
 
 @app.get("/users-detail/{user_id}", response_model=schemas.UserDetailResponse)
 def get_user(user_id:UUID, db: Session = Depends(database.get_db)):
@@ -61,7 +61,7 @@ def create_auth(auth: schemas.AuthCreate, db: Session = Depends(database.get_db)
 def authentication(auth: schemas.Authentication, db:Session = Depends(database.get_db)):
     return crud.authentication(db, auth)
 
-# POST TERREIRO
+# CREATE TERREIRO
 @app.post("/terreiros/", response_model=schemas.TerreiroResponse)
 def create_terreiro(terreiro: schemas.TerreiroCreate, db: Session = Depends(database.get_db)):
     return crud.create_terreiro(db,terreiro)  
@@ -71,7 +71,7 @@ def create_terreiro(terreiro: schemas.TerreiroCreate, db: Session = Depends(data
 def get_terreiro(terreiro_id: UUID, db: Session = Depends(database.get_db)):
     return crud.get_terreiro(terreiro_id, db)
 
-# POST TERREIROS
+# CREATE TERREIROS
 @app.get("/terreiros/", response_model=list[schemas.TerreiroResponse])  
 def get_terreiros(db: Session = Depends(database.get_db)):
     return crud.get_terreiros(db)
@@ -81,7 +81,7 @@ def get_terreiros(db: Session = Depends(database.get_db)):
 def update_terreiro(terreiro_id: UUID, terreiro: schemas.TerreiroUpdate, db: Session = Depends(database.get_db)):
     return crud.update_terreiro(terreiro_id, terreiro, db)
 
-# POST TERREIRO_ROLE
+# CREATE TERREIRO_ROLE
 @app.post("/terreiro_roles/", response_model=schemas.TerreiroRoleResponse)
 def create_terreiroRole(terreiro_role:schemas.TerreiroRoleCreate, db:Session = Depends(database.get_db)):
     return crud.create_terreiroRole(terreiro_role, db)
@@ -91,7 +91,7 @@ def create_terreiroRole(terreiro_role:schemas.TerreiroRoleCreate, db:Session = D
 def get_terreiroRoles(db:Session=Depends(database.get_db)):
     return crud.get_terreiroRole(db)
 
-# POST AGENT TERREIRO
+# CREATE AGENT TERREIRO
 @app.post("/agent_terreiro/", response_model=schemas.AgentTerreiroResponse)
 def create_agentTerreiro(agent: schemas.AgentTerreiroCreate, db:Session=Depends(database.get_db)):
     return crud.create_agentTerreiro(agent, db)
