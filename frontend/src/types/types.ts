@@ -7,6 +7,7 @@ export type User = {
 };
 export type UserDetails = {
   email: string;
+  created_at: string;
 };
 export type Auth = {
   email: string;

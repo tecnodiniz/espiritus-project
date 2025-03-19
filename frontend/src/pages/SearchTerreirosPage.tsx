@@ -41,12 +41,13 @@ export function SearchTerreiros() {
             <Badge className="w-fit px-4 py-1.5 text-sm font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-800/40">
               Terreiros
             </Badge>
+
             <h1 className="text-3xl md:text-4xl font-bold text-purple-900 dark:text-white">
               {query ? `Resultados para "${query}"` : "Todos os Terreiros"}
             </h1>
           </div>
 
-          {filteredTerreiros.length === 0 && (
+          {filteredTerreiros.length === 0 && query && (
             <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800">
               <p className="text-purple-800 dark:text-purple-300 text-lg">
                 Ops! Não encontramos resultados para a busca por "{query}"

@@ -165,7 +165,8 @@ const Layout = () => {
                     <DropdownMenuGroup>
                       <DropdownMenuItem className="cursor-pointer">
                         <User className="mr-2 h-4 w-4" />
-                        <span>Meu Perfil</span>
+
+                        <Link to={"/users/" + profile.id}>Meu Perfil</Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem className="cursor-pointer">
                         <Heart className="mr-2 h-4 w-4" />

@@ -1,3 +1,4 @@
+from datetime import datetime
 from uuid import UUID
 from typing import Optional, Any,List
 from pydantic import BaseModel
@@ -34,7 +35,6 @@ class UserDetailResponse(UserBase):
 
 # Auth
 class AuthBase(BaseModel):
-    user_id: UUID
     email: str
     google_id: Optional[str] = None
     avatar_url: Optional[str] = None
@@ -48,7 +48,9 @@ class Authentication(BaseModel):
 
 class AuthResponse(AuthBase):
     id: UUID
-
+    created_at: datetime
+    user_id: UUID
+    
     class Config:
         from_attributes = True
     
