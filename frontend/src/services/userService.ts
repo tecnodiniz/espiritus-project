@@ -6,4 +6,8 @@ export const userService = {
     console.log(response.data);
     return response.data;
   },
+  async createUser(data: any) {
+    const response = await api.post("/users/", data);
+    return response;
+  },
 };

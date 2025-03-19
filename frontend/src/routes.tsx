@@ -6,6 +6,7 @@ import UserPage from "./pages/UserPage";
 import TerreiroPage from "./pages/TerreiroPage";
 import { SearchTerreiros } from "./pages/SearchTerreirosPage";
 import { CreateTerreiro } from "./pages/CreateTerreiro";
+import CreateUser from "./pages/CreateUser";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
+  { path: "/register", element: <CreateUser /> },
   {
     path: "*",
     element: <h1>Ops, 404 página não encontrada</h1>,

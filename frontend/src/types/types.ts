@@ -2,9 +2,12 @@ export type User = {
   id: string;
   name: string;
   plan: string;
+  auth: UserDetails;
   agents: TerreiroAgent[];
 };
-
+export type UserDetails = {
+  email: string;
+};
 export type Auth = {
   email: string;
   password: string;
