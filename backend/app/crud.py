@@ -18,9 +18,10 @@ def create_user(db:Session, user: schemas.UserCreate, auth: schemas.AuthCreate):
     db_user = models.User(name=user.name, cpf = user.cpf, plan = user.plan)
 
     try:
+        db.begin()
         db.add(db_user)
-        db.commit()
-        db.refresh(db_user)
+
+        db.flush()
 
         password = hash_password(auth.password)
         db_auth = models.Auth(
@@ -31,13 +32,19 @@ def create_user(db:Session, user: schemas.UserCreate, auth: schemas.AuthCreate):
         avatar_url=auth.avatar_url
         )
         db.add(db_auth)
+        
         db.commit()
-        db.refresh(db_auth)
+        db.refresh(db_user)
 
         return db_user
-    except IntegrityError:
+    except IntegrityError as e: 
         db.rollback()
-        raise HTTPException(status_code=400, detail=f"Email já cadastrado {e}")
+
+        error_message = str(e.orig)
+
+        if "auth_email_key" in error_message:
+            raise HTTPException(status_code=400, detail=f"Email já cadastrado")
+        raise HTTPException(status_code=400, detail=f"erro: {e}")
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Erro interno {e}")

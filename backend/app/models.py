@@ -21,7 +21,7 @@ class Auth(Base):
     __tablename__ = "auth"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), unique=True, nullable=False)
     email = Column(String(255), unique=True)
     password_hash = Column(Text)
     google_id = Column(String(255))
