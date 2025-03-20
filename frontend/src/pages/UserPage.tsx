@@ -64,7 +64,7 @@ export default function UserPage() {
             </Avatar>
 
             <div className="flex flex-col md:flex-row md:items-center md:justify-between w-full pt-4 md:pt-0">
-              <div>
+              <div className="mt-0 md:mt-20">
                 <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
                   {user?.name}
                 </h1>

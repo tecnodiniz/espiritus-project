@@ -46,6 +46,7 @@ export const ProfileProvider = ({ children }: ProfileProviderProps) => {
     setProfile(null);
     localStorage.removeItem("user");
     localStorage.removeItem("redirectAfterLogin");
+    window.location.href = "/";
   };
 
   return (

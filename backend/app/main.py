@@ -26,8 +26,6 @@ app.add_middleware(
 def read_root():
     return {"message":"API v0", "status":"ok"}
 
-
-
 # CREATE USER
 @app.post("/users/", response_model=schemas.UserResponse)
 def create_user(user: schemas.UserCreate, auth:schemas.AuthCreate, db: Session = Depends(database.get_db)):
