@@ -3,6 +3,13 @@ from database import Base
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy import Column,Text, String, Boolean, DateTime, func, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship
+import enum
+from sqlalchemy import Enum
+
+class AgenteStatusEnum(enum.Enum):
+    PENDENTE = "pendente"
+    ATIVO = "ativo"
+    INATIVO = "inativo"
 
 class User(Base):
     __tablename__ = "users"
@@ -65,6 +72,7 @@ class AgentTerreiro(Base):
     id_terreiro_role = Column(UUID(as_uuid=True), ForeignKey("terreiro_roles.id", ondelete="CASCADE"), nullable=False)
     id_user = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     id_terreiro = Column(UUID(as_uuid=True), ForeignKey("terreiros.id", ondelete="CASCADE"), nullable=False)
+    status = Column(Enum(AgenteStatusEnum, name="agente_status", create_type=True), nullable=False, default=AgenteStatusEnum.PENDENTE)
 
     __table_args__ = (UniqueConstraint("id_user","id_terreiro", name="uq_user_terreiro"),)
 
