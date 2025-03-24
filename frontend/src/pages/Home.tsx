@@ -196,7 +196,7 @@ export default function Home() {
             ].map((category, index) => (
               <Card
                 key={index}
-                className="rounded-xl overflow-hidden border-none shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 group bg-white dark:bg-gray-950"
+                className="cursor-pointer rounded-xl overflow-hidden border-none shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 group bg-white dark:bg-gray-950"
               >
                 <div
                   className={`w-full flex-col bg-gradient-to-br ${category.gradient} ${category.darkGradient} h-28 sm:h-36 md:h-44 lg:h-56 flex items-center justify-center p-3 sm:p-4 relative overflow-hidden`}
