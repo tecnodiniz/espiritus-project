@@ -2,6 +2,7 @@ from datetime import datetime
 from uuid import UUID
 from typing import Optional, Any,List
 from pydantic import BaseModel
+from enum import Enum
 
 
 
@@ -73,6 +74,11 @@ class TerreiroRoleResponse(TerreiroRoleBase):
         from_attributes = True
 
 # Agents
+class AgenteStatus(str, Enum):
+    PENDENTE = "pendente"
+    ATIVO = "ativo"
+    INATIVO = "inativo"
+
 class AgentTerreiroBase(BaseModel):
     id_terreiro_role: UUID
     id_terreiro: UUID
@@ -85,6 +91,7 @@ class AgentTerreiroResponse(BaseModel):
     id: UUID
     user: "UserResponse"
     role: "TerreiroRoleResponse"
+    status: AgenteStatus
     
     class Config:
         from_attributes = True
