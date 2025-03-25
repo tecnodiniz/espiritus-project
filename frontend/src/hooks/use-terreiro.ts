@@ -21,7 +21,7 @@ export function useTerreiros() {
   return { terreiros };
 }
 
-export function useTerreiro(id: any) {
+export function useTerreiro(id: string) {
   const [terreiro, setTerreiro] = useState<Terreiro>();
   const navigate = useNavigate();
 
@@ -31,9 +31,10 @@ export function useTerreiro(id: any) {
         const data = await terreiroService.getTerreirosById(id);
 
         setTerreiro(data);
-      } catch (error: any) {
-        if (error.response.status == 422) navigate("/notFound");
-        console.error("Não foi possível buscar o terreiro: ", error);
+      } catch (err: any) {
+        if (err.response.status === 404 || err.response.status === 422)
+          navigate("/notFound");
+        console.error("Não foi possível buscar o terreiro: ", err);
       }
     }
     if (id) fetchTerreiroById();

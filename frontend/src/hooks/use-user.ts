@@ -6,12 +6,18 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export function useUser(id: any) {
+  const navigate = useNavigate();
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
     async function fetchUserById() {
-      const data = await userService.getUsersById(id);
-      setUser(data);
+      try {
+        const data = await userService.getUsersById(id);
+        setUser(data);
+      } catch (err: any) {
+        if (err.response.status === 404 || err.response.status === 422)
+          navigate("/notFound");
+      }
     }
     fetchUserById();
   }, [id]);
@@ -19,9 +25,9 @@ export function useUser(id: any) {
 }
 
 export function useAuth() {
+  const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const { userLogin } = useProfile();
-  const navigate = useNavigate();
 
   async function authenticate(credentials: Auth) {
     setError(null);
