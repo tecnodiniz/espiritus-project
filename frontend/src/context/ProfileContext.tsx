@@ -11,6 +11,7 @@ interface ProfileContexType {
   profile: User | null;
   userLogin: (user: User) => void;
   userLogout: () => void;
+  isAuthenticate: boolean;
 }
 
 const ProfileContext = createContext<ProfileContexType | undefined>(undefined);
@@ -30,6 +31,7 @@ interface ProfileProviderProps {
 
 export const ProfileProvider = ({ children }: ProfileProviderProps) => {
   const [profile, setProfile] = useState<User | null>(null);
+  const [isAuthenticate, setIsAuthenticate] = useState(false);
 
   useEffect(() => {
     const storageUser = localStorage.getItem("user");
@@ -38,19 +40,23 @@ export const ProfileProvider = ({ children }: ProfileProviderProps) => {
 
   const userLogin = (user: User) => {
     setProfile(user);
+    setIsAuthenticate(true);
     localStorage.setItem("user", JSON.stringify(user));
     window.location.href = localStorage.getItem("redirectAfterLogin") || "/";
   };
 
   const userLogout = () => {
     setProfile(null);
+    setIsAuthenticate(false);
     localStorage.removeItem("user");
     localStorage.removeItem("redirectAfterLogin");
     window.location.href = "/";
   };
 
   return (
-    <ProfileContext.Provider value={{ profile, userLogin, userLogout }}>
+    <ProfileContext.Provider
+      value={{ profile, userLogin, userLogout, isAuthenticate }}
+    >
       {children}
     </ProfileContext.Provider>
   );

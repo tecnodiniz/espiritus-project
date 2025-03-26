@@ -6,7 +6,9 @@ import UserPage from "./pages/UserPage";
 import TerreiroPage from "./pages/TerreiroPage";
 import { SearchTerreiros } from "./pages/SearchTerreirosPage";
 import { CreateTerreiro } from "./pages/CreateTerreiro";
+
 import CreateUser from "./pages/CreateUser";
+import { UserTerreiros } from "./pages/UserTerreiros";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,7 @@ const router = createBrowserRouter([
         ],
       },
       { path: "users/:id", element: <UserPage /> },
+      { path: "users/meus-terreiros", element: <UserTerreiros /> },
       { path: "*", element: <p>Ops, 404 página não encontrada</p> }, // Catch-all route for other paths
     ],
   },

@@ -316,55 +316,58 @@ export default function TerreiroPage() {
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {filteredUser.map((agent, index) => (
-                    <Card
-                      key={index}
-                      className="overflow-hidden border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all duration-300 rounded-xl"
-                    >
-                      <CardHeader className="pb-2">
-                        <div className="flex items-center">
-                          <Avatar className="h-14 w-14 border-2 border-purple-100 dark:border-purple-800">
-                            <AvatarImage src="" />
-                            <AvatarFallback className="bg-purple-700 text-white font-bold">
-                              {getInitials(agent.user.name)}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div className="ml-4">
-                            <CardTitle className="text-lg text-purple-900 dark:text-white">
-                              {agent.user.name}
-                            </CardTitle>
-                            <Badge className="mt-1 bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 hover:bg-purple-200">
-                              {agent.role.position}
-                            </Badge>
-                          </div>
-                        </div>
-                      </CardHeader>
-
-                      <CardContent className="pt-2">
-                        <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                          {agent.role.description ||
-                            "Sem descrição disponível."}
-                        </p>
-                      </CardContent>
-
-                      <CardFooter className="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-800">
-                        <CardDescription className="text-gray-500 dark:text-gray-400">
-                          Membro desde 2020
-                        </CardDescription>
-                        <Button
-                          variant="ghost"
-                          className="text-purple-700 hover:text-purple-900 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-900/20 p-0 h-auto"
+                  {filteredUser.map(
+                    (agent, index) =>
+                      agent.status === "ativo" && (
+                        <Card
+                          key={index}
+                          className="overflow-hidden border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all duration-300 rounded-xl"
                         >
-                          <Link
-                            to={"/users/" + agent.user.id}
-                            className="flex items-center"
-                          >
-                            Visitar Perfil
-                          </Link>
-                        </Button>
-                      </CardFooter>
-                    </Card>
-                  ))}
+                          <CardHeader className="pb-2">
+                            <div className="flex items-center">
+                              <Avatar className="h-14 w-14 border-2 border-purple-100 dark:border-purple-800">
+                                <AvatarImage src="" />
+                                <AvatarFallback className="bg-purple-700 text-white font-bold">
+                                  {getInitials(agent.user.name)}
+                                </AvatarFallback>
+                              </Avatar>
+                              <div className="ml-4">
+                                <CardTitle className="text-lg text-purple-900 dark:text-white">
+                                  {agent.user.name}
+                                </CardTitle>
+                                <Badge className="mt-1 bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 hover:bg-purple-200">
+                                  {agent.role.position}
+                                </Badge>
+                              </div>
+                            </div>
+                          </CardHeader>
+
+                          <CardContent className="pt-2">
+                            <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+                              {agent.role.description ||
+                                "Sem descrição disponível."}
+                            </p>
+                          </CardContent>
+
+                          <CardFooter className="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-800">
+                            <CardDescription className="text-gray-500 dark:text-gray-400">
+                              Membro desde 2020
+                            </CardDescription>
+                            <Button
+                              variant="ghost"
+                              className="text-purple-700 hover:text-purple-900 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-900/20 p-0 h-auto"
+                            >
+                              <Link
+                                to={"/users/" + agent.user.id}
+                                className="flex items-center"
+                              >
+                                Visitar Perfil
+                              </Link>
+                            </Button>
+                          </CardFooter>
+                        </Card>
+                      )
+                  )}
                 </div>
               </div>
             </TabsContent>

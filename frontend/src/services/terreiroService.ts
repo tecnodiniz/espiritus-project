@@ -1,4 +1,3 @@
-
 import api from "./api";
 
 export const terreiroService = {
@@ -11,10 +10,13 @@ export const terreiroService = {
     const response = await api.get("/terreiros/" + id);
     return response.data;
   },
-
+  async getUserTerreiros(id: string) {
+    const response = await api.get("/user/terreiros/" + id);
+    return response;
+  },
 
   async postTerreiro(data: any) {
     const response = await api.post("/terreiros/", data);
     return response;
-  }
+  },
 };

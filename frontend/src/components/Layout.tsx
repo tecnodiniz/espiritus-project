@@ -170,7 +170,7 @@ const Layout = () => {
                       </DropdownMenuItem>
                       <DropdownMenuItem className="cursor-pointer">
                         <Heart className="mr-2 h-4 w-4" />
-                        <span>Favoritos</span>
+                        <Link to={"/users/meus-terreiros"}>Meus Terreiros</Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem className="cursor-pointer">
                         <PlusCircle className="mr-2 h-4 w-4" />

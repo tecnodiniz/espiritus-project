@@ -10,9 +10,4 @@ export const userService = {
     const response = await api.post("/users/", data);
     return response;
   },
-
-  async userTerreiros(id: string) {
-    const response = await api.post("/users/terreiro/" + id);
-    return response;
-  },
 };

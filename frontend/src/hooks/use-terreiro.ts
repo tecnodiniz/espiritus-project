@@ -21,7 +21,7 @@ export function useTerreiros() {
   return { terreiros };
 }
 
-export function useTerreiro(id: string) {
+export function useTerreiro(id: any) {
   const [terreiro, setTerreiro] = useState<Terreiro>();
   const navigate = useNavigate();
 

@@ -23,6 +23,7 @@ export type TerreiroAgent = {
   role: Role;
   user: User;
   terreiro: Terreiro;
+  status: string;
 };
 export type Terreiro = {
   id: string;
