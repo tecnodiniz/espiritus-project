@@ -80,7 +80,8 @@ def update_user(user_id: UUID, user:schemas.UserUpadte, db:Session):
         db.rollback()
         raise HTTPException(status_code=500, detail=f"erro interno {e}")
 
-
+def get_user_terreiros(user_id:UUID, db:Session):
+    return db.query(models.Terreiro).filter(user_id == models.Terreiro.leader).all()
 # Auth
 def create_auth(db: Session, auth: schemas.AuthCreate):
 
@@ -110,7 +111,7 @@ def authentication(db: Session, auth: schemas.Authentication):
     if db_auth and verify_password(auth.password, db_auth.password_hash):
         return db_auth.user
     raise HTTPException(status_code=401, detail="Email ou Senha incorretos")
-    
+
     
 # Terreiro
 def create_terreiro(db: Session, terreiro: schemas.TerreiroCreate):

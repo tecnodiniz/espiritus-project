@@ -45,6 +45,9 @@ def get_users(db: Session = Depends(database.get_db)):
 def get_user(user_id:UUID, db: Session = Depends(database.get_db)):
     return crud.get_user(user_id, db)
 
+@app.get("/user/terreiros/{user_id}", response_model=list[schemas.TerreiroBasicResponse])
+def get_user_terreiros(user_id:UUID, db:Session = Depends(database.get_db)):
+    return crud.get_user_terreiros(user_id, db)
 # PATH USER
 @app.patch("/users/{user_id}", response_model=dict)
 def update_user(user_id: UUID, user: schemas.UserUpadte, db: Session=Depends(database.get_db)):
