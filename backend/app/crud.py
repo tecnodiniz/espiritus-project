@@ -203,5 +203,22 @@ def create_agentTerreiro(agent: schemas.AgentTerreiroCreate, db:Session):
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Erro interno {e}")
     
+def update_agentTerreiro(agent_id: UUID, agent:schemas.AgenteTerreiroUpdate, db:Session):
+    db_agent = db.query(models.AgentTerreiro).filter(models.AgentTerreiro.id==agent_id).first()
+    if not db_agent:
+        raise HTTPException(status_code=404, detail="Ligação não encontrada")
+    
+    try:
+        db_agent.status=models.AgenteStatusEnum(agent.status)
+        db.add(db_agent)
+        db.commit()
+        db.refresh(db_agent)
+
+        return {"mensagem":f"atualização de usuário: {db_agent.status} "}
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Erro interno {e}")
+
+    
 def get_agentTerreiro(db:Session):
     return db.query(models.AgentTerreiro).all()

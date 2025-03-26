@@ -104,7 +104,9 @@ def get_agentsTerreiro(db:Session=Depends(database.get_db)):
     return crud.get_agentTerreiro(db)
 
 
-
+@app.patch("/agent_terreiro/{agent_id}",response_model=dict)
+def update_agentTerreiro(agent: schemas.AgenteTerreiroUpdate, agent_id: UUID, db: Session=Depends(database.get_db)):
+    return crud.update_agentTerreiro(agent_id,agent,db)
 
 
 # END POINTS FOR TEST, ONLY FOR DEVELOPE MODE

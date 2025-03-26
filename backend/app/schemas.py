@@ -96,6 +96,11 @@ class AgentTerreiroResponse(BaseModel):
     class Config:
         from_attributes = True
 
+class AgenteTerreiroUpdate(BaseModel):
+    status: str
+
+
+
 class AgentTerreiroBasicResponse(BaseModel):
     role: Optional["TerreiroRoleResponse"] = None
     terreiro: Optional["TerreiroBasicResponse"] = None
