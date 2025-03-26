@@ -15,6 +15,10 @@ import {
   Heart,
   Navigation2,
   Search,
+  Hourglass,
+  Circle,
+  X,
+  Check,
 } from "lucide-react";
 
 import { useTerreiro } from "@/hooks/use-terreiro";
@@ -35,12 +39,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useProfile } from "@/context/ProfileContext";
 
 export default function TerreiroPage() {
   const { id } = useParams();
   const { terreiro } = useTerreiro(id);
   const [query, setQuery] = useState("");
   const [filteredUser, setFilteredUser] = useState<TerreiroAgent[]>([]);
+  const { profile } = useProfile();
 
   useEffect(() => {
     console.log(id);
@@ -144,6 +150,16 @@ export default function TerreiroPage() {
                   <Users className="mr-2 h-4 w-4" />
                   Membros
                 </TabsTrigger>
+                {profile?.id == terreiro?.user.id && (
+                  <TabsTrigger
+                    value="pendentes"
+                    className="data-[state=active]:text-purple-700 data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-purple-700 rounded-none h-14 px-4"
+                  >
+                    <Hourglass className="mr-2 h-4 w-4" />
+                    Pendentes
+                  </TabsTrigger>
+                )}
+
                 <TabsTrigger
                   value="fotos"
                   className="data-[state=active]:text-purple-700 data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-purple-700 rounded-none h-14 px-4"
@@ -338,6 +354,119 @@ export default function TerreiroPage() {
                                 <Badge className="mt-1 bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 hover:bg-purple-200">
                                   {agent.role.position}
                                 </Badge>
+                              </div>
+                            </div>
+                          </CardHeader>
+
+                          <CardContent className="pt-2">
+                            <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+                              {agent.role.description ||
+                                "Sem descrição disponível."}
+                            </p>
+                          </CardContent>
+
+                          <CardFooter className="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-800">
+                            <CardDescription className="text-gray-500 dark:text-gray-400">
+                              Membro desde 2020
+                            </CardDescription>
+                            <Button
+                              variant="ghost"
+                              className="text-purple-700 hover:text-purple-900 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-purple-900/20 p-0 h-auto"
+                            >
+                              <Link
+                                to={"/users/" + agent.user.id}
+                                className="flex items-center"
+                              >
+                                Visitar Perfil
+                              </Link>
+                            </Button>
+                          </CardFooter>
+                        </Card>
+                      )
+                  )}
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent
+              value="pendentes"
+              className="p-4 md:p-8 focus:outline-none"
+            >
+              <div className="grid grid-cols-1 gap-6">
+                <div className="flex flex-col md:flex-row justify-between md:items-center">
+                  <h2 className="text-2xl font-bold text-purple-900 dark:text-white mb-4 md:mb-0">
+                    Pendentes
+                  </h2>
+
+                  {terreiro && terreiro.agents.length > 0 && (
+                    <div className="relative w-full md:w-72">
+                      <Input
+                        type="text"
+                        placeholder="Pesquisar participantes"
+                        onChange={(e) => setQuery(e.target.value)}
+                        className="pl-10 pr-4 py-2 rounded-full border-gray-300 dark:border-gray-700 focus:ring-purple-500 focus:border-purple-500"
+                      />
+                      <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                        <Search className="h-5 w-5" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {terreiro && terreiro.agents.length === 0 && (
+                  <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800 text-center">
+                    <Users className="mx-auto h-12 w-12 text-purple-400 mb-3" />
+                    <p className="text-purple-800 dark:text-purple-300 text-lg font-medium">
+                      Não há participantes registrados
+                    </p>
+                    <p className="text-purple-600 dark:text-purple-400 mt-2">
+                      Este terreiro ainda não tem membros cadastrados na
+                      plataforma.
+                    </p>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {filteredUser.map(
+                    (agent, index) =>
+                      agent.status === "pendente" && (
+                        <Card
+                          key={index}
+                          className="overflow-hidden border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all duration-300 rounded-xl"
+                        >
+                          <CardHeader className="pb-2 ">
+                            <div className="flex justify-between">
+                              <div className="flex items-center">
+                                <Avatar className="h-14 w-14 border-2 border-purple-100 dark:border-purple-800">
+                                  <AvatarImage src="" />
+                                  <AvatarFallback className="bg-purple-700 text-white font-bold">
+                                    {getInitials(agent.user.name)}
+                                  </AvatarFallback>
+                                </Avatar>
+                                <div className="ml-4">
+                                  <CardTitle className="text-lg text-purple-900 dark:text-white">
+                                    {agent.user.name}
+                                  </CardTitle>
+                                  <Badge className="mt-1 bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 hover:bg-purple-200">
+                                    {agent.role.position}
+                                  </Badge>
+                                </div>
+                              </div>
+                              <div>
+                                <Button
+                                  variant="ghost"
+                                  className="cursor-pointer"
+                                  size="sm"
+                                >
+                                  <X />
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  className="cursor-pointer"
+                                  size="sm"
+                                >
+                                  <Check />
+                                </Button>
                               </div>
                             </div>
                           </CardHeader>
