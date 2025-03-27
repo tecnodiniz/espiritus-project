@@ -40,27 +40,38 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useProfile } from "@/context/ProfileContext";
 import { terreiroService } from "@/services/terreiroService";
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/hooks/use-toast";
 
 export default function TerreiroPage() {
   const { id } = useParams();
+  const { toast } = useToast();
   const { terreiro, updateTerreiro } = useTerreiro(id);
   const [query, setQuery] = useState("");
   const [filteredUser, setFilteredUser] = useState<TerreiroAgent[]>([]);
   const { profile } = useProfile();
 
-  const activeUserTerreiro = async (id: string) => {
+  const updateUserTerreiro = async (
+    id: string,
+    status: "ativo" | "pendente" | "inativo"
+  ) => {
     try {
-      const result = await terreiroService.updateUserStatus(id, {
-        status: "ativo",
+      const response = await terreiroService.updateUserStatus(id, {
+        status: status,
       });
-      if (result.status === 200) {
-        console.log(result.data);
+      if (response.status === 200) {
+        toast({
+          description: `Terreiro Atualizado! Usuário está '${status}'`,
+          action: <ToastAction altText="OK">Ok</ToastAction>,
+        });
+
         updateTerreiro();
       }
     } catch (err) {
       console.log(err);
     }
   };
+
   useEffect(() => {
     if (terreiro?.agents) {
       setFilteredUser(
@@ -351,21 +362,35 @@ export default function TerreiroPage() {
                           key={index}
                           className="overflow-hidden border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all duration-300 rounded-xl"
                         >
-                          <CardHeader className="pb-2">
-                            <div className="flex items-center">
-                              <Avatar className="h-14 w-14 border-2 border-purple-100 dark:border-purple-800">
-                                <AvatarImage src="" />
-                                <AvatarFallback className="bg-purple-700 text-white font-bold">
-                                  {getInitials(agent.user.name)}
-                                </AvatarFallback>
-                              </Avatar>
-                              <div className="ml-4">
-                                <CardTitle className="text-lg text-purple-900 dark:text-white">
-                                  {agent.user.name}
-                                </CardTitle>
-                                <Badge className="mt-1 bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 hover:bg-purple-200">
-                                  {agent.role.position}
-                                </Badge>
+                          <CardHeader className="pb-2 ">
+                            <div className="flex justify-between">
+                              <div className="flex items-center">
+                                <Avatar className="h-14 w-14 border-2 border-purple-100 dark:border-purple-800">
+                                  <AvatarImage src="" />
+                                  <AvatarFallback className="bg-purple-700 text-white font-bold">
+                                    {getInitials(agent.user.name)}
+                                  </AvatarFallback>
+                                </Avatar>
+                                <div className="ml-4">
+                                  <CardTitle className="text-lg text-purple-900 dark:text-white">
+                                    {agent.user.name}
+                                  </CardTitle>
+                                  <Badge className="mt-1 bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 hover:bg-purple-200">
+                                    {agent.role.position}
+                                  </Badge>
+                                </div>
+                              </div>
+                              <div>
+                                <Button
+                                  variant="ghost"
+                                  className="cursor-pointer"
+                                  size="sm"
+                                  onClick={() =>
+                                    updateUserTerreiro(agent.id, "pendente")
+                                  }
+                                >
+                                  <X />
+                                </Button>
                               </div>
                             </div>
                           </CardHeader>
@@ -476,7 +501,9 @@ export default function TerreiroPage() {
                                   variant="ghost"
                                   className="cursor-pointer"
                                   size="sm"
-                                  onClick={() => activeUserTerreiro(agent.id)}
+                                  onClick={() =>
+                                    updateUserTerreiro(agent.id, "ativo")
+                                  }
                                 >
                                   <Check />
                                 </Button>

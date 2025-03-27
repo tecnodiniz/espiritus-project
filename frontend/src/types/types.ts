@@ -18,12 +18,13 @@ export type Role = {
   position: string;
   description: string;
 };
+
 export type TerreiroAgent = {
   id: string;
   role: Role;
   user: User;
   terreiro: Terreiro;
-  status: string;
+  status: "ativo" | "pendente" | "inativo";
 };
 export type Terreiro = {
   id: string;
