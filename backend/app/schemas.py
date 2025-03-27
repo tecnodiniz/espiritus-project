@@ -97,14 +97,12 @@ class AgentTerreiroResponse(BaseModel):
         from_attributes = True
 
 class AgenteTerreiroUpdate(BaseModel):
-    status: str
-
-
+    status: AgenteStatus
 
 class AgentTerreiroBasicResponse(BaseModel):
     role: Optional["TerreiroRoleResponse"] = None
     terreiro: Optional["TerreiroBasicResponse"] = None
-
+    status: Optional["AgenteStatus"] = None
     class Config:
         from_attributes = True
 

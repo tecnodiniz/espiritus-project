@@ -24,7 +24,7 @@ import { NavBar, NavBarLink } from "./NavBar";
 
 import { Button } from "./ui/button";
 import { useProfile } from "@/context/ProfileContext";
-import { getInitials } from "@/utility/utils";
+import { getInitials } from "@/lib/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,

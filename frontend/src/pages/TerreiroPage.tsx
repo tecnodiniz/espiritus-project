@@ -18,10 +18,11 @@ import {
   Hourglass,
   X,
   Check,
+  UserPlus,
 } from "lucide-react";
 
 import { useTerreiro } from "@/hooks/use-terreiro";
-import { getInitials } from "@/utility/utils";
+import { getInitials } from "@/lib/utils";
 import { TerreiroAgent } from "@/types/types";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -42,15 +43,39 @@ import { useProfile } from "@/context/ProfileContext";
 import { terreiroService } from "@/services/terreiroService";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { DialogClose, DialogTitle } from "@radix-ui/react-dialog";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useRoles } from "@/hooks/use-roles";
 
 export default function TerreiroPage() {
   const { id } = useParams();
+  const { roles } = useRoles();
   const { toast } = useToast();
   const { terreiro, updateTerreiro } = useTerreiro(id);
   const [query, setQuery] = useState("");
+  const [selectedRole, setSelectedRole] = useState<string | null>(null);
   const [filteredUser, setFilteredUser] = useState<TerreiroAgent[]>([]);
   const { profile } = useProfile();
 
+  const [userAgentOnTerreiro, setUserAgentOnTerreiro] = useState<
+    "ativo" | "pendente" | "inativo" | null
+  >(null);
   const updateUserTerreiro = async (
     id: string,
     status: "ativo" | "pendente" | "inativo"
@@ -70,6 +95,18 @@ export default function TerreiroPage() {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  useEffect(() => {
+    if (terreiro) {
+      setUserAgentOnTerreiro(
+        profile?.agents.find((a) => a.terreiro.id == terreiro.id)?.status ||
+          null
+      );
+    }
+  }, [terreiro]);
+  const sendPending = async () => {
+    console.log(selectedRole);
   };
 
   useEffect(() => {
@@ -145,6 +182,68 @@ export default function TerreiroPage() {
               <Navigation2 className="mr-2 h-4 w-4" />
               Como chegar
             </Button>
+            {!terreiro?.agents.some((e) => e.user.id == profile?.id) ? (
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    className="flex-1 md:flex-none rounded-full shadow-md"
+                    variant="secondary"
+                  >
+                    <UserPlus className="mr-2 h-4 w-4" />
+                    Vincular ao Terreiro
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Vincular ao Terreiro</DialogTitle>
+                    <DialogDescription>
+                      Uma solicitação será enviada ao dono do terreiro
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex items-center space-x-2">
+                    <div className="grid flex-1 gap-2">
+                      <Label htmlFor="link" className="sr-only">
+                        Cargos
+                      </Label>
+                      <Select onValueChange={setSelectedRole}>
+                        <SelectTrigger className="w-[180px]">
+                          <SelectValue placeholder="Selecione um cargo" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectLabel>Cargos</SelectLabel>
+                            {roles.map((role, index) => (
+                              <SelectItem value={role.id} key={index}>
+                                {role.position}
+                              </SelectItem>
+                            ))}
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <DialogClose asChild>
+                      <Button
+                        size="sm"
+                        className="px-3"
+                        onClick={sendPending}
+                        disabled={!selectedRole}
+                      >
+                        Enviar
+                      </Button>
+                    </DialogClose>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            ) : (
+              <Button
+                className="flex-1 md:flex-none rounded-full shadow-md"
+                variant="ghost"
+                disabled
+              >
+                {userAgentOnTerreiro}
+              </Button>
+            )}
           </div>
         </div>
 

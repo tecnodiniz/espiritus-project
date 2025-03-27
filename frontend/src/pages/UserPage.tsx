@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 
 import { useUser } from "@/hooks/use-user";
-import { formatDate, getInitials } from "@/utility/utils";
+import { formatDate, getInitials } from "@/lib/utils";
 
 import {
   Card,

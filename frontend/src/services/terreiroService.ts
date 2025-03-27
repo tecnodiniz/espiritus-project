@@ -24,4 +24,9 @@ export const terreiroService = {
     const response = await api.patch("/agent_terreiro/" + id, data);
     return response;
   },
+
+  async getRoles() {
+    const respone = await api.get("terreiro_roles");
+    return respone;
+  },
 };
