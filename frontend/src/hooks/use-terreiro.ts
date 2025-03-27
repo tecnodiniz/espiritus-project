@@ -39,5 +39,11 @@ export function useTerreiro(id: any) {
     }
     if (id) fetchTerreiroById();
   }, [id]);
-  return { terreiro };
+
+  async function updateTerreiro() {
+    const data = await terreiroService.getTerreirosById(id);
+    setTerreiro(data);
+  }
+
+  return { terreiro, updateTerreiro };
 }

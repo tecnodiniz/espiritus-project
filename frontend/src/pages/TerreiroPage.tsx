@@ -16,7 +16,6 @@ import {
   Navigation2,
   Search,
   Hourglass,
-  Circle,
   X,
   Check,
 } from "lucide-react";
@@ -40,16 +39,29 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useProfile } from "@/context/ProfileContext";
+import { terreiroService } from "@/services/terreiroService";
 
 export default function TerreiroPage() {
   const { id } = useParams();
-  const { terreiro } = useTerreiro(id);
+  const { terreiro, updateTerreiro } = useTerreiro(id);
   const [query, setQuery] = useState("");
   const [filteredUser, setFilteredUser] = useState<TerreiroAgent[]>([]);
   const { profile } = useProfile();
 
+  const activeUserTerreiro = async (id: string) => {
+    try {
+      const result = await terreiroService.updateUserStatus(id, {
+        status: "ativo",
+      });
+      if (result.status === 200) {
+        console.log(result.data);
+        updateTerreiro();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
-    console.log(id);
     if (terreiro?.agents) {
       setFilteredUser(
         query.trim()
@@ -464,6 +476,7 @@ export default function TerreiroPage() {
                                   variant="ghost"
                                   className="cursor-pointer"
                                   size="sm"
+                                  onClick={() => activeUserTerreiro(agent.id)}
                                 >
                                   <Check />
                                 </Button>

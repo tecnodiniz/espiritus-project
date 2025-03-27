@@ -19,4 +19,9 @@ export const terreiroService = {
     const response = await api.post("/terreiros/", data);
     return response;
   },
+
+  async updateUserStatus(id: string, data: any) {
+    const response = await api.patch("/agent_terreiro/" + id, data);
+    return response;
+  },
 };
