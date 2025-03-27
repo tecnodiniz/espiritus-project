@@ -326,33 +326,41 @@ export default function TerreiroPage() {
                     Membros
                   </h2>
 
-                  {terreiro && terreiro.agents.length > 0 && (
-                    <div className="relative w-full md:w-72">
-                      <Input
-                        type="text"
-                        placeholder="Pesquisar participantes"
-                        onChange={(e) => setQuery(e.target.value)}
-                        className="pl-10 pr-4 py-2 rounded-full border-gray-300 dark:border-gray-700 focus:ring-purple-500 focus:border-purple-500"
-                      />
-                      <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                        <Search className="h-5 w-5" />
+                  {terreiro &&
+                    terreiro.agents.reduce(
+                      (acc, agent) => acc + (agent.status == "ativo" ? 1 : 0),
+                      0
+                    ) > 0 && (
+                      <div className="relative w-full md:w-72">
+                        <Input
+                          type="text"
+                          placeholder="Pesquisar participantes"
+                          onChange={(e) => setQuery(e.target.value)}
+                          className="pl-10 pr-4 py-2 rounded-full border-gray-300 dark:border-gray-700 focus:ring-purple-500 focus:border-purple-500"
+                        />
+                        <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                          <Search className="h-5 w-5" />
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
                 </div>
 
-                {terreiro && terreiro.agents.length === 0 && (
-                  <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800 text-center">
-                    <Users className="mx-auto h-12 w-12 text-purple-400 mb-3" />
-                    <p className="text-purple-800 dark:text-purple-300 text-lg font-medium">
-                      Não há participantes registrados
-                    </p>
-                    <p className="text-purple-600 dark:text-purple-400 mt-2">
-                      Este terreiro ainda não tem membros cadastrados na
-                      plataforma.
-                    </p>
-                  </div>
-                )}
+                {terreiro &&
+                  terreiro.agents.reduce(
+                    (acc, agent) => acc + (agent.status == "ativo" ? 1 : 0),
+                    0
+                  ) == 0 && (
+                    <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800 text-center">
+                      <Users className="mx-auto h-12 w-12 text-purple-400 mb-3" />
+                      <p className="text-purple-800 dark:text-purple-300 text-lg font-medium">
+                        Não há participantes registrados
+                      </p>
+                      <p className="text-purple-600 dark:text-purple-400 mt-2">
+                        Este terreiro ainda não tem membros cadastrados na
+                        plataforma.
+                      </p>
+                    </div>
+                  )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {filteredUser.map(
@@ -380,18 +388,21 @@ export default function TerreiroPage() {
                                   </Badge>
                                 </div>
                               </div>
-                              <div>
-                                <Button
-                                  variant="ghost"
-                                  className="cursor-pointer"
-                                  size="sm"
-                                  onClick={() =>
-                                    updateUserTerreiro(agent.id, "pendente")
-                                  }
-                                >
-                                  <X />
-                                </Button>
-                              </div>
+
+                              {profile?.id == terreiro?.user.id && (
+                                <div>
+                                  <Button
+                                    variant="ghost"
+                                    className="cursor-pointer"
+                                    size="sm"
+                                    onClick={() =>
+                                      updateUserTerreiro(agent.id, "pendente")
+                                    }
+                                  >
+                                    <X />
+                                  </Button>
+                                </div>
+                              )}
                             </div>
                           </CardHeader>
 
@@ -435,33 +446,42 @@ export default function TerreiroPage() {
                     Pendentes
                   </h2>
 
-                  {terreiro && terreiro.agents.length > 0 && (
-                    <div className="relative w-full md:w-72">
-                      <Input
-                        type="text"
-                        placeholder="Pesquisar participantes"
-                        onChange={(e) => setQuery(e.target.value)}
-                        className="pl-10 pr-4 py-2 rounded-full border-gray-300 dark:border-gray-700 focus:ring-purple-500 focus:border-purple-500"
-                      />
-                      <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                        <Search className="h-5 w-5" />
+                  {terreiro &&
+                    terreiro.agents.reduce(
+                      (acc, agent) =>
+                        acc + (agent.status == "pendente" ? 1 : 0),
+                      0
+                    ) > 0 && (
+                      <div className="relative w-full md:w-72">
+                        <Input
+                          type="text"
+                          placeholder="Pesquisar participantes"
+                          onChange={(e) => setQuery(e.target.value)}
+                          className="pl-10 pr-4 py-2 rounded-full border-gray-300 dark:border-gray-700 focus:ring-purple-500 focus:border-purple-500"
+                        />
+                        <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                          <Search className="h-5 w-5" />
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
                 </div>
 
-                {terreiro && terreiro.agents.length === 0 && (
-                  <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800 text-center">
-                    <Users className="mx-auto h-12 w-12 text-purple-400 mb-3" />
-                    <p className="text-purple-800 dark:text-purple-300 text-lg font-medium">
-                      Não há participantes registrados
-                    </p>
-                    <p className="text-purple-600 dark:text-purple-400 mt-2">
-                      Este terreiro ainda não tem membros cadastrados na
-                      plataforma.
-                    </p>
-                  </div>
-                )}
+                {terreiro &&
+                  terreiro.agents.reduce(
+                    (acc, agent) => acc + (agent.status == "pendente" ? 1 : 0),
+                    0
+                  ) == 0 && (
+                    <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800 text-center">
+                      <Users className="mx-auto h-12 w-12 text-purple-400 mb-3" />
+                      <p className="text-purple-800 dark:text-purple-300 text-lg font-medium">
+                        Nenhum membro pendente!
+                      </p>
+                      <p className="text-purple-600 dark:text-purple-400 mt-2">
+                        Não há aprovações pendentes. Aproveite essa harmonia e
+                        continue fortalecendo sua comunidade! ✨
+                      </p>
+                    </div>
+                  )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {filteredUser.map(
