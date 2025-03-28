@@ -35,7 +35,10 @@ export const ProfileProvider = ({ children }: ProfileProviderProps) => {
 
   useEffect(() => {
     const storageUser = localStorage.getItem("user");
-    if (storageUser) setProfile(JSON.parse(storageUser));
+    if (storageUser) {
+      setProfile(JSON.parse(storageUser));
+      setIsAuthenticate(true);
+    }
   }, []);
 
   const userLogin = (user: User) => {

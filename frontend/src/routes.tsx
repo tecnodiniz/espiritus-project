@@ -9,6 +9,8 @@ import { CreateTerreiro } from "./pages/CreateTerreiro";
 
 import CreateUser from "./pages/CreateUser";
 import { UserTerreiros } from "./pages/UserTerreiros";
+import Introduction from "./pages/Introduction";
+import PricePage from "./pages/PricePage";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
+      { path: "/prices", element: <PricePage /> },
       {
         path: "terreiros",
         children: [
@@ -33,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/introduction",
+    element: <Introduction />,
   },
   { path: "/register", element: <CreateUser /> },
   {

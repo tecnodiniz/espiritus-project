@@ -18,13 +18,14 @@ import { Terreiro } from "@/types/types";
 import { terreiroService } from "@/services/terreiroService";
 
 export function UserTerreiros() {
-  const { profile } = useProfile();
+  const { profile, isAuthenticate } = useProfile();
   const [terreiros, setTerreiros] = useState<Terreiro[]>([]);
+  const navigate = useNavigate();
 
   const id = profile?.id || "";
 
   useEffect(() => {
-    if (!id) return;
+    if (!isAuthenticate) navigate("/login");
     async function fetchUserTerreiros() {
       try {
         const response = await terreiroService.getUserTerreiros(id);

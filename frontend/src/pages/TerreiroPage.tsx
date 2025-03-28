@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import {
   ChevronLeft,
@@ -72,11 +72,38 @@ export default function TerreiroPage() {
   const [query, setQuery] = useState("");
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
   const [filteredUser, setFilteredUser] = useState<TerreiroAgent[]>([]);
-  const { profile } = useProfile();
-
+  const { profile, isAuthenticate } = useProfile();
+  const navigate = useNavigate();
   const [userAgentOnTerreiro, setUserAgentOnTerreiro] = useState<
     "ativo" | "pendente" | "inativo" | null
   >(null);
+
+  useEffect(() => {
+    if (!isAuthenticate) navigate("/login");
+  }, []);
+
+  useEffect(() => {
+    if (terreiro) {
+      setUserAgentOnTerreiro(
+        terreiro?.agents.find((a) => a.user.id == profile?.id)?.status || null
+      );
+    }
+  }, [terreiro]);
+
+  useEffect(() => {
+    if (terreiro?.agents) {
+      setFilteredUser(
+        query.trim()
+          ? terreiro.agents.filter((terreiroAgent) =>
+              terreiroAgent.user.name
+                .toLowerCase()
+                .includes(query.toLowerCase())
+            )
+          : terreiro.agents
+      );
+    }
+  }, [query, terreiro]);
+
   const updateUserTerreiro = async (
     id: string,
     status: "ativo" | "pendente" | "inativo"
@@ -97,15 +124,6 @@ export default function TerreiroPage() {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    if (terreiro) {
-      setUserAgentOnTerreiro(
-        terreiro?.agents.find((a) => a.user.id == profile?.id)?.status || null
-      );
-    }
-  }, [terreiro]);
-
   const sendPending = async () => {
     const payload = {
       id_terreiro_role: selectedRole,
@@ -141,20 +159,6 @@ export default function TerreiroPage() {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    if (terreiro?.agents) {
-      setFilteredUser(
-        query.trim()
-          ? terreiro.agents.filter((terreiroAgent) =>
-              terreiroAgent.user.name
-                .toLowerCase()
-                .includes(query.toLowerCase())
-            )
-          : terreiro.agents
-      );
-    }
-  }, [query, terreiro]);
 
   return (
     <div className="container max-w-[1280px] mx-auto px-4 py-6">

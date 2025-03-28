@@ -83,7 +83,7 @@ const Layout = () => {
               </Link>
 
               <nav className="flex items-center space-x-8">
-                <NavBarLink to="/">Inicio</NavBarLink>
+                <NavBarLink to="/prices">Preços</NavBarLink>
                 <NavBarLink to="/terreiros">Terreiros</NavBarLink>
                 <NavBarLink to="/terreiros">Mediums</NavBarLink>
                 <NavBarLink to="/terreiros">Eventos</NavBarLink>
