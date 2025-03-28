@@ -33,4 +33,9 @@ export const terreiroService = {
     const response = await api.post("agent_terreiro", data);
     return response;
   },
+
+  async removeAgentTerreiro(id: string) {
+    const response = await api.delete("/agent_terreiro/" + id);
+    return response;
+  },
 };

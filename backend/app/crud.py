@@ -219,6 +219,18 @@ def update_agentTerreiro(agent_id: UUID, agent:schemas.AgenteTerreiroUpdate, db:
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Erro interno {e}")
 
+def delete_agenteTerreiro(agent_id: UUID, db:Session):
+    db_agent = db.query(models.AgentTerreiro).filter(models.AgentTerreiro.id == agent_id).first()
+    if not db_agent:
+        raise HTTPException(status_code=404, detail="Ligação não encontrada")
+    
+    try:
+        db.delete(db_agent)
+        db.commit()
+        return {"mensagem":"Usuário removido do terreiro"}
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Erro interno {e}")
     
 def get_agentTerreiro(db:Session):
     return db.query(models.AgentTerreiro).all()

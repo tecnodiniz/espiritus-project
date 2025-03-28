@@ -99,6 +99,7 @@ class AgentTerreiroResponse(BaseModel):
 class AgenteTerreiroUpdate(BaseModel):
     status: AgenteStatus
 
+
 class AgentTerreiroBasicResponse(BaseModel):
     role: Optional["TerreiroRoleResponse"] = None
     terreiro: Optional["TerreiroBasicResponse"] = None

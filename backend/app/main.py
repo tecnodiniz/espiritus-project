@@ -103,11 +103,16 @@ def create_agentTerreiro(agent: schemas.AgentTerreiroCreate, db:Session=Depends(
 def get_agentsTerreiro(db:Session=Depends(database.get_db)):
     return crud.get_agentTerreiro(db)
 
-
+# PATCH AGENT TERREIRO
 @app.patch("/agent_terreiro/{agent_id}",response_model=dict)
 def update_agentTerreiro(agent: schemas.AgenteTerreiroUpdate, agent_id: UUID, db: Session=Depends(database.get_db)):
     return crud.update_agentTerreiro(agent_id,agent,db)
 
+# DELETE AGENT TERREIRO
+
+@app.delete("/agent_terreiro/{agent_id}", response_model=dict)
+def delete_agentTerreiro(agent_id: UUID, db:Session=Depends(database.get_db)):
+    return crud.delete_agenteTerreiro(agent_id,db)
 
 # END POINTS FOR TEST, ONLY FOR DEVELOPE MODE
 
