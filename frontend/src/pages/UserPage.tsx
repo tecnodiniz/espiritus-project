@@ -217,64 +217,72 @@ export default function UserPage() {
                   Terreiros
                 </h2>
 
-                {user?.agents && user.agents.length === 0 && (
-                  <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800 text-center">
-                    <Building className="mx-auto h-12 w-12 text-purple-400 mb-3" />
-                    <p className="text-purple-800 dark:text-purple-300 text-lg font-medium">
-                      Nenhum terreiro associado
-                    </p>
-                    <p className="text-purple-600 dark:text-purple-400 mt-2">
-                      Este usuário ainda não está associado a nenhum terreiro.
-                    </p>
-                  </div>
-                )}
+                {user?.agents &&
+                  user.agents.reduce(
+                    (acc, agent) => acc + (agent.status == "ativo" ? 1 : 0),
+                    0
+                  ) == 0 && (
+                    <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800 text-center">
+                      <Building className="mx-auto h-12 w-12 text-purple-400 mb-3" />
+                      <p className="text-purple-800 dark:text-purple-300 text-lg font-medium">
+                        Nenhum terreiro associado
+                      </p>
+                      <p className="text-purple-600 dark:text-purple-400 mt-2">
+                        Este usuário ainda não está associado a nenhum terreiro.
+                      </p>
+                    </div>
+                  )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {user?.agents?.map((agent, index) => (
-                    <Card
-                      key={index}
-                      className="overflow-hidden border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all duration-300 rounded-xl"
-                    >
-                      <div className="relative w-full h-40 bg-gradient-to-br from-purple-800 to-purple-600 dark:from-purple-900 dark:to-gray-800 overflow-hidden">
-                        <div className="absolute inset-0 opacity-20 bg-[url('https://source.unsplash.com/random/300x200/?temple')] bg-center bg-cover"></div>
-                      </div>
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-lg text-purple-900 dark:text-white">
-                          {agent.terreiro.name}
-                        </CardTitle>
-                        <CardDescription className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
-                          <MapPin className="h-3.5 w-3.5 text-gray-500 dark:text-gray-400" />
-                          {agent.terreiro.address}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent className="pb-2">
-                        <Badge className="bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 hover:bg-purple-200">
-                          {agent.role.position}
-                        </Badge>
-                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                          {agent.role.description ||
-                            `Atua como ${agent.role.position} neste terreiro.`}
-                        </p>
-                      </CardContent>
-                      <CardFooter className="flex flex-col sm:flex-row gap-2 justify-between pt-2">
-                        <Button className="w-full sm:w-auto rounded-full bg-purple-700 hover:bg-purple-800 text-white">
-                          <Link
-                            to={"/terreiros/" + agent.terreiro.id}
-                            className="flex items-center justify-center w-full"
-                          >
-                            <Heart className="mr-2 h-4 w-4" />
-                            Seguir
-                          </Link>
-                        </Button>
-                        <Button
-                          className="w-full sm:w-auto rounded-full border-purple-700 text-purple-800 hover:bg-purple-50 dark:border-purple-700 dark:text-purple-400 dark:hover:bg-gray-800/50"
-                          variant="outline"
+                    <>
+                      {agent.status == "ativo" && (
+                        <Card
+                          key={index}
+                          className="overflow-hidden border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all duration-300 rounded-xl"
                         >
-                          <Navigation2 className="mr-2 h-4 w-4" />
-                          Como chegar
-                        </Button>
-                      </CardFooter>
-                    </Card>
+                          <div className="relative w-full h-40 bg-gradient-to-br from-purple-800 to-purple-600 dark:from-purple-900 dark:to-gray-800 overflow-hidden">
+                            <div className="absolute inset-0 opacity-20 bg-[url('https://source.unsplash.com/random/300x200/?temple')] bg-center bg-cover"></div>
+                          </div>
+                          <CardHeader className="pb-2">
+                            <CardTitle className="text-lg text-purple-900 dark:text-white">
+                              {agent.terreiro.name}
+                            </CardTitle>
+                            <CardDescription className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+                              <MapPin className="h-3.5 w-3.5 text-gray-500 dark:text-gray-400" />
+                              {agent.terreiro.address}
+                            </CardDescription>
+                          </CardHeader>
+                          <CardContent className="pb-2">
+                            <Badge className="bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 hover:bg-purple-200">
+                              {agent.role.position}
+                            </Badge>
+                            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+                              {agent.role.description ||
+                                `Atua como ${agent.role.position} neste terreiro.`}
+                            </p>
+                          </CardContent>
+                          <CardFooter className="flex flex-col sm:flex-row gap-2 justify-between pt-2">
+                            <Button className="w-full sm:w-auto rounded-full bg-purple-700 hover:bg-purple-800 text-white">
+                              <Link
+                                to={"/terreiros/" + agent.terreiro.id}
+                                className="flex items-center justify-center w-full"
+                              >
+                                <Heart className="mr-2 h-4 w-4" />
+                                Seguir
+                              </Link>
+                            </Button>
+                            <Button
+                              className="w-full sm:w-auto rounded-full border-purple-700 text-purple-800 hover:bg-purple-50 dark:border-purple-700 dark:text-purple-400 dark:hover:bg-gray-800/50"
+                              variant="outline"
+                            >
+                              <Navigation2 className="mr-2 h-4 w-4" />
+                              Como chegar
+                            </Button>
+                          </CardFooter>
+                        </Card>
+                      )}
+                    </>
                   ))}
                 </div>
               </div>

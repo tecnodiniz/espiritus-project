@@ -29,4 +29,8 @@ export const terreiroService = {
     const respone = await api.get("terreiro_roles");
     return respone;
   },
+  async postAgentTerreiro(data: any) {
+    const response = await api.post("agent_terreiro", data);
+    return response;
+  },
 };

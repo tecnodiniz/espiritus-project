@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import {
@@ -100,13 +100,29 @@ export default function TerreiroPage() {
   useEffect(() => {
     if (terreiro) {
       setUserAgentOnTerreiro(
-        profile?.agents.find((a) => a.terreiro.id == terreiro.id)?.status ||
-          null
+        terreiro?.agents.find((a) => a.user.id == profile?.id)?.status || null
       );
     }
   }, [terreiro]);
+
   const sendPending = async () => {
-    console.log(selectedRole);
+    const payload = {
+      id_terreiro_role: selectedRole,
+      id_terreiro: terreiro?.id,
+      id_user: profile?.id,
+    };
+    try {
+      const response = await terreiroService.postAgentTerreiro(payload);
+      if (response.status === 200) {
+        toast({
+          description: `Solicitação enviada`,
+          action: <ToastAction altText="OK">Ok</ToastAction>,
+        });
+        updateTerreiro();
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -236,13 +252,26 @@ export default function TerreiroPage() {
                 </DialogContent>
               </Dialog>
             ) : (
-              <Button
-                className="flex-1 md:flex-none rounded-full shadow-md"
-                variant="ghost"
-                disabled
-              >
-                {userAgentOnTerreiro}
-              </Button>
+              <>
+                {userAgentOnTerreiro !== "ativo" && (
+                  <Button
+                    className="flex-1 md:flex-none rounded-full shadow-md"
+                    variant="secondary"
+                    disabled
+                  >
+                    solicitação enviada
+                  </Button>
+                )}
+                {userAgentOnTerreiro == "ativo" && (
+                  <Button
+                    className="flex-1 md:flex-none rounded-full shadow-md"
+                    variant="secondary"
+                    disabled
+                  >
+                    Membro Ativo
+                  </Button>
+                )}
+              </>
             )}
           </div>
         </div>
