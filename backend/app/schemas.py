@@ -5,13 +5,17 @@ from pydantic import BaseModel
 from enum import Enum
 
 
+class UserPlan(str, Enum):
+    BASIC = "basic"
+    PREMIUM = "premium"
+    PROFESSIONAL = "professional"
 
 # User
 class UserBase(BaseModel):
     id: Optional[UUID] = None # Remove this on prod
     name: str
     cpf: Optional[str] = None
-    plan: Optional[str] = None
+    plan: Optional[UserPlan] = None
     
 class UserCreate(UserBase):
     pass
@@ -19,7 +23,7 @@ class UserCreate(UserBase):
 class UserUpadte(BaseModel):
     name: Optional[str] = None
     cpf: Optional[str] = None
-    plan: Optional[str] = None
+    plan: Optional[UserPlan] = None
     
 class UserResponse(UserBase):
     id: UUID
@@ -75,9 +79,9 @@ class TerreiroRoleResponse(TerreiroRoleBase):
 
 # Agents
 class AgenteStatus(str, Enum):
-    PENDENTE = "pendente"
-    ATIVO = "ativo"
-    INATIVO = "inativo"
+    PENDING = "pending"
+    ACTIVE = "active"
+    INACTIE = "inactive"
 
 class AgentTerreiroBase(BaseModel):
     id_terreiro_role: UUID

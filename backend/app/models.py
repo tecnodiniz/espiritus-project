@@ -6,10 +6,15 @@ from sqlalchemy.orm import relationship
 import enum
 from sqlalchemy import Enum
 
-class AgenteStatusEnum(enum.Enum):
-    PENDENTE = "pendente"
-    ATIVO = "ativo"
-    INATIVO = "inativo"
+class AgentStatusEnum(enum.Enum):
+    PENDING = "pending"
+    ACTIVE = "active"
+    INACTIVE = "inactive"
+    
+class UserPlanEnum(enum.Enum):
+    BASIC = "basic"
+    PREMIUM = "premium"
+    PROFESSIONAL = "professional"
 
 class User(Base):
     __tablename__ = "users"
@@ -17,7 +22,7 @@ class User(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
     name = Column(String(255), index=True)
     cpf = Column(String(14))
-    plan = Column(String(50), default="basic")
+    plan = Column(Enum(UserPlanEnum, name="user_plan", create_type=True), nullable=False, default=UserPlanEnum.BASIC)
 
     terreiros = relationship("Terreiro", back_populates="user", uselist=True, cascade="all, delete-orphan")
     agents = relationship("AgentTerreiro", back_populates="user", uselist=True, cascade="all, delete-orphan")
@@ -72,7 +77,7 @@ class AgentTerreiro(Base):
     id_terreiro_role = Column(UUID(as_uuid=True), ForeignKey("terreiro_roles.id", ondelete="CASCADE"), nullable=False)
     id_user = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     id_terreiro = Column(UUID(as_uuid=True), ForeignKey("terreiros.id", ondelete="CASCADE"), nullable=False)
-    status = Column(Enum(AgenteStatusEnum, name="agente_status", create_type=True), nullable=False, default=AgenteStatusEnum.PENDENTE)
+    status = Column(Enum(AgentStatusEnum, name="agent_status", create_type=True), nullable=False, default=AgentStatusEnum.PENDING)
 
     __table_args__ = (UniqueConstraint("id_user","id_terreiro", name="uq_user_terreiro"),)
 
