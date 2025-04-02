@@ -24,7 +24,7 @@ import {
 
 import { useTerreiro } from "@/hooks/use-terreiro";
 import { getInitials } from "@/lib/utils";
-import { TerreiroAgent } from "@/types/types";
+import { AgentStatus, TerreiroAgent } from "@/types/types";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -74,8 +74,9 @@ export default function TerreiroPage() {
   const [filteredUser, setFilteredUser] = useState<TerreiroAgent[]>([]);
   const { profile, isAuthenticate } = useProfile();
   const navigate = useNavigate();
+
   const [userAgentOnTerreiro, setUserAgentOnTerreiro] = useState<
-    "ativo" | "pendente" | "inativo" | null
+    AgentStatus.active | AgentStatus.pending | AgentStatus.inactive | null
   >(null);
 
   useEffect(() => {
@@ -106,7 +107,7 @@ export default function TerreiroPage() {
 
   const updateUserTerreiro = async (
     id: string,
-    status: "ativo" | "pendente" | "inativo"
+    status: AgentStatus.active | AgentStatus.inactive | AgentStatus.pending
   ) => {
     try {
       const response = await terreiroService.updateUserStatus(id, {
@@ -274,7 +275,7 @@ export default function TerreiroPage() {
               </Dialog>
             ) : (
               <>
-                {userAgentOnTerreiro == "pendente" && (
+                {userAgentOnTerreiro == AgentStatus.pending && (
                   <Button
                     className="flex-1 md:flex-none rounded-full shadow-md"
                     variant="secondary"
@@ -283,7 +284,7 @@ export default function TerreiroPage() {
                     solicitação enviada
                   </Button>
                 )}
-                {userAgentOnTerreiro == "ativo" && (
+                {userAgentOnTerreiro == AgentStatus.active && (
                   <Button
                     className="flex-1 md:flex-none rounded-full shadow-md"
                     variant="secondary"
@@ -293,7 +294,7 @@ export default function TerreiroPage() {
                   </Button>
                 )}
 
-                {userAgentOnTerreiro == "inativo" && (
+                {userAgentOnTerreiro == AgentStatus.inactive && (
                   <Button
                     className="flex-1 md:flex-none rounded-full shadow-md"
                     variant="secondary"
@@ -496,7 +497,8 @@ export default function TerreiroPage() {
 
                   {terreiro &&
                     terreiro.agents.reduce(
-                      (acc, agent) => acc + (agent.status == "ativo" ? 1 : 0),
+                      (acc, agent) =>
+                        acc + (agent.status == AgentStatus.active ? 1 : 0),
                       0
                     ) > 0 && (
                       <div className="relative w-full md:w-72">
@@ -515,7 +517,8 @@ export default function TerreiroPage() {
 
                 {terreiro &&
                   terreiro.agents.reduce(
-                    (acc, agent) => acc + (agent.status == "ativo" ? 1 : 0),
+                    (acc, agent) =>
+                      acc + (agent.status == AgentStatus.active ? 1 : 0),
                     0
                   ) == 0 && (
                     <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800 text-center">
@@ -533,7 +536,7 @@ export default function TerreiroPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {filteredUser.map(
                     (agent, index) =>
-                      agent.status === "ativo" && (
+                      agent.status === AgentStatus.active && (
                         <Card
                           key={index}
                           className="overflow-hidden border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all duration-300 rounded-xl"
@@ -546,7 +549,10 @@ export default function TerreiroPage() {
                                   className="cursor-pointer"
                                   size="sm"
                                   onClick={() =>
-                                    updateUserTerreiro(agent.id, "inativo")
+                                    updateUserTerreiro(
+                                      agent.id,
+                                      AgentStatus.inactive
+                                    )
                                   }
                                 >
                                   <X />
@@ -619,7 +625,7 @@ export default function TerreiroPage() {
                   {terreiro &&
                     terreiro.agents.reduce(
                       (acc, agent) =>
-                        acc + (agent.status == "pendente" ? 1 : 0),
+                        acc + (agent.status == AgentStatus.pending ? 1 : 0),
                       0
                     ) > 0 && (
                       <div className="relative w-full md:w-72">
@@ -638,7 +644,8 @@ export default function TerreiroPage() {
 
                 {terreiro &&
                   terreiro.agents.reduce(
-                    (acc, agent) => acc + (agent.status == "pendente" ? 1 : 0),
+                    (acc, agent) =>
+                      acc + (agent.status == AgentStatus.pending ? 1 : 0),
                     0
                   ) == 0 && (
                     <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800 text-center">
@@ -656,7 +663,7 @@ export default function TerreiroPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {filteredUser.map(
                     (agent, index) =>
-                      agent.status === "pendente" && (
+                      agent.status === AgentStatus.pending && (
                         <Card
                           key={index}
                           className="overflow-hidden border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all duration-300 rounded-xl"
@@ -674,7 +681,7 @@ export default function TerreiroPage() {
                               className="cursor-pointer"
                               size="sm"
                               onClick={() =>
-                                updateUserTerreiro(agent.id, "ativo")
+                                updateUserTerreiro(agent.id, AgentStatus.active)
                               }
                             >
                               <Check />
@@ -743,7 +750,8 @@ export default function TerreiroPage() {
 
                   {terreiro &&
                     terreiro.agents.reduce(
-                      (acc, agent) => acc + (agent.status == "inativo" ? 1 : 0),
+                      (acc, agent) =>
+                        acc + (agent.status == AgentStatus.inactive ? 1 : 0),
                       0
                     ) > 0 && (
                       <div className="relative w-full md:w-72">
@@ -762,7 +770,8 @@ export default function TerreiroPage() {
 
                 {terreiro &&
                   terreiro.agents.reduce(
-                    (acc, agent) => acc + (agent.status == "inativo" ? 1 : 0),
+                    (acc, agent) =>
+                      acc + (agent.status == AgentStatus.inactive ? 1 : 0),
                     0
                   ) == 0 && (
                     <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800 text-center">
@@ -780,7 +789,7 @@ export default function TerreiroPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {filteredUser.map(
                     (agent, index) =>
-                      agent.status === "inativo" && (
+                      agent.status === AgentStatus.inactive && (
                         <Card
                           key={index}
                           className="overflow-hidden border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all duration-300 rounded-xl"
@@ -799,7 +808,7 @@ export default function TerreiroPage() {
                               className="cursor-pointer"
                               size="sm"
                               onClick={() =>
-                                updateUserTerreiro(agent.id, "ativo")
+                                updateUserTerreiro(agent.id, AgentStatus.active)
                               }
                             >
                               <Check />

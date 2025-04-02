@@ -19,12 +19,17 @@ export type Role = {
   description: string;
 };
 
+export enum AgentStatus {
+  active = "active",
+  pending = "pending",
+  inactive = "inactive",
+}
 export type TerreiroAgent = {
   id: string;
   role: Role;
   user: User;
   terreiro: Terreiro;
-  status: "ativo" | "pendente" | "inativo";
+  status: AgentStatus;
 };
 export type Terreiro = {
   id: string;

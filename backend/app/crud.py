@@ -209,7 +209,7 @@ def update_agentTerreiro(agent_id: UUID, agent:schemas.AgenteTerreiroUpdate, db:
         raise HTTPException(status_code=404, detail="Ligação não encontrada")
     
     try:
-        db_agent.status=models.AgenteStatusEnum(agent.status)
+        db_agent.status=models.AgentStatusEnum(agent.status)
         db.add(db_agent)
         db.commit()
         db.refresh(db_agent)
