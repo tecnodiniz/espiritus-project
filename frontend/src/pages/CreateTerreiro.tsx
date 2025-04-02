@@ -33,7 +33,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import {
- 
   ChevronRight,
   Clock,
   HelpCircle,
@@ -46,7 +45,12 @@ import {
   Warehouse,
   X,
 } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { terreiroService } from "@/services/terreiroService";
 
 const formSchema = z.object({
@@ -55,16 +59,19 @@ const formSchema = z.object({
     .min(3, {
       message: "O nome do terreiro deve ter no mínimo 3 caracteres.",
     })
-    .regex(new RegExp("^(?!\\s)(?=.*[a-zA-Z])[a-zA-Z0-9 \\s]+$"), {
-      message: "Nome inválido",
-    }),
+    .regex(
+      new RegExp("^(?!\\s)(?=.*[a-zA-ZÀ-ÖØ-öø-ÿ])[a-zA-ZÀ-ÖØ-öø-ÿ0-9 \\s]+$"),
+      {
+        message: "Nome inválido",
+      }
+    ),
   address: z.string().nonempty({ message: "Preencha o endereço" }),
   contact: z
     .string()
     .nonempty({ message: "Preencha o contato" })
-    .transform(val => val.replace(/\s+/g, "").replace(/[-()]/g, ""))
-    .refine(val => /^\d{10,11}$/.test(val), {
-      message: "Telefone deve ter 10 ou 11 dígitos numéricos"
+    .transform((val) => val.replace(/\s+/g, "").replace(/[-()]/g, ""))
+    .refine((val) => /^\d{10,11}$/.test(val), {
+      message: "Telefone deve ter 10 ou 11 dígitos numéricos",
     }),
   hours: z
     .object({
@@ -88,7 +95,7 @@ export function CreateTerreiro() {
   const [loading, setLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const { toast } = useToast();
-  
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -102,9 +109,13 @@ export function CreateTerreiro() {
     mode: "onChange",
   });
 
-  const basicInfoFilled = form.watch('name') && form.watch('address') && 
-                         form.watch('contact') && form.watch('hours.start') && 
-                         form.watch('hours.end') && form.watch('segment');
+  const basicInfoFilled =
+    form.watch("name") &&
+    form.watch("address") &&
+    form.watch("contact") &&
+    form.watch("hours.start") &&
+    form.watch("hours.end") &&
+    form.watch("segment");
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
@@ -117,7 +128,7 @@ export function CreateTerreiro() {
         opening_hours: opening_hours,
       };
       console.log(payload);
-      
+
       const response = await terreiroService.postTerreiro(payload);
 
       console.log(response);
@@ -132,11 +143,11 @@ export function CreateTerreiro() {
       }
       // Simulate API call
       // await new Promise((resolve) => setTimeout(resolve, 1000));
-    
     } catch (error) {
       toast({
         title: "Erro ao cadastrar terreiro",
-        description: "Ocorreu um erro ao processar seu cadastro. Tente novamente.",
+        description:
+          "Ocorreu um erro ao processar seu cadastro. Tente novamente.",
         variant: "destructive",
       });
     } finally {
@@ -167,9 +178,7 @@ export function CreateTerreiro() {
         <Card className="shadow-md border-purple-100 dark:border-purple-900">
           <CardHeader className="bg-gradient-to-r from-purple-900 to-purple-800 text-white dark:from-purple-800 dark:to-purple-700 rounded-t-lg pb-6">
             <CardTitle>
-              <p className="text-3xl font-semibold">
-                Cadastro de Terreiro
-              </p>
+              <p className="text-3xl font-semibold">Cadastro de Terreiro</p>
             </CardTitle>
             <CardDescription className="text-purple-100 dark:text-purple-200 mt-2">
               Preencha as informações para cadastrar um novo terreiro
@@ -177,19 +186,25 @@ export function CreateTerreiro() {
 
             <div className="mt-6 flex justify-center">
               <div className="flex items-center">
-                <div 
+                <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                    currentStep >= 1 ? 'bg-yellow-400 text-purple-900' : 'bg-purple-700 text-white'
+                    currentStep >= 1
+                      ? "bg-yellow-400 text-purple-900"
+                      : "bg-purple-700 text-white"
                   }`}
                 >
                   1
                 </div>
-                <div className={`w-16 h-1 ${
-                  currentStep >= 2 ? 'bg-yellow-400' : 'bg-purple-700'
-                }`}></div>
-                <div 
+                <div
+                  className={`w-16 h-1 ${
+                    currentStep >= 2 ? "bg-yellow-400" : "bg-purple-700"
+                  }`}
+                ></div>
+                <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                    currentStep >= 2 ? 'bg-yellow-400 text-purple-900' : 'bg-purple-700 text-white'
+                    currentStep >= 2
+                      ? "bg-yellow-400 text-purple-900"
+                      : "bg-purple-700 text-white"
                   }`}
                 >
                   2
@@ -211,24 +226,34 @@ export function CreateTerreiro() {
                       </h3>
                       <Tooltip>
                         <TooltipTrigger>
-                          <HelpCircle size={16} className="text-purple-700 dark:text-purple-400" />
+                          <HelpCircle
+                            size={16}
+                            className="text-purple-700 dark:text-purple-400"
+                          />
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p className="w-[220px] text-sm">Estas são as informações essenciais para o cadastro do terreiro</p>
+                          <p className="w-[220px] text-sm">
+                            Estas são as informações essenciais para o cadastro
+                            do terreiro
+                          </p>
                         </TooltipContent>
                       </Tooltip>
                     </div>
                     <Separator className="bg-purple-200 dark:bg-purple-800 mb-4" />
-                    
+
                     <FormField
                       control={form.control}
                       name="name"
                       render={({ field }) => (
                         <FormItem>
                           <div className="flex items-center gap-2">
-                            <Building2 className="text-purple-700 dark:text-purple-400" size={18} />
+                            <Building2
+                              className="text-purple-700 dark:text-purple-400"
+                              size={18}
+                            />
                             <FormLabel className="text-lg font-medium text-purple-900 dark:text-purple-300">
-                              Nome do Terreiro <span className="text-red-500">*</span>
+                              Nome do Terreiro{" "}
+                              <span className="text-red-500">*</span>
                             </FormLabel>
                           </div>
                           <FormControl>
@@ -253,7 +278,10 @@ export function CreateTerreiro() {
                         render={({ field }) => (
                           <FormItem>
                             <div className="flex items-center gap-2">
-                              <MapPin className="text-purple-700 dark:text-purple-400" size={18} />
+                              <MapPin
+                                className="text-purple-700 dark:text-purple-400"
+                                size={18}
+                              />
                               <FormLabel className="text-lg font-medium text-purple-900 dark:text-purple-300">
                                 Endereço <span className="text-red-500">*</span>
                               </FormLabel>
@@ -279,7 +307,10 @@ export function CreateTerreiro() {
                         render={({ field }) => (
                           <FormItem>
                             <div className="flex items-center gap-2">
-                              <Phone className="text-purple-700 dark:text-purple-400" size={18} />
+                              <Phone
+                                className="text-purple-700 dark:text-purple-400"
+                                size={18}
+                              />
                               <FormLabel className="text-lg font-medium text-purple-900 dark:text-purple-300">
                                 Contato <span className="text-red-500">*</span>
                               </FormLabel>
@@ -296,11 +327,26 @@ export function CreateTerreiro() {
                                     if (value.length <= 2) {
                                       value = `(${value}`;
                                     } else if (value.length <= 7) {
-                                      value = `(${value.substring(0, 2)}) ${value.substring(2)}`;
+                                      value = `(${value.substring(
+                                        0,
+                                        2
+                                      )}) ${value.substring(2)}`;
                                     } else if (value.length <= 11) {
-                                      value = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7)}`;
+                                      value = `(${value.substring(
+                                        0,
+                                        2
+                                      )}) ${value.substring(
+                                        2,
+                                        7
+                                      )}-${value.substring(7)}`;
                                     } else {
-                                      value = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7, 11)}`;
+                                      value = `(${value.substring(
+                                        0,
+                                        2
+                                      )}) ${value.substring(
+                                        2,
+                                        7
+                                      )}-${value.substring(7, 11)}`;
                                     }
                                   }
                                   field.onChange(value);
@@ -308,7 +354,8 @@ export function CreateTerreiro() {
                               />
                             </FormControl>
                             <FormDescription className="text-xs text-gray-500 ml-6">
-                              Digite apenas os números e a formatação será aplicada automaticamente
+                              Digite apenas os números e a formatação será
+                              aplicada automaticamente
                             </FormDescription>
                             <FormMessage className="text-red-500 ml-6" />
                           </FormItem>
@@ -319,15 +366,19 @@ export function CreateTerreiro() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <div className="flex items-center gap-2">
-                          <Clock className="text-purple-700 dark:text-purple-400" size={18} />
+                          <Clock
+                            className="text-purple-700 dark:text-purple-400"
+                            size={18}
+                          />
                           <FormLabel className="text-lg font-medium text-purple-900 dark:text-purple-300">
-                            Horário de Funcionamento <span className="text-red-500">*</span>
+                            Horário de Funcionamento{" "}
+                            <span className="text-red-500">*</span>
                           </FormLabel>
                         </div>
                         <FormDescription className="text-xs text-gray-500 ml-6 mb-2">
                           Selecione o horário de abertura e fechamento
                         </FormDescription>
-                        
+
                         <div className="space-y-3 ml-6">
                           <div className="flex items-center space-x-2">
                             <FormField
@@ -357,7 +408,9 @@ export function CreateTerreiro() {
                                 </FormItem>
                               )}
                             />
-                            <span className="text-gray-500 dark:text-gray-400">até</span>
+                            <span className="text-gray-500 dark:text-gray-400">
+                              até
+                            </span>
                             <FormField
                               control={form.control}
                               name="hours.end"
@@ -395,7 +448,10 @@ export function CreateTerreiro() {
                         render={({ field }) => (
                           <FormItem>
                             <div className="flex items-center gap-2">
-                              <Info className="text-purple-700 dark:text-purple-400" size={18} />
+                              <Info
+                                className="text-purple-700 dark:text-purple-400"
+                                size={18}
+                              />
                               <FormLabel className="text-lg font-medium text-purple-900 dark:text-purple-300">
                                 Segmento <span className="text-red-500">*</span>
                               </FormLabel>
@@ -414,7 +470,9 @@ export function CreateTerreiro() {
                               </FormControl>
                               <SelectContent>
                                 <SelectItem value="Umbanda">Umbanda</SelectItem>
-                                <SelectItem value="Candomblé">Candomblé</SelectItem>
+                                <SelectItem value="Candomblé">
+                                  Candomblé
+                                </SelectItem>
                               </SelectContent>
                             </Select>
                             <FormMessage className="text-red-500 ml-6" />
@@ -445,10 +503,16 @@ export function CreateTerreiro() {
                       </h3>
                       <Tooltip>
                         <TooltipTrigger>
-                          <HelpCircle size={16} className="text-purple-700 dark:text-purple-400" />
+                          <HelpCircle
+                            size={16}
+                            className="text-purple-700 dark:text-purple-400"
+                          />
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p className="w-[220px] text-sm">Estas informações auxiliam os visitantes a conhecerem melhor o terreiro</p>
+                          <p className="w-[220px] text-sm">
+                            Estas informações auxiliam os visitantes a
+                            conhecerem melhor o terreiro
+                          </p>
                         </TooltipContent>
                       </Tooltip>
                     </div>
@@ -460,13 +524,17 @@ export function CreateTerreiro() {
                       render={({ field }) => (
                         <FormItem>
                           <div className="flex items-center gap-2">
-                            <FileText className="text-purple-700 dark:text-purple-400" size={18} />
+                            <FileText
+                              className="text-purple-700 dark:text-purple-400"
+                              size={18}
+                            />
                             <FormLabel className="text-lg font-medium text-purple-900 dark:text-purple-300">
                               Histórico da Casa
                             </FormLabel>
                           </div>
                           <FormDescription className="text-xs text-gray-500 ml-6 mb-2">
-                            Conte a história e a trajetória do terreiro <span className="text-red-500">*</span>
+                            Conte a história e a trajetória do terreiro{" "}
+                            <span className="text-red-500">*</span>
                           </FormDescription>
                           <FormControl>
                             <Textarea
@@ -486,13 +554,17 @@ export function CreateTerreiro() {
                       render={({ field }) => (
                         <FormItem>
                           <div className="flex items-center gap-2">
-                            <Warehouse className="text-purple-700 dark:text-purple-400" size={18} />
+                            <Warehouse
+                              className="text-purple-700 dark:text-purple-400"
+                              size={18}
+                            />
                             <FormLabel className="text-lg font-medium text-purple-900 dark:text-purple-300">
                               Infraestrutura
                             </FormLabel>
                           </div>
                           <FormDescription className="text-xs text-gray-500 ml-6 mb-2">
-                            Descreva a infraestrutura e acomodações do terreiro <span className="text-red-500">*</span>
+                            Descreva a infraestrutura e acomodações do terreiro{" "}
+                            <span className="text-red-500">*</span>
                           </FormDescription>
                           <FormControl>
                             <Textarea
@@ -515,7 +587,7 @@ export function CreateTerreiro() {
                       >
                         Voltar
                       </Button>
-                      
+
                       <div className="flex gap-4">
                         <Button
                           type="button"

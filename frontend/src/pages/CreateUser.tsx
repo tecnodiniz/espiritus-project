@@ -39,9 +39,12 @@ const formSchema = z
       .min(2, {
         message: "O nome deve ter pelo menos 2 caracteres",
       })
-      .regex(new RegExp("^(?!\\s)[a-zA-Z]+(\\s[a-z-A-Z]+)*$"), {
-        message: "Nome inválido",
-      })
+      .regex(
+        new RegExp("^(?!\\s)[a-zA-ZÀ-ÖØ-öø-ÿ]+(\\s[a-z-A-ZÀ-ÖØ-öø-ÿ]+)*$"),
+        {
+          message: "Nome inválido",
+        }
+      )
       .max(50),
     cpf: z.string().min(11, {
       message: "CPF inválido",
