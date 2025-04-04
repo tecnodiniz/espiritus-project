@@ -4,15 +4,17 @@ import Home from "./pages/Home";
 import Layout from "./components/Layout";
 import PricePage from "./pages/PricePage";
 import Login from "./pages/Login";
-
-import UserPage from "./pages/UserPage";
-import TerreiroPage from "./pages/TerreiroPage";
-import SearchTerreiros from "./pages/SearchTerreirosPage";
-import CreateTerreiro from "./pages/CreateTerreiro";
 import CreateUser from "./pages/CreateUser";
-import UserTerreiros from "./pages/UserTerreiros";
+import { LoaderComponent } from "./components/LoaderComponent";
 import Introduction from "./pages/Introduction";
+import { lazy, Suspense } from "react";
 
+// Lazy load
+const TerreiroPage = lazy(() => import("./pages/TerreiroPage"));
+const CreateTerreiro = lazy(() => import("./pages/CreateTerreiro"));
+const UserPage = lazy(() => import("./pages/UserPage"));
+const SearchTerreiros = lazy(() => import("./pages/SearchTerreirosPage"));
+const UserTerreiros = lazy(() => import("./pages/UserTerreiros"));
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,15 +28,50 @@ const router = createBrowserRouter([
       {
         path: "terreiros",
         children: [
-          { index: true, element: <SearchTerreiros /> },
-          { path: "create", element: <CreateTerreiro /> },
-          { path: ":id", element: <TerreiroPage /> },
-          { path: "*", element: <p>Ops, 404 página não encontrada</p> }, // Catch-all route for /terreiros/*
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<LoaderComponent />}>
+                <SearchTerreiros />
+              </Suspense>
+            ),
+          },
+          {
+            path: "create",
+            element: (
+              <Suspense fallback={<LoaderComponent />}>
+                <CreateTerreiro />
+              </Suspense>
+            ),
+          },
+          {
+            path: ":id",
+            element: (
+              <Suspense fallback={<LoaderComponent />}>
+                <TerreiroPage />
+              </Suspense>
+            ),
+          },
+          { path: "*", element: <p>Ops, 404 página não encontrada</p> },
         ],
       },
-      { path: "users/:id", element: <UserPage /> },
-      { path: "users/meus-terreiros", element: <UserTerreiros /> },
-      { path: "*", element: <p>Ops, 404 página não encontrada</p> }, // Catch-all route for other paths
+      {
+        path: "users/:id",
+        element: (
+          <Suspense fallback={<LoaderComponent />}>
+            <UserPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "users/meus-terreiros",
+        element: (
+          <Suspense fallback={<LoaderComponent />}>
+            <UserTerreiros />
+          </Suspense>
+        ),
+      },
+      { path: "*", element: <p>Ops, 404 página não encontrada</p> },
     ],
   },
   {
