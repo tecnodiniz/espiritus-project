@@ -17,7 +17,7 @@ import { useProfile } from "@/context/ProfileContext";
 import { Terreiro } from "@/types/types";
 import { terreiroService } from "@/services/terreiroService";
 
-export function UserTerreiros() {
+export default function UserTerreiros() {
   const { profile, isAuthenticate } = useProfile();
   const [terreiros, setTerreiros] = useState<Terreiro[]>([]);
   const navigate = useNavigate();

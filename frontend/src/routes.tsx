@@ -1,23 +1,27 @@
 import { createBrowserRouter } from "react-router-dom";
+
 import Home from "./pages/Home";
 import Layout from "./components/Layout";
+import PricePage from "./pages/PricePage";
 import Login from "./pages/Login";
+
 import UserPage from "./pages/UserPage";
 import TerreiroPage from "./pages/TerreiroPage";
-import { SearchTerreiros } from "./pages/SearchTerreirosPage";
-import { CreateTerreiro } from "./pages/CreateTerreiro";
-
+import SearchTerreiros from "./pages/SearchTerreirosPage";
+import CreateTerreiro from "./pages/CreateTerreiro";
 import CreateUser from "./pages/CreateUser";
-import { UserTerreiros } from "./pages/UserTerreiros";
+import UserTerreiros from "./pages/UserTerreiros";
 import Introduction from "./pages/Introduction";
-import PricePage from "./pages/PricePage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <Home /> },
+      {
+        index: true,
+        element: <Home />,
+      },
       { path: "/prices", element: <PricePage /> },
       {
         path: "terreiros",

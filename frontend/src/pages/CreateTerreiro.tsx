@@ -75,15 +75,10 @@ const formSchema = z.object({
     .refine((val) => /^\d{10,11}$/.test(val), {
       message: "Telefone deve ter 10 ou 11 dígitos numéricos",
     }),
-  hours: z
-    .object({
-      start: z.string().nonempty({ message: "Selecione a hora inicial" }),
-      end: z.string().nonempty({ message: "Selecione a hora final" }),
-    })
-    .refine((data) => data.start < data.end, {
-      message: "A hora inicial deve ser menor que a hora final",
-      path: ["end"],
-    }),
+  hours: z.object({
+    start: z.string().nonempty({ message: "Selecione a hora inicial" }),
+    end: z.string().nonempty({ message: "Selecione a hora final" }),
+  }),
 
   history: z.string().nonempty({ message: "Preencha o histórico" }),
   infrastructure: z.string().nonempty({ message: "Preencha a infraestrutura" }),
@@ -92,7 +87,7 @@ const formSchema = z.object({
   }),
 });
 
-export function CreateTerreiro() {
+export default function CreateTerreiro() {
   const { profile } = useProfile();
   const [loading, setLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);

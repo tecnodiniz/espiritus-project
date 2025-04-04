@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/card";
 import { MapPin, Star, StarHalf, ArrowRight } from "lucide-react";
 
-export function SearchTerreiros() {
+export default function SearchTerreiros() {
   const { terreiros } = useTerreiros(); //Provisório. O correto é fazer a buscar pela api
   const [filteredTerreiros, setFilteredTerreiros] = useState<Terreiro[]>([]);
   const [searchParams] = useSearchParams();
