@@ -71,7 +71,6 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      { path: "*", element: <p>Ops, 404 página não encontrada</p> },
     ],
   },
   {
