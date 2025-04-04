@@ -52,6 +52,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { terreiroService } from "@/services/terreiroService";
+import { ToastAction } from "@radix-ui/react-toast";
+import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
   name: z
@@ -95,6 +97,7 @@ export function CreateTerreiro() {
   const [loading, setLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -136,6 +139,14 @@ export function CreateTerreiro() {
         toast({
           title: "Terreiro cadastrado com sucesso!",
           description: `O terreiro ${values.name} foi cadastrado com sucesso.`,
+          action: (
+            <ToastAction
+              altText="Visualizar"
+              onClick={() => navigate(`/terreiros/${response.data.id}`)}
+            >
+              Visualizar
+            </ToastAction>
+          ),
         });
 
         form.reset();
