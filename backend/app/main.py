@@ -1,11 +1,21 @@
 import crud,  schemas, database, models
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, UploadFile, File,Form, Request, HTTPException
 from sqlalchemy.orm import Session
 from uuid import UUID
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
+import os, shutil
+from fastapi.staticfiles import StaticFiles
+from utils import generate_hash_files, find_image_path, get_mime_type
+from fastapi.responses import HTMLResponse,JSONResponse, FileResponse
+from starlette.exceptions import HTTPException as StarLetteHTTPException
 
 app = FastAPI()
+
+UPLOAD_DIR = "a"
+os.makedirs(UPLOAD_DIR,exist_ok=True)
+
+app.mount("/a", StaticFiles(directory=UPLOAD_DIR), name="a")
 
 origins = [
     "http://127.0.0.1:5173",
@@ -22,10 +32,34 @@ app.add_middleware(
 )
 # models.Base.metadata.create_all(bind=database.engine)
 
+@app.exception_handler(StarLetteHTTPException)
+def custom_http_exception_handler(request: Request, exc: StarLetteHTTPException):
+    if exc.status_code == 404:
+        return HTMLResponse(
+            content="<h1>404 - Page not found</h1>",
+            status_code=404
+        )
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"detail":exc.detail, "request":request},
+    )
+
+@app.post("/upload-profile-picture/", response_model=dict)
+def upload_profile_picture(user_id: UUID, file: UploadFile = File(...), db: Session=Depends(database.get_db)):
+    return crud.upload_user_profile_picture(user_id,file,db)
+
 @app.get("/")
 def read_root():
     return {"message":"API v0", "status":"ok"}
 
+@app.get("/profile_picture/{image_id}")
+def get_profile_image(image_id: str):
+    image_path = find_image_path(UPLOAD_DIR, image_id)
+    if not image_path or not os.path.exists(image_path):
+        raise HTTPException(status_code=404, detail="Imagem não encontrada")
+    
+    mime_type = get_mime_type(image_path)
+    return FileResponse(image_path, media_type=mime_type)
 # CREATE USER
 @app.post("/users/", response_model=schemas.UserResponse)
 def create_user(user: schemas.UserCreate, auth:schemas.AuthCreate, db: Session = Depends(database.get_db)):

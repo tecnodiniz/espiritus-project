@@ -1,9 +1,13 @@
+import os
+import shutil
 from uuid import UUID
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
-from fastapi import HTTPException
+from fastapi import HTTPException, UploadFile
+from utils import generate_hash_files
 import models, schemas
 from passlib.context import CryptContext
+import pdb
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -12,6 +16,34 @@ def hash_password(password: str) -> str:
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
+
+
+def upload_user_profile_picture(user_id:UUID, file: UploadFile, db:Session):
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
+
+    if not db_user:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+    
+    try:
+        UPLOAD_DIR = "a"
+        filename_hashed = generate_hash_files(file.filename)
+        
+        name, ext = os.path.splitext(filename_hashed)
+
+        file_path = os.path.join(UPLOAD_DIR, filename_hashed)
+
+        db_user.profile_picture = name
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
+
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+            
+        return {"message":"foto de perfil carregada"}
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=e)
 
 # USER
 def create_user(db:Session, user: schemas.UserCreate, auth: schemas.AuthCreate):

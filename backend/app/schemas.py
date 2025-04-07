@@ -15,6 +15,9 @@ class UserBase(BaseModel):
     id: Optional[UUID] = None # Remove this on prod
     name: str
     cpf: Optional[str] = None
+    contact: Optional[str] = None
+    bio: Optional[str] = None
+    profile_picture: Optional[str] = None
     plan: Optional[UserPlan] = None
     
 class UserCreate(UserBase):
@@ -23,8 +26,12 @@ class UserCreate(UserBase):
 class UserUpadte(BaseModel):
     name: Optional[str] = None
     cpf: Optional[str] = None
+    contact: Optional[str] = None
+    bio: Optional[str] = None
     plan: Optional[UserPlan] = None
-    
+
+class UserPictureUpload(BaseModel):
+    profile_picture: str
 class UserResponse(UserBase):
     id: UUID
     class Config:

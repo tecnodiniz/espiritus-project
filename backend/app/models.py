@@ -22,6 +22,9 @@ class User(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
     name = Column(String(255), index=True)
     cpf = Column(String(14))
+    contact = Column(String(15))
+    bio = Column(String(255))
+    profile_picture = Column(String(255))
     plan = Column(Enum(UserPlanEnum, name="user_plan", create_type=True), nullable=False, default=UserPlanEnum.BASIC)
 
     terreiros = relationship("Terreiro", back_populates="user", uselist=True, cascade="all, delete-orphan")
