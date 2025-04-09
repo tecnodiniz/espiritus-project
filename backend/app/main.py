@@ -41,7 +41,7 @@ def custom_http_exception_handler(request: Request, exc: StarLetteHTTPException)
         )
     return JSONResponse(
         status_code=exc.status_code,
-        content={"detail":exc.detail, "request":request},
+        content={"detail":exc.detail, "request":str(request.url)},
     )
 
 @app.post("/upload-profile-picture/", response_model=dict)
@@ -61,7 +61,7 @@ def get_profile_image(image_id: str):
     mime_type = get_mime_type(image_path)
     return FileResponse(image_path, media_type=mime_type)
 # CREATE USER
-@app.post("/users/", response_model=schemas.UserResponse)
+@app.post("/users/", response_model=dict)
 def create_user(user: schemas.UserCreate, auth:schemas.AuthCreate, db: Session = Depends(database.get_db)):
     return crud.create_user(db, user, auth)
 

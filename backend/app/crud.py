@@ -68,18 +68,18 @@ def create_user(db:Session, user: schemas.UserCreate, auth: schemas.AuthCreate):
         db.commit()
         db.refresh(db_user)
 
-        return db_user
+        return {"mensagem":"usuário criado com sucesso"}
     except IntegrityError as e: 
         db.rollback()
 
         error_message = str(e.orig)
 
         if "auth_email_key" in error_message:
-            raise HTTPException(status_code=400, detail=f"Email já cadastrado")
-        raise HTTPException(status_code=400, detail=f"erro: {e}")
+            raise HTTPException(status_code=400, detail="Email já cadastrado")
+        raise HTTPException(status_code=400, detail=f"Erro de integridade no banco de dados.")
     except Exception as e:
         db.rollback()
-        raise HTTPException(status_code=500, detail=f"Erro interno {e}")
+        raise HTTPException(status_code=500, detail=f"Erro interno")
 
 def get_users(db:Session):
     return db.query(models.User).all()
@@ -135,7 +135,7 @@ def create_auth(db: Session, auth: schemas.AuthCreate):
 
     except Exception as e:
         db.rollback()
-        raise HTTPException(status_code=500, detail=f"Erro interno {e}")
+        raise HTTPException(status_code=500, detail=f"Erro interno")
 
 def authentication(db: Session, auth: schemas.Authentication):
     db_auth = db.query(models.Auth).filter(models.Auth.email == auth.email).first()
