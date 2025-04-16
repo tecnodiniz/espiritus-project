@@ -2,6 +2,9 @@ export type User = {
   id: string;
   name: string;
   plan: string;
+  bio: string;
+  contact: string;
+  profile_picture: string;
   auth: UserDetails;
   agents: TerreiroAgent[];
 };

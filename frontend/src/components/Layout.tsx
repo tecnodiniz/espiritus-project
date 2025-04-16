@@ -46,6 +46,7 @@ const Layout = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const navigate = useNavigate();
+  // const picture_path = "http://127.0.0.1:8000/profile_picture/";
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
@@ -147,7 +148,7 @@ const Layout = () => {
                 <DropdownMenu>
                   <DropdownMenuTrigger className="focus-visible:outline-none cursor-pointer">
                     <Avatar className="size-10 border-2 border-yellow-300 transition-transform hover:scale-105">
-                      <AvatarImage src="/" />
+                      <AvatarImage src="" />
                       <AvatarFallback className="bg-purple-800 text-white font-bold">
                         {getInitials(profile.name)}
                       </AvatarFallback>

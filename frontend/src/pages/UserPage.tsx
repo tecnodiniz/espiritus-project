@@ -30,6 +30,7 @@ import {
   Navigation2,
 } from "lucide-react";
 import { useProfile } from "@/context/ProfileContext";
+import { AgentStatus } from "@/types/types";
 
 export default function UserPage() {
   const { id } = useParams();
@@ -57,7 +58,7 @@ export default function UserPage() {
         <div className="relative px-4 md:px-8 -mt-16">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
             <Avatar className="h-32 w-32 border-4 border-white dark:border-gray-900 shadow-xl">
-              <AvatarImage src="https://thispersondoesnotexist.com/" />
+              <AvatarImage src="/" />
               <AvatarFallback className="bg-gradient-to-br from-purple-700 to-purple-900 text-white text-2xl font-bold">
                 {getInitials(user?.name || "IMGs")}
               </AvatarFallback>
@@ -219,7 +220,8 @@ export default function UserPage() {
 
                 {user?.agents &&
                   user.agents.reduce(
-                    (acc, agent) => acc + (agent.status == "ativo" ? 1 : 0),
+                    (acc, agent) =>
+                      acc + (agent.status == AgentStatus.active ? 1 : 0),
                     0
                   ) == 0 && (
                     <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800 text-center">
@@ -236,7 +238,7 @@ export default function UserPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {user?.agents?.map((agent, index) => (
                     <>
-                      {agent.status == "ativo" && (
+                      {agent.status == AgentStatus.active && (
                         <Card
                           key={index}
                           className="overflow-hidden border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all duration-300 rounded-xl"
