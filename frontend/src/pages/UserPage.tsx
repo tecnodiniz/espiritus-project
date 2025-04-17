@@ -28,9 +28,11 @@ import {
   Heart,
   Building,
   Navigation2,
+  Edit,
 } from "lucide-react";
 import { useProfile } from "@/context/ProfileContext";
 import { AgentStatus } from "@/types/types";
+import { use } from "react";
 
 export default function UserPage() {
   const { id } = useParams();
@@ -88,13 +90,23 @@ export default function UserPage() {
               </div>
 
               <div className="mt-4 md:mt-0">
-                <Button
-                  className="rounded-full bg-purple-700 hover:bg-purple-800 text-white shadow-md disabled:opacity-70"
-                  disabled={profile ? false : true}
-                >
-                  <Heart className="mr-2 h-4 w-4" />
-                  Seguir
-                </Button>
+                {profile?.id == user?.id ? (
+                  <Button
+                    className="rounded-full bg-purple-700 hover:bg-purple-800 text-white shadow-md disabled:opacity-70"
+                    disabled={profile ? false : true}
+                  >
+                    <Edit className="mr-2 h-4 w-4" />
+                    Editar
+                  </Button>
+                ) : (
+                  <Button
+                    className="rounded-full bg-purple-700 hover:bg-purple-800 text-white shadow-md disabled:opacity-70"
+                    disabled={profile ? false : true}
+                  >
+                    <Heart className="mr-2 h-4 w-4" />
+                    Seguir
+                  </Button>
+                )}
               </div>
             </div>
           </div>
@@ -174,7 +186,7 @@ export default function UserPage() {
                             Contato
                           </p>
                           <p className="font-medium text-gray-900 dark:text-white">
-                            (71) 99999-9999
+                            {user?.contact ? user.contact : "-----"}
                           </p>
                         </div>
                       </div>
@@ -203,7 +215,9 @@ export default function UserPage() {
                     Biografia
                   </h2>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    O usuário ainda não adicionou uma biografia.
+                    {user?.bio
+                      ? user.bio
+                      : "O usuário ainda não adicionou uma biografia."}
                   </p>
                 </section>
               </div>
@@ -274,6 +288,7 @@ export default function UserPage() {
                                 Seguir
                               </Link>
                             </Button>
+
                             <Button
                               className="w-full sm:w-auto rounded-full border-purple-700 text-purple-800 hover:bg-purple-50 dark:border-purple-700 dark:text-purple-400 dark:hover:bg-gray-800/50"
                               variant="outline"
