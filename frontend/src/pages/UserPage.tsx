@@ -32,12 +32,11 @@ import {
 } from "lucide-react";
 import { useProfile } from "@/context/ProfileContext";
 import { AgentStatus } from "@/types/types";
-import { use } from "react";
 
 export default function UserPage() {
   const { id } = useParams();
   const { user } = useUser(id);
-  const { profile } = useProfile();
+  const { profile, isCurrentUser } = useProfile();
 
   return (
     <div className="container max-w-[1280px] mx-auto px-4 py-6">
@@ -90,7 +89,7 @@ export default function UserPage() {
               </div>
 
               <div className="mt-4 md:mt-0">
-                {profile?.id == user?.id ? (
+                {isCurrentUser(user?.id) ? (
                   <Button
                     className="rounded-full bg-purple-700 hover:bg-purple-800 text-white shadow-md disabled:opacity-70"
                     disabled={profile ? false : true}
@@ -186,7 +185,7 @@ export default function UserPage() {
                             Contato
                           </p>
                           <p className="font-medium text-gray-900 dark:text-white">
-                            {user?.contact ? user.contact : "-----"}
+                            {user?.contact || "-----"}
                           </p>
                         </div>
                       </div>
@@ -215,9 +214,8 @@ export default function UserPage() {
                     Biografia
                   </h2>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    {user?.bio
-                      ? user.bio
-                      : "O usuário ainda não adicionou uma biografia."}
+                    {user?.bio ||
+                      "O usuário ainda não adicionou uma biografia."}
                   </p>
                 </section>
               </div>

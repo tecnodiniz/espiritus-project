@@ -12,6 +12,7 @@ interface ProfileContexType {
   userLogin: (user: User) => void;
   userLogout: () => void;
   isAuthenticate: boolean;
+  isCurrentUser: (id: string | undefined) => boolean;
 }
 
 const ProfileContext = createContext<ProfileContexType | undefined>(undefined);
@@ -56,9 +57,11 @@ export const ProfileProvider = ({ children }: ProfileProviderProps) => {
     window.location.href = "/";
   };
 
+  const isCurrentUser = (id: string | undefined): boolean => profile?.id === id;
+
   return (
     <ProfileContext.Provider
-      value={{ profile, userLogin, userLogout, isAuthenticate }}
+      value={{ profile, userLogin, userLogout, isCurrentUser, isAuthenticate }}
     >
       {children}
     </ProfileContext.Provider>

@@ -72,7 +72,7 @@ export default function TerreiroPage() {
   const [query, setQuery] = useState("");
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
   const [filteredUser, setFilteredUser] = useState<TerreiroAgent[]>([]);
-  const { profile, isAuthenticate } = useProfile();
+  const { profile, isAuthenticate, isCurrentUser } = useProfile();
   const navigate = useNavigate();
 
   const [userAgentOnTerreiro, setUserAgentOnTerreiro] = useState<
@@ -86,7 +86,7 @@ export default function TerreiroPage() {
   useEffect(() => {
     if (terreiro) {
       setUserAgentOnTerreiro(
-        terreiro?.agents.find((a) => a.user.id == profile?.id)?.status || null
+        terreiro?.agents.find((a) => a.user.id === profile?.id)?.status || null
       );
     }
   }, [terreiro]);
@@ -220,7 +220,7 @@ export default function TerreiroPage() {
               <Navigation2 className="mr-2 h-4 w-4" />
               Como chegar
             </Button>
-            {!terreiro?.agents.some((e) => e.user.id == profile?.id) ? (
+            {!terreiro?.agents.some((e) => e.user.id === profile?.id) ? (
               <Dialog>
                 <DialogTrigger asChild>
                   <Button
@@ -275,7 +275,7 @@ export default function TerreiroPage() {
               </Dialog>
             ) : (
               <>
-                {userAgentOnTerreiro == AgentStatus.pending && (
+                {userAgentOnTerreiro === AgentStatus.pending && (
                   <Button
                     className="flex-1 md:flex-none rounded-full shadow-md"
                     variant="secondary"
@@ -284,7 +284,7 @@ export default function TerreiroPage() {
                     solicitação enviada
                   </Button>
                 )}
-                {userAgentOnTerreiro == AgentStatus.active && (
+                {userAgentOnTerreiro === AgentStatus.active && (
                   <Button
                     className="flex-1 md:flex-none rounded-full shadow-md"
                     variant="secondary"
@@ -294,7 +294,7 @@ export default function TerreiroPage() {
                   </Button>
                 )}
 
-                {userAgentOnTerreiro == AgentStatus.inactive && (
+                {userAgentOnTerreiro === AgentStatus.inactive && (
                   <Button
                     className="flex-1 md:flex-none rounded-full shadow-md"
                     variant="secondary"
@@ -333,7 +333,7 @@ export default function TerreiroPage() {
                   <Users className="mr-2 h-4 w-4" />
                   Membros
                 </TabsTrigger>
-                {profile?.id == terreiro?.user.id && (
+                {isCurrentUser(terreiro?.user.id) && (
                   <>
                     <TabsTrigger
                       value="pendentes"
@@ -498,7 +498,7 @@ export default function TerreiroPage() {
                   {terreiro &&
                     terreiro.agents.reduce(
                       (acc, agent) =>
-                        acc + (agent.status == AgentStatus.active ? 1 : 0),
+                        acc + (agent.status === AgentStatus.active ? 1 : 0),
                       0
                     ) > 0 && (
                       <div className="relative w-full md:w-72">
@@ -518,9 +518,9 @@ export default function TerreiroPage() {
                 {terreiro &&
                   terreiro.agents.reduce(
                     (acc, agent) =>
-                      acc + (agent.status == AgentStatus.active ? 1 : 0),
+                      acc + (agent.status === AgentStatus.active ? 1 : 0),
                     0
-                  ) == 0 && (
+                  ) === 0 && (
                     <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800 text-center">
                       <Users className="mx-auto h-12 w-12 text-purple-400 mb-3" />
                       <p className="text-purple-800 dark:text-purple-300 text-lg font-medium">
@@ -542,7 +542,7 @@ export default function TerreiroPage() {
                           className="overflow-hidden border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all duration-300 rounded-xl"
                         >
                           <div className="flex justify-end px-3 pt-1">
-                            {profile?.id == terreiro?.user.id && (
+                            {isCurrentUser(terreiro?.user.id) && (
                               <div>
                                 <Button
                                   variant="ghost"
@@ -625,7 +625,7 @@ export default function TerreiroPage() {
                   {terreiro &&
                     terreiro.agents.reduce(
                       (acc, agent) =>
-                        acc + (agent.status == AgentStatus.pending ? 1 : 0),
+                        acc + (agent.status === AgentStatus.pending ? 1 : 0),
                       0
                     ) > 0 && (
                       <div className="relative w-full md:w-72">
@@ -645,9 +645,9 @@ export default function TerreiroPage() {
                 {terreiro &&
                   terreiro.agents.reduce(
                     (acc, agent) =>
-                      acc + (agent.status == AgentStatus.pending ? 1 : 0),
+                      acc + (agent.status === AgentStatus.pending ? 1 : 0),
                     0
-                  ) == 0 && (
+                  ) === 0 && (
                     <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800 text-center">
                       <Users className="mx-auto h-12 w-12 text-purple-400 mb-3" />
                       <p className="text-purple-800 dark:text-purple-300 text-lg font-medium">
@@ -751,7 +751,7 @@ export default function TerreiroPage() {
                   {terreiro &&
                     terreiro.agents.reduce(
                       (acc, agent) =>
-                        acc + (agent.status == AgentStatus.inactive ? 1 : 0),
+                        acc + (agent.status === AgentStatus.inactive ? 1 : 0),
                       0
                     ) > 0 && (
                       <div className="relative w-full md:w-72">
@@ -771,9 +771,9 @@ export default function TerreiroPage() {
                 {terreiro &&
                   terreiro.agents.reduce(
                     (acc, agent) =>
-                      acc + (agent.status == AgentStatus.inactive ? 1 : 0),
+                      acc + (agent.status === AgentStatus.inactive ? 1 : 0),
                     0
-                  ) == 0 && (
+                  ) === 0 && (
                     <div className="bg-purple-50 dark:bg-gray-800/50 rounded-xl p-6 border border-purple-100 dark:border-gray-800 text-center">
                       <Users className="mx-auto h-12 w-12 text-purple-400 mb-3" />
                       <p className="text-purple-800 dark:text-purple-300 text-lg font-medium">
