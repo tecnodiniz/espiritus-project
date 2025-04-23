@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import {
   Moon,
@@ -61,6 +61,9 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
+import { userService } from "@/services/userService";
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/hooks/use-toast";
 
 // Form schema for profile editing
 const profileFormSchema = z.object({
@@ -70,15 +73,20 @@ const profileFormSchema = z.object({
   bio: z.string().max(500, {
     message: "Bio não pode exceder 500 caracteres.",
   }),
-  contact: z.string().min(5, {
-    message: "Contato deve ter pelo menos 5 caracteres.",
-  }),
+  contact: z
+    .string()
+    .nonempty({ message: "Preencha o contato" })
+    .transform((val) => val.replace(/\s+/g, "").replace(/[-()]/g, ""))
+    .refine((val) => /^\d{10,11}$/.test(val), {
+      message: "Telefone deve ter 10 ou 11 dígitos numéricos",
+    }),
   profile_picture: z.any().optional(),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 const Layout = () => {
+  const { toast } = useToast();
   const { theme, toggleTheme } = useTheme();
   const { profile, userLogout, updateProfile } = useProfile();
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -114,17 +122,31 @@ const Layout = () => {
 
     setIsSubmitting(true);
     try {
+      const payload = {
+        name: values.name,
+        bio: values.bio,
+        contact: values.contact,
+      };
       // Create FormData for file upload
-      const formData = new FormData();
-      formData.append("name", values.name);
-      formData.append("bio", values.bio);
-      formData.append("contact", values.contact);
+      // const formData = new FormData();
+      // formData.append("name", values.name);
+      // formData.append("bio", values.bio);
+      // formData.append("contact", values.contact);
 
-      if (values.profile_picture && values.profile_picture.length > 0) {
-        formData.append("profile_picture", values.profile_picture[0]);
+      // if (values.profile_picture && values.profile_picture.length > 0) {
+      //   formData.append("profile_picture", values.profile_picture[0]);
+      // }
+
+      const response = await userService.updateProfile(profile.id, payload);
+      if (response.status === 200) {
+        console.log(response);
+        toast({
+          description: "Seus dados foram atualizados com sucesso!",
+          action: <ToastAction altText="OK">OK</ToastAction>,
+        });
+        updateProfile(profile.id);
+        form.reset();
       }
-
-      await updateProfile(formData);
       setIsEditProfileOpen(false);
     } catch (error) {
       console.error("Failed to update profile:", error);
@@ -469,7 +491,11 @@ const Layout = () => {
                   <FormItem>
                     <FormLabel>Nome</FormLabel>
                     <FormControl>
-                      <Input placeholder="Seu nome completo" {...field} />
+                      <Input
+                        placeholder="Seu nome completo"
+                        {...field}
+                        className="mt-2 border-purple-200 focus:border-purple-500 focus-visible:ring-purple-500 dark:border-purple-800 dark:bg-gray-800 dark:text-white"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -485,7 +511,7 @@ const Layout = () => {
                     <FormControl>
                       <Textarea
                         placeholder="Uma breve descrição sobre você"
-                        className="resize-none"
+                        className="mt-2 border-purple-200 focus:border-purple-500 focus-visible:ring-purple-500 dark:border-purple-800 dark:bg-gray-800 dark:text-white resize-none"
                         {...field}
                       />
                     </FormControl>
@@ -502,8 +528,39 @@ const Layout = () => {
                     <FormLabel>Contato</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Telefone ou informações de contato"
+                        placeholder="(99) 99999-9999"
+                        className="mt-2 border-purple-200 focus:border-purple-500 focus-visible:ring-purple-500 dark:border-purple-800 dark:bg-gray-800 dark:text-white"
                         {...field}
+                        onChange={(e) => {
+                          let value = e.target.value.replace(/\D/g, "");
+                          if (value.length > 0) {
+                            // Add formatting as the user types
+                            if (value.length <= 2) {
+                              value = `(${value}`;
+                            } else if (value.length <= 7) {
+                              value = `(${value.substring(
+                                0,
+                                2
+                              )}) ${value.substring(2)}`;
+                            } else if (value.length <= 11) {
+                              value = `(${value.substring(
+                                0,
+                                2
+                              )}) ${value.substring(2, 7)}-${value.substring(
+                                7
+                              )}`;
+                            } else {
+                              value = `(${value.substring(
+                                0,
+                                2
+                              )}) ${value.substring(2, 7)}-${value.substring(
+                                7,
+                                11
+                              )}`;
+                            }
+                          }
+                          field.onChange(value);
+                        }}
                       />
                     </FormControl>
                     <FormMessage />
@@ -511,7 +568,7 @@ const Layout = () => {
                 )}
               />
 
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="profile_picture"
                 render={({ field }) => (
@@ -527,7 +584,7 @@ const Layout = () => {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
 
               <DialogFooter>
                 <Button

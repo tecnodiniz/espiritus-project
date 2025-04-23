@@ -14,7 +14,7 @@ interface ProfileContexType {
   userLogout: () => void;
   isAuthenticate: boolean;
   isCurrentUser: (id: string | undefined) => boolean;
-  updateProfile: (formData: FormData) => Promise<void>;
+  updateProfile: (data: any) => Promise<void>;
 }
 
 const ProfileContext = createContext<ProfileContexType | undefined>(undefined);
@@ -61,14 +61,12 @@ export const ProfileProvider = ({ children }: ProfileProviderProps) => {
 
   const isCurrentUser = (id: string | undefined): boolean => profile?.id === id;
 
-  const updateProfile = async (formData: FormData): Promise<void> => {
+  const updateProfile = async (): Promise<void> => {
     if (!profile) return;
 
     try {
-      const updatedProfile = await userService.updateProfile(
-        profile.id,
-        formData
-      );
+      const updatedProfile = await userService.getUsersById(profile.id);
+
       setProfile(updatedProfile);
       localStorage.setItem("user", JSON.stringify(updatedProfile));
     } catch (error) {

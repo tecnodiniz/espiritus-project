@@ -28,7 +28,6 @@ import {
   Heart,
   Building,
   Navigation2,
-  Edit,
 } from "lucide-react";
 import { useProfile } from "@/context/ProfileContext";
 import { AgentStatus } from "@/types/types";
@@ -89,15 +88,7 @@ export default function UserPage() {
               </div>
 
               <div className="mt-4 md:mt-0">
-                {isCurrentUser(user?.id) ? (
-                  <Button
-                    className="rounded-full bg-purple-700 hover:bg-purple-800 text-white shadow-md disabled:opacity-70"
-                    disabled={profile ? false : true}
-                  >
-                    <Edit className="mr-2 h-4 w-4" />
-                    Editar
-                  </Button>
-                ) : (
+                {!isCurrentUser(user?.id) && (
                   <Button
                     className="rounded-full bg-purple-700 hover:bg-purple-800 text-white shadow-md disabled:opacity-70"
                     disabled={profile ? false : true}
@@ -248,11 +239,11 @@ export default function UserPage() {
                   )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {user?.agents?.map((agent, index) => (
-                    <>
-                      {agent.status == AgentStatus.active && (
+                  {user?.agents?.map(
+                    (agent) =>
+                      agent.status == AgentStatus.active && (
                         <Card
-                          key={index}
+                          key={`${agent.id}-${agent.terreiro.id}`}
                           className="overflow-hidden border border-gray-200 dark:border-gray-800 hover:shadow-md transition-all duration-300 rounded-xl"
                         >
                           <div className="relative w-full h-40 bg-gradient-to-br from-purple-800 to-purple-600 dark:from-purple-900 dark:to-gray-800 overflow-hidden">
@@ -296,9 +287,8 @@ export default function UserPage() {
                             </Button>
                           </CardFooter>
                         </Card>
-                      )}
-                    </>
-                  ))}
+                      )
+                  )}
                 </div>
               </div>
             </TabsContent>
