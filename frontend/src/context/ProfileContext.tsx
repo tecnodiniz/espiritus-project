@@ -6,6 +6,7 @@ import {
   ReactNode,
   useEffect,
 } from "react";
+import { userService } from "@/services/userService";
 
 interface ProfileContexType {
   profile: User | null;
@@ -13,6 +14,7 @@ interface ProfileContexType {
   userLogout: () => void;
   isAuthenticate: boolean;
   isCurrentUser: (id: string | undefined) => boolean;
+  updateProfile: (formData: FormData) => Promise<void>;
 }
 
 const ProfileContext = createContext<ProfileContexType | undefined>(undefined);
@@ -59,9 +61,32 @@ export const ProfileProvider = ({ children }: ProfileProviderProps) => {
 
   const isCurrentUser = (id: string | undefined): boolean => profile?.id === id;
 
+  const updateProfile = async (formData: FormData): Promise<void> => {
+    if (!profile) return;
+
+    try {
+      const updatedProfile = await userService.updateProfile(
+        profile.id,
+        formData
+      );
+      setProfile(updatedProfile);
+      localStorage.setItem("user", JSON.stringify(updatedProfile));
+    } catch (error) {
+      console.error("Failed to update profile:", error);
+      throw error;
+    }
+  };
+
   return (
     <ProfileContext.Provider
-      value={{ profile, userLogin, userLogout, isCurrentUser, isAuthenticate }}
+      value={{
+        profile,
+        userLogin,
+        userLogout,
+        isCurrentUser,
+        isAuthenticate,
+        updateProfile,
+      }}
     >
       {children}
     </ProfileContext.Provider>

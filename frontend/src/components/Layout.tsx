@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import {
   Moon,
@@ -16,6 +16,7 @@ import {
   Menu,
   X,
   Search,
+  Edit,
 } from "lucide-react";
 
 import { useTheme } from "@/context/ThemeContext";
@@ -38,15 +39,99 @@ import {
   DropdownMenuSeparator,
 } from "@radix-ui/react-dropdown-menu";
 import { Separator } from "./ui/separator";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "./ui/dialog";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
+
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "./ui/form";
+
+// Form schema for profile editing
+const profileFormSchema = z.object({
+  name: z.string().min(2, {
+    message: "Nome deve ter pelo menos 2 caracteres.",
+  }),
+  bio: z.string().max(500, {
+    message: "Bio não pode exceder 500 caracteres.",
+  }),
+  contact: z.string().min(5, {
+    message: "Contato deve ter pelo menos 5 caracteres.",
+  }),
+  profile_picture: z.any().optional(),
+});
+
+type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 const Layout = () => {
   const { theme, toggleTheme } = useTheme();
-  const { profile, userLogout } = useProfile();
+  const { profile, userLogout, updateProfile } = useProfile();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+  const [isEditProfileOpen, setIsEditProfileOpen] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const navigate = useNavigate();
-  // const picture_path = "http://127.0.0.1:8000/profile_picture/";
+
+  const form = useForm<ProfileFormValues>({
+    resolver: zodResolver(profileFormSchema),
+    defaultValues: {
+      name: "",
+      bio: "",
+      contact: "",
+    },
+  });
+
+  // Reset form when dialog opens with current profile values
+  const handleOpenEditProfile = () => {
+    if (profile) {
+      form.reset({
+        name: profile.name ?? "",
+        bio: profile.bio ?? "",
+        contact: profile.contact ?? "",
+      });
+    }
+    setIsEditProfileOpen(true);
+  };
+
+  const handleProfileUpdate = async (values: ProfileFormValues) => {
+    if (!profile) return;
+
+    setIsSubmitting(true);
+    try {
+      // Create FormData for file upload
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("bio", values.bio);
+      formData.append("contact", values.contact);
+
+      if (values.profile_picture && values.profile_picture.length > 0) {
+        formData.append("profile_picture", values.profile_picture[0]);
+      }
+
+      await updateProfile(formData);
+      setIsEditProfileOpen(false);
+    } catch (error) {
+      console.error("Failed to update profile:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
@@ -148,7 +233,7 @@ const Layout = () => {
                 <DropdownMenu>
                   <DropdownMenuTrigger className="focus-visible:outline-none cursor-pointer">
                     <Avatar className="size-10 border-2 border-yellow-300 transition-transform hover:scale-105">
-                      <AvatarImage src="" />
+                      <AvatarImage src={profile.profile_picture || ""} />
                       <AvatarFallback className="bg-purple-800 text-white font-bold">
                         {getInitials(profile.name)}
                       </AvatarFallback>
@@ -166,8 +251,14 @@ const Layout = () => {
                     <DropdownMenuGroup>
                       <DropdownMenuItem className="cursor-pointer">
                         <User className="mr-2 h-4 w-4" />
-
                         <Link to={"/users/" + profile.id}>Meu Perfil</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        className="cursor-pointer"
+                        onClick={handleOpenEditProfile}
+                      >
+                        <Edit className="mr-2 h-4 w-4" />
+                        <span>Editar Perfil</span>
                       </DropdownMenuItem>
                       <DropdownMenuItem className="cursor-pointer">
                         <Heart className="mr-2 h-4 w-4" />
@@ -355,6 +446,109 @@ const Layout = () => {
       <main className="flex-grow py-6">
         <Outlet />
       </main>
+
+      {/* Edit Profile Dialog */}
+      <Dialog open={isEditProfileOpen} onOpenChange={setIsEditProfileOpen}>
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <DialogTitle>Editar Perfil</DialogTitle>
+            <DialogDescription>
+              Atualize as informações do seu perfil aqui.
+            </DialogDescription>
+          </DialogHeader>
+
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(handleProfileUpdate)}
+              className="space-y-6"
+            >
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Nome</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Seu nome completo" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="bio"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Bio</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Uma breve descrição sobre você"
+                        className="resize-none"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="contact"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Contato</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Telefone ou informações de contato"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="profile_picture"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Foto de Perfil</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => field.onChange(e.target.files)}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <DialogFooter>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setIsEditProfileOpen(false)}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  type="submit"
+                  className="bg-purple-700 hover:bg-purple-800"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Salvando..." : "Salvar alterações"}
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
 
       <footer className="mt-12 bg-gradient-to-r from-purple-950 to-purple-800 dark:from-neutral-950 dark:to-gray-900 text-white">
         <div className="container mx-auto py-10 px-4">
