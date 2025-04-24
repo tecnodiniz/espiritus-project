@@ -23,7 +23,7 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     pass
 
-class UserUpadte(BaseModel):
+class UserUpadte(BaseModel): # Fix method name
     name: Optional[str] = None
     cpf: Optional[str] = None
     contact: Optional[str] = None

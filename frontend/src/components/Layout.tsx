@@ -195,6 +195,7 @@ const Layout = () => {
                 <NavBarLink to="/terreiros">Terreiros</NavBarLink>
                 <NavBarLink to="/terreiros">Mediums</NavBarLink>
                 <NavBarLink to="/terreiros">Eventos</NavBarLink>
+                <NavBarLink to="/terreiros">Celebridades</NavBarLink>
                 <div className="group relative">
                   Mais
                   <div className="absolute left-0 top-full mt-1 w-48 bg-white dark:bg-gray-900 rounded-md overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-lg z-50">
@@ -216,6 +217,13 @@ const Layout = () => {
                         className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-purple-50 dark:hover:bg-gray-800"
                       >
                         Espaços
+                      </Link>
+                      <Link
+                        to="/find-terreiros"
+                        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-purple-50 dark:hover:bg-gray-800"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        Encontre Terreiros
                       </Link>
                     </div>
                   </div>

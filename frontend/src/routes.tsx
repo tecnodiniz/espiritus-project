@@ -15,6 +15,7 @@ const CreateTerreiro = lazy(() => import("./pages/CreateTerreiro"));
 const UserPage = lazy(() => import("./pages/UserPage"));
 const SearchTerreiros = lazy(() => import("./pages/SearchTerreirosPage"));
 const UserTerreiros = lazy(() => import("./pages/UserTerreiros"));
+const FindTerreiros = lazy(() => import("./pages/FindTerreiros"));
 const router = createBrowserRouter([
   {
     path: "/",
@@ -55,6 +56,7 @@ const router = createBrowserRouter([
           { path: "*", element: <p>Ops, 404 página não encontrada</p> },
         ],
       },
+      { path: "/find-terreiros", element: <FindTerreiros /> },
       {
         path: "users/:id",
         element: (
