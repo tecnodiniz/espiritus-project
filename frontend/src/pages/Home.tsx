@@ -58,7 +58,7 @@ export default function Home() {
                 className="rounded-xl overflow-hidden border border-purple-100 dark:border-gray-800 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-white dark:bg-gray-950"
               >
                 <div className="relative w-full h-40 sm:h-48 bg-gradient-to-br from-purple-800 to-purple-600 dark:from-purple-900 dark:to-gray-800 overflow-hidden">
-                  <div className="absolute inset-0 opacity-20 bg-[url('https://source.unsplash.com/random/300x200/?temple')] bg-center bg-cover"></div>
+                  <div className="absolute inset-0  bg-[url('https://assets.brasildefato.com.br/2024/09/image_processing20231005-21368-2n89wo.jpeg')] bg-center bg-cover"></div>
                 </div>
                 <CardHeader className="p-4 pb-0">
                   <CardTitle className="text-lg sm:text-xl text-purple-900 dark:text-white">
@@ -67,7 +67,7 @@ export default function Home() {
                   <CardDescription className="flex items-center gap-1 text-gray-600 dark:text-gray-400 text-xs sm:text-sm">
                     <span className="text-purple-700 dark:text-purple-400 font-medium">
                       Umbanda
-                    </span>{" "}
+                    </span>
                     ·
                     <MapPin className="h-3 w-3 text-gray-500 dark:text-gray-400" />
                     Salvador, BA
